@@ -39,13 +39,13 @@ export default function IteckLandingPage() {
 
           <div className="hidden md:flex items-center space-x-8">
             <div className="flex items-center space-x-1 text-gray-700 hover:text-gray-900 cursor-pointer">
-              <span>Homes</span>
-              <ChevronDown className="w-4 h-4" />
+              <span>Home</span>
             </div>
             <div className="flex items-center space-x-1 text-gray-700 hover:text-gray-900 cursor-pointer">
-              <span>Pages</span>
+              <span>Services</span>
               <ChevronDown className="w-4 h-4" />
             </div>
+            <span className="text-gray-700 hover:text-gray-900 cursor-pointer">About Us</span>
             <span className="text-gray-700 hover:text-gray-900 cursor-pointer">Portfolio</span>
             <span className="text-gray-700 hover:text-gray-900 cursor-pointer">Blog</span>
             <span className="text-gray-700 hover:text-gray-900 cursor-pointer">Contact</span>
