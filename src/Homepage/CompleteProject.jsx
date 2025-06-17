@@ -54,7 +54,7 @@ const CompletedProject = () => {
     const currentProject = projects[currentIndex];
 
     return (
-        <div className=" min-h-screen p-8">
+        <div className="p-8">
             <div className="max-w-7xl mx-auto">
                 {/* Header */}
                 <div className="flex items-center justify-between mb-12">
