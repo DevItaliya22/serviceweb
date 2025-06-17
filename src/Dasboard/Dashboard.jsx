@@ -8,17 +8,19 @@ import ChooseUs from "../Homepage/ChooseUs";
 import CompletedProject from "../Homepage/CompleteProject";
 import About from "../Homepage/About";
 import Expertise from "../Homepage/Expertise";
+import Plan from "../Homepage/Plan";
 
 export const Dashboard = () => {
     useEffect(() => {
         AOS.init({
             duration: 1000,
-            once: true, 
+            once: true,
         });
     }, []);
 
     return (
         <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-4 space-y-6">
+
             <div className="mb-2" data-aos="fade-down">
                 <Expertise />
             </div>
@@ -33,6 +35,9 @@ export const Dashboard = () => {
             </div>
             <div data-aos="flip-left">
                 <Review />
+            </div>
+            <div className="mb-2" data-aos="fade-right">
+                <Plan />
             </div>
             <div data-aos="fade-up">
                 <Footer />
