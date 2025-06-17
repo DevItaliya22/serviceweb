@@ -7,6 +7,7 @@ import Footer from "../components/Footer/Footer";
 import ChooseUs from "../Homepage/ChooseUs";
 import CompletedProject from "../Homepage/CompleteProject";
 import About from "../Homepage/About";
+import Expertise from "../Homepage/Expertise";
 
 export const Dashboard = () => {
     useEffect(() => {
@@ -18,6 +19,9 @@ export const Dashboard = () => {
 
     return (
         <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-4 space-y-6">
+            <div className="mb-2" data-aos="fade-down">
+                <Expertise />
+            </div>
             <div data-aos="fade-up">
                 <About />
             </div>
