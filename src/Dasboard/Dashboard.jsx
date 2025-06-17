@@ -9,6 +9,7 @@ import CompletedProject from "../Homepage/CompleteProject";
 import About from "../Homepage/About";
 import Expertise from "../Homepage/Expertise";
 import Plan from "../Homepage/Plan";
+import Header from "../Homepage/Header";
 
 export const Dashboard = () => {
     useEffect(() => {
@@ -20,7 +21,9 @@ export const Dashboard = () => {
 
     return (
         <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-4 space-y-6">
-
+            <div className="w-full max-w-7xl">
+                <Header />
+            </div>
             <div className="mb-2" data-aos="fade-down">
                 <Expertise />
             </div>
