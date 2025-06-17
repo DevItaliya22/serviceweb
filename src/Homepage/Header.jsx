@@ -146,40 +146,7 @@ export default function IteckLandingPage() {
         </div>
       </main>
 
-      <div className="fixed top-32 right-6 bg-gray-900 rounded-lg overflow-hidden shadow-2xl z-50" style={{ width: '280px', height: '200px' }}>
-        <div className="bg-gray-800 px-4 py-2 flex items-center justify-between">
-          <span className="text-white text-sm font-medium">Video call - WhatsApp</span>
-          <div className="flex space-x-1">
-            <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-            <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-            <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-          </div>
-        </div>
-        
-        <div className="relative h-full bg-gray-700">
-          <div className="w-full h-full bg-gradient-to-br from-green-200 to-green-300 relative">
-            <div className="absolute bottom-4 left-4 w-16 h-16 bg-pink-200 rounded-lg overflow-hidden">
-              <div className="w-full h-full bg-gradient-to-br from-pink-300 to-pink-400 flex items-center justify-center">
-                <div className="w-8 h-8 bg-pink-500 rounded-full"></div>
-              </div>
-            </div>
-            
-            <div className="absolute top-4 right-4 w-12 h-12 bg-gray-600 rounded-lg"></div>
-          </div>
-          
-          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-4">
-            <button className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center">
-              <PhoneCall className="w-5 h-5 text-white" />
-            </button>
-            <button className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center">
-              <Video className="w-5 h-5 text-white" />
-            </button>
-            <button className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center">
-              <Mic className="w-5 h-5 text-white" />
-            </button>
-          </div>
-        </div>
-      </div>
+
 
       <div className="fixed bottom-8 right-8 space-y-4 z-40">
         <div className="w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center cursor-pointer hover:shadow-xl transition-shadow">
