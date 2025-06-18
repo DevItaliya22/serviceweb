@@ -2,6 +2,7 @@ import React from 'react';
 import { Code, Smartphone, MessageSquare } from 'lucide-react';
 import IteckFooter from '../components/Footer/Footer';
 import { FaFacebookF, FaLinkedinIn, FaPinterestP } from "react-icons/fa";
+import Navbar from '../components/Navbar/Navbar';
 
 const teamMembers = [
     {
@@ -29,6 +30,7 @@ const teamMembers = [
 export default function AboutUs() {
     return (
         <div className="min-h-screen">
+            <Navbar />
             <div className="w-full h-screen relative overflow-hidden">
                 <div className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-8">
                     <div className="relative">
