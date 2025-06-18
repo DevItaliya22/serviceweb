@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import Logo from "../../assets/Logo.jpg"
 
 export default function Navbar() {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -22,17 +23,14 @@ export default function Navbar() {
             }`}>
             <nav className="flex items-center justify-between max-w-7xl mx-auto p-6">
                 <div className="flex items-center space-x-3">
-                    <div className="flex">
-                        <div className="w-8 h-8 bg-orange-500 rounded-lg flex items-center justify-center">
-                            <div className="w-4 h-4 bg-white rounded-sm"></div>
-                        </div>
-                        <div className="w-8 h-8 bg-blue-500 rounded-lg -ml-2 flex items-center justify-center">
-                            <div className="w-4 h-4 bg-white rounded-sm"></div>
-                        </div>
-                    </div>
+                    <img 
+                        src={Logo} 
+                        alt="Company Logo" 
+                        className="w-16 h-16 object-contain rounded-lg"
+                    />
                     <div>
-                        <h1 className="text-2xl font-bold text-gray-900">Iteck</h1>
-                        <p className="text-sm text-gray-600 -mt-1">DATA ANALYSIS</p>
+                        <h1 className="text-2xl font-bold text-gray-900"> Technitium </h1>
+                        <p className="text-sm text-gray-600 -mt-1">Experience The Excellence</p>
                     </div>
                 </div>
 
