@@ -1,5 +1,30 @@
 import React from 'react';
 import { Code, Smartphone, MessageSquare } from 'lucide-react';
+import IteckFooter from '../components/Footer/Footer';
+import { FaFacebookF, FaLinkedinIn, FaPinterestP } from "react-icons/fa";
+
+const teamMembers = [
+    {
+        name: "Michael Edwards",
+        title: "CEO Founder",
+        img: "https://images.pexels.com/photos/834863/pexels-photo-834863.jpeg",
+    },
+    {
+        name: "Bobby Kane",
+        title: "CTO",
+        img: "https://images.pexels.com/photos/3778875/pexels-photo-3778875.jpeg",
+    },
+    {
+        name: "Robert Downey Jr",
+        title: "Project Manager",
+        img: "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg",
+    },
+    {
+        name: "Andrew Robertson",
+        title: "Marketing Leader",
+        img: "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg",
+    },
+];
 
 export default function AboutUs() {
     return (
@@ -142,6 +167,163 @@ export default function AboutUs() {
                     </div>
                 </div>
             </div>
+            <section className="flex flex-col lg:flex-row items-center justify-between px-8 py-20 max-w-7xl mx-auto">
+                <div className="lg:w-1/2 mb-10 lg:mb-0">
+                    <h2 className="text-4xl sm:text-5xl font-bold text-gray-900">
+                        Iteck’s <br />
+                        <span className="text-blue-600 underline underline-offset-4 decoration-blue-300">
+                            Philosophy
+                        </span>
+                    </h2>
+
+                    <p className="text-gray-500 mt-6 max-w-md">
+                        Like any great agency, we are only as good as the result we deliver
+                        of our recent work. Our developers are committed to maintaining the
+                        highest web standards so that your site.
+                    </p>
+
+                    <div className="mt-10 space-y-6 text-black font-semibold">
+                        <div className="border-b border-gray-200 pb-2 hover:border-blue-500 cursor-pointer transition duration-200">
+                            Become 1st in the IT industrial
+                        </div>
+                        <div className="border-b border-gray-200 pb-2 hover:border-blue-500 cursor-pointer transition duration-200">
+                            Competitive Price
+                        </div>
+                        <div className="pb-2 hover:border-b hover:border-blue-500 cursor-pointer transition duration-200">
+                            Enhance the quality of life
+                        </div>
+                    </div>
+
+                </div>
+
+                <div className="lg:w-1/2 flex justify-center">
+                    <img
+                        src="https://digitalzeroz.com/assets/img/about/digital-zero-001.png"
+                        alt="Philosophy illustration"
+                        className="max-w-full h-auto object-contain"
+                    />
+                </div>
+            </section>
+
+            <div className="bg-white py-16 px-4 md:px-12 lg:px-20">
+                <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-10">
+                    <div>
+                        <img
+                            src="https://rrfinserve.com/wp-content/uploads/2023/03/img_012.jpg"
+                            alt="Arrow Man"
+                            className="w-full h-auto"
+                        />
+                    </div>
+
+                    <div>
+                        <h2 className="text-4xl font-bold text-gray-900 mb-4">
+                            Our <span className="text-blue-600 relative inline-block">
+                                Services
+                                <span className="absolute left-0 bottom-0 w-full h-2 bg-blue-100 -z-10"></span>
+                            </span>
+                        </h2>
+
+                        <p className="text-gray-600 mb-10">
+                            With Iteck Marketplace, choose from hundreds of payment gateways for your customers.
+                        </p>
+
+                        <div className="space-y-8">
+                            <div className="flex items-start space-x-4">
+                                <img
+                                    src="https://cdn-icons-png.flaticon.com/512/4320/4320337.png"
+                                    alt="IT Consultation"
+                                    className="w-10 h-10"
+                                />
+                                <div>
+                                    <h3 className="text-xl font-semibold text-gray-900">IT Consultation</h3>
+                                    <p className="text-gray-600 mt-1">
+                                        Nanotechnology immersion along the information high will close the loop on focusing solely
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div className="flex items-start space-x-4">
+                                <img
+                                    src="https://cdn-icons-png.flaticon.com/512/1055/1055687.png"
+                                    alt="Software Design"
+                                    className="w-10 h-10"
+                                />
+                                <div>
+                                    <h3 className="text-xl font-semibold text-gray-900">Software Design & Development</h3>
+                                    <p className="text-gray-600 mt-1">
+                                        Our top-notch Experts with much years of experience certail will give best solutions for your business
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div className="flex items-start space-x-4">
+                                <img
+                                    src="https://cdn-icons-png.flaticon.com/512/1161/1161388.png"
+                                    alt="Cloud Services"
+                                    className="w-10 h-10"
+                                />
+                                <div>
+                                    <h3 className="text-xl font-semibold text-gray-900">Cloud Services</h3>
+                                    <p className="text-gray-600 mt-1">
+                                        Customer support is always our number one priority.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="mt-10">
+                            <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full font-medium shadow-md hover:shadow-lg transition">
+                                See More
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <section className="py-16 bg-[#f7f8fd]">
+                <div className="text-center mb-10">
+                    <h2 className="text-4xl font-bold text-gray-800">
+                        Our <span className="text-blue-600 underline decoration-blue-300">Leaders</span>
+                    </h2>
+                    <p className="text-gray-500 mt-2">
+                        Professional & Friendly is our slogan. Meet our leaders
+                    </p>
+                </div>
+
+                <div className="max-w-7xl mx-auto px-6 grid gap-6 sm:grid-cols-2 md:grid-cols-4">
+                    {teamMembers.map((member, idx) => (
+                        <div
+                            key={idx}
+                            className="bg-white rounded-2xl p-4 shadow-md hover:shadow-lg transition-shadow duration-300 relative group"
+                        >
+                            <div className="relative overflow-hidden rounded-xl">
+                                <img
+                                    src={member.img}
+                                    alt={member.name}
+                                    className="w-full h-72 object-cover rounded-xl transition-transform duration-300 group-hover:scale-105"
+                                />
+                                <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center space-x-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    <a href="#" className="text-white hover:text-blue-400">
+                                        <FaLinkedinIn size={20} />
+                                    </a>
+                                    <a href="#" className="text-white hover:text-blue-400">
+                                        <FaFacebookF size={20} />
+                                    </a>
+                                    <a href="#" className="text-white hover:text-blue-400">
+                                        <FaPinterestP size={20} />
+                                    </a>
+                                </div>
+                            </div>
+                            <div className="text-center mt-4">
+                                <h3 className="text-lg font-semibold text-gray-900">{member.name}</h3>
+                                <p className="text-sm text-gray-500">{member.title}</p>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </section>
+
+            <IteckFooter />
         </div>
     );
 }
