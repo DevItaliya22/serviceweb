@@ -1,0 +1,422 @@
+import React, { useState, useEffect } from 'react';
+import { ChevronLeft, ChevronRight, Target, Megaphone, Mail, Instagram, Globe } from 'lucide-react';
+
+const TopServices = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [direction, setDirection] = useState('next');
+
+  const services = [
+    {
+      icon: <Target className="w-8 h-8 text-orange-500" />,
+      title: "Content Strategy",
+      description: "You can provide the answers that your potential customers are trying to find, so you can become the industry",
+      bgColor: "bg-gradient-to-br from-purple-100 to-purple-200",
+      iconBg: "bg-white",
+      accentColor: "orange"
+    },
+    {
+      icon: <Megaphone className="w-8 h-8 text-red-500" />,
+      title: "Google/FB Ads",
+      description: "Get more website traffic, more customers & more online visibility with powerful SEO services.",
+      bgColor: "bg-gradient-to-br from-gray-100 to-gray-200",
+      iconBg: "bg-white",
+      accentColor: "red"
+    },
+    {
+      icon: <Mail className="w-8 h-8 text-yellow-500" />,
+      title: "Email Marketing",
+      description: "Your website has to impress your visitors within just a few seconds",
+      bgColor: "bg-gradient-to-br from-blue-50 to-blue-100",
+      iconBg: "bg-white",
+      accentColor: "yellow"
+    },
+    {
+      icon: <Instagram className="w-8 h-8 text-pink-500" />,
+      title: "Social Media",
+      description: "Get more website traffic, more customers for your social chanel",
+      bgColor: "bg-gradient-to-br from-pink-50 to-pink-100",
+      iconBg: "bg-white",
+      accentColor: "pink"
+    },
+    {
+      icon: <Globe className="w-8 h-8 text-blue-500" />,
+      title: "Website Design and Development",
+      description: "Your website has to impress your visitors within just a few seconds. If it runs slow, if it feels outdated",
+      bgColor: "bg-gradient-to-br from-blue-50 to-blue-100",
+      iconBg: "bg-white",
+      accentColor: "blue"
+    }
+  ];
+
+  useEffect(() => {
+    if (!isAutoPlaying) return;
+    
+    const interval = setInterval(() => {
+      handleTransition('next');
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, [isAutoPlaying, currentIndex]);
+
+  const handleTransition = (dir) => {
+    if (isTransitioning) return;
+    
+    setIsTransitioning(true);
+    setDirection(dir);
+    
+    setTimeout(() => {
+      if (dir === 'next') {
+        setCurrentIndex((prevIndex) => 
+          prevIndex === services.length - 1 ? 0 : prevIndex + 1
+        );
+      } else {
+        setCurrentIndex((prevIndex) => 
+          prevIndex === 0 ? services.length - 1 : prevIndex - 1
+        );
+      }
+      
+      setTimeout(() => {
+        setIsTransitioning(false);
+      }, 100);
+    }, 300);
+  };
+
+  const nextSlide = () => {
+    setIsAutoPlaying(false);
+    handleTransition('next');
+  };
+
+  const prevSlide = () => {
+    setIsAutoPlaying(false);
+    handleTransition('prev');
+  };
+
+  const goToSlide = (index) => {
+    if (isTransitioning || index === currentIndex) return;
+    setIsAutoPlaying(false);
+    setDirection(index > currentIndex ? 'next' : 'prev');
+    handleTransition(index > currentIndex ? 'next' : 'prev');
+    setTimeout(() => {
+      setCurrentIndex(index);
+    }, 300);
+  };
+
+  const getVisibleServices = () => {
+    const visible = [];
+    for (let i = 0; i < 3; i++) {
+      const index = (currentIndex + i) % services.length;
+      visible.push({ ...services[index], originalIndex: index, position: i });
+    }
+    return visible;
+  };
+
+  const getAccentColors = (color) => {
+    const colors = {
+      orange: 'shadow-orange-200 border-orange-100',
+      red: 'shadow-red-200 border-red-100',
+      yellow: 'shadow-yellow-200 border-yellow-100',
+      pink: 'shadow-pink-200 border-pink-100',
+      blue: 'shadow-blue-200 border-blue-100'
+    };
+    return colors[color] || 'shadow-gray-200 border-gray-100';
+  };
+
+  return (
+    <div className="w-full max-w-8xl mx-auto px-4 py-16  overflow-hidden">
+      {/* Animated Header */}
+      <div className="text-center mb-16 animate-fadeInDown">
+        <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-blue-900 to-gray-900 bg-clip-text text-transparent animate-pulse">
+          Our Top <span className="text-blue-500 inline-block">Services</span>
+        </h2>
+        <p className="text-gray-600 text-lg max-w-3xl mx-auto leading-relaxed animate-fadeInUp">
+          Iteck Dashboard is a powerhouse when it comes to the feature list. This ensures you have every 
+          functionality you need to build, run, and expand your marketplace
+        </p>
+      </div>
+
+      {/* Carousel Container */}
+      <div className="relative">
+        {/* Animated Navigation Buttons */}
+        <button
+          onClick={prevSlide}
+          disabled={isTransitioning}
+          className="absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-white rounded-full p-4 shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-125 hover:rotate-12 disabled:opacity-50 animate-slideInLeft group"
+        >
+          <ChevronLeft className="w-6 h-6 text-gray-600 group-hover:text-blue-500 transition-colors duration-300" />
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+        </button>
+        
+        <button
+          onClick={nextSlide}
+          disabled={isTransitioning}
+          className="absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-white rounded-full p-4 shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-125 hover:-rotate-12 disabled:opacity-50 animate-slideInRight group"
+        >
+          <ChevronRight className="w-6 h-6 text-gray-600 group-hover:text-blue-500 transition-colors duration-300" />
+          <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+        </button>
+
+        {/* Animated Services Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-16 relative">
+          {getVisibleServices().map((service, index) => (
+            <div
+              key={`${service.originalIndex}-${currentIndex}`}
+              className={`bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-700 transform hover:-translate-y-6 hover:rotate-1 group cursor-pointer border-2 ${getAccentColors(service.accentColor)} relative overflow-hidden ${
+                isTransitioning 
+                  ? direction === 'next' 
+                    ? 'animate-slideOutLeft' 
+                    : 'animate-slideOutRight'
+                  : 'animate-slideInUp'
+              }`}
+              style={{ 
+                animationDelay: `${index * 0.2}s`,
+                animationFillMode: 'both'
+              }}
+            >
+              {/* Animated Background Effects */}
+              <div className="absolute inset-0 bg-gradient-to-br from-transparent via-blue-50/20 to-purple-50/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-br from-blue-400/10 to-purple-400/10 rounded-full blur-xl group-hover:scale-150 transition-transform duration-700"></div>
+              
+              {/* Animated Icon Container */}
+              <div className={`${service.bgColor} rounded-2xl p-6 mb-6 relative overflow-hidden group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 animate-bounceIn`}>
+                <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-transparent animate-shimmer"></div>
+                <div className={`${service.iconBg} rounded-xl p-4 shadow-lg relative z-10 mx-auto w-fit group-hover:shadow-xl transition-all duration-300 animate-pulse`}>
+                  <div className="animate-spin-slow">
+                    {service.icon}
+                  </div>
+                </div>
+                
+                {/* Animated Decorative elements */}
+                <div className="absolute top-2 right-2 w-2 h-2 bg-red-400 rounded-full animate-ping"></div>
+                <div className="absolute bottom-2 left-2 w-1 h-1 bg-yellow-400 rounded-full animate-pulse"></div>
+                <div className="absolute top-1/2 right-1 w-1 h-1 bg-blue-400 rounded-full animate-bounce"></div>
+                
+                {/* Floating particles */}
+                <div className="absolute top-4 left-4 w-1 h-1 bg-purple-400 rounded-full animate-float"></div>
+                <div className="absolute bottom-4 right-4 w-1 h-1 bg-green-400 rounded-full animate-float-delayed"></div>
+              </div>
+
+              {/* Animated Content */}
+              <div className="text-center relative z-10">
+                <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors duration-300 animate-fadeInUp">
+                  {service.title}
+                </h3>
+                <p className="text-gray-600 leading-relaxed group-hover:text-gray-700 transition-colors duration-300 animate-fadeInUp">
+                  {service.description}
+                </p>
+              </div>
+
+              {/* Hover glow effect */}
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-blue-400/0 via-purple-400/0 to-pink-400/0 group-hover:from-blue-400/5 group-hover:via-purple-400/5 group-hover:to-pink-400/5 transition-all duration-500"></div>
+            </div>
+          ))}
+        </div>
+
+        {/* Animated Dots Indicator */}
+        <div className="flex justify-center mt-12 space-x-3 animate-fadeInUp">
+          {services.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => goToSlide(index)}
+              disabled={isTransitioning}
+              className={`relative overflow-hidden transition-all duration-500 rounded-full ${
+                index === currentIndex 
+                  ? 'w-8 h-3 bg-gradient-to-r from-blue-500 to-purple-500 scale-125' 
+                  : 'w-3 h-3 bg-gray-300 hover:bg-gray-400 hover:scale-110'
+              }`}
+            >
+              {index === currentIndex && (
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-400 animate-pulse"></div>
+              )}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Custom CSS Animations */}
+      <style jsx>{`
+        @keyframes fadeInDown {
+          from {
+            opacity: 0;
+            transform: translateY(-30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes slideInLeft {
+          from {
+            opacity: 0;
+            transform: translateX(-100px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+
+        @keyframes slideInRight {
+          from {
+            opacity: 0;
+            transform: translateX(100px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+
+        @keyframes slideInUp {
+          from {
+            opacity: 0;
+            transform: translateY(50px) scale(0.9);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+          }
+        }
+
+        @keyframes slideOutLeft {
+          from {
+            opacity: 1;
+            transform: translateX(0) scale(1);
+          }
+          to {
+            opacity: 0;
+            transform: translateX(-100px) scale(0.8);
+          }
+        }
+
+        @keyframes slideOutRight {
+          from {
+            opacity: 1;
+            transform: translateX(0) scale(1);
+          }
+          to {
+            opacity: 0;
+            transform: translateX(100px) scale(0.8);
+          }
+        }
+
+        @keyframes bounceIn {
+          0% {
+            opacity: 0;
+            transform: scale(0.3);
+          }
+          50% {
+            opacity: 1;
+            transform: scale(1.05);
+          }
+          70% {
+            transform: scale(0.9);
+          }
+          100% {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+
+        @keyframes shimmer {
+          0% {
+            transform: translateX(-100%);
+          }
+          100% {
+            transform: translateX(100%);
+          }
+        }
+
+        @keyframes float {
+          0%, 100% {
+            transform: translateY(0px) rotate(0deg);
+          }
+          50% {
+            transform: translateY(-10px) rotate(180deg);
+          }
+        }
+
+        @keyframes float-delayed {
+          0%, 100% {
+            transform: translateY(0px) rotate(0deg);
+          }
+          50% {
+            transform: translateY(-8px) rotate(-180deg);
+          }
+        }
+
+        @keyframes spin-slow {
+          from {
+            transform: rotate(0deg);
+          }
+          to {
+            transform: rotate(360deg);
+          }
+        }
+
+        .animate-fadeInDown {
+          animation: fadeInDown 1s ease-out;
+        }
+
+        .animate-fadeInUp {
+          animation: fadeInUp 0.8s ease-out;
+        }
+
+        .animate-slideInLeft {
+          animation: slideInLeft 0.8s ease-out;
+        }
+
+        .animate-slideInRight {
+          animation: slideInRight 0.8s ease-out;
+        }
+
+        .animate-slideInUp {
+          animation: slideInUp 0.6s ease-out;
+        }
+
+        .animate-slideOutLeft {
+          animation: slideOutLeft 0.3s ease-in;
+        }
+
+        .animate-slideOutRight {
+          animation: slideOutRight 0.3s ease-in;
+        }
+
+        .animate-bounceIn {
+          animation: bounceIn 0.8s ease-out;
+        }
+
+        .animate-shimmer {
+          animation: shimmer 2s infinite;
+        }
+
+        .animate-float {
+          animation: float 3s ease-in-out infinite;
+        }
+
+        .animate-float-delayed {
+          animation: float-delayed 3s ease-in-out infinite 1.5s;
+        }
+
+        .animate-spin-slow {
+          animation: spin-slow 8s linear infinite;
+        }
+      `}</style>
+    </div>
+  );
+};
+
+export default TopServices;

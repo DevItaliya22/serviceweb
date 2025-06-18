@@ -3,6 +3,8 @@ import { Calendar, Code, Database, MessageSquare, Users, FileText, MapPin, Truck
 import Navbar from '../components/Navbar/Navbar';
 import Footer from '../components/Footer/Footer';
 import { CheckCircle2 } from 'lucide-react';
+import Reviews from './Reviews';
+import TopServices from './TopServices';
 
 const SoftwareServices = () => {
     const services = [
@@ -179,6 +181,14 @@ const SoftwareServices = () => {
                     </button>
                 </div>
             </section>
+            <div className="">
+                <div className="max-w-7xl mx-auto px-4">
+                    <Reviews />
+                </div>
+            </div>
+            <div className="max-w-7xl mx-auto px-4 mt-16">
+                <TopServices />
+                    </div>
             {/* Footer */}
             <div className="mt-16">
                 <Footer />
