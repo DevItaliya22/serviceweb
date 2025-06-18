@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { ChevronDown } from "lucide-react";
 
 export default function Navbar() {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -43,8 +42,9 @@ export default function Navbar() {
                     </Link>
 
                     <div className="flex items-center space-x-1 text-gray-700 hover:text-gray-900 cursor-pointer">
-                        <span>Services</span>
-                        <ChevronDown className="w-4 h-4" />
+                        <Link to="/services" className="flex items-center space-x-1 text-gray-700 hover:text-gray-900 cursor-pointer">
+                            <span>Services</span>
+                        </Link>
                     </div>
 
                     <Link to="/about" className="text-gray-700 hover:text-gray-900 cursor-pointer">About Us</Link>
