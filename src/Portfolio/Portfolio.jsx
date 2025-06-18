@@ -5,7 +5,7 @@ import IteckFooter from '../components/Footer/Footer';
 
 const Portfolio = () => {
     return (
-        <div className="min-h-screen ">
+        <div className="">
             <Navbar />
             <main className="pt-32 pb-16">
                 <section className="text-center px-4 sm:px-6 lg:px-8 mb-16">

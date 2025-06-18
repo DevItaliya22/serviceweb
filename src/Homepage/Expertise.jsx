@@ -47,7 +47,7 @@ const Expertise = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % services.length);
-    }, 3000); 
+    },1000); 
 
     return () => clearInterval(interval);
   }, [services.length]);
