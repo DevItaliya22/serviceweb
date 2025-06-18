@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Facebook, Twitter, Youtube, Linkedin, Mail, Phone, MapPin } from 'lucide-react';
+import Logo from "../../assets/Logo.jpg"
 
 export default function IteckFooter() {
   const [email, setEmail] = useState('');
@@ -18,12 +19,15 @@ export default function IteckFooter() {
           {/* Logo Section */}
           <div className="flex items-center space-x-2 mb-6 sm:mb-0">
             <div className="flex">
-              <div className="w-6 h-6 bg-orange-500 rounded-sm"></div>
-              <div className="w-6 h-6 bg-blue-600 rounded-sm -ml-2"></div>
+              <img
+                src={Logo}
+                alt="Company Logo"
+                className="w-16 h-16 object-contain rounded-lg"
+              />
             </div>
             <div>
-              <h3 className="text-2xl font-bold text-gray-900">Iteck</h3>
-              <p className="text-sm text-gray-600 uppercase tracking-wide">DATA ANALYSIS</p>
+              <h1 className="text-2xl font-bold text-gray-900"> Technitium </h1>
+              <p className="text-sm text-gray-600 -mt-1">Experience The Excellence</p>
             </div>
           </div>
           
@@ -63,7 +67,7 @@ export default function IteckFooter() {
             <p className="text-gray-600 leading-relaxed">
               Our highly skilled development teams specialized in data analysis.
             </p>
-            
+
             <div className="space-y-3">
               <div className="flex items-center space-x-3">
                 <Mail className="w-5 h-5 text-blue-600" />
@@ -170,7 +174,7 @@ export default function IteckFooter() {
             <p className="text-gray-600 leading-relaxed">
               Get every single promotional & business update.
             </p>
-            
+
             <div className="space-y-4">
               <div className="relative">
                 <input
