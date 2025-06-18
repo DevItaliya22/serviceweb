@@ -3,6 +3,7 @@ import { Dashboard } from "./Dasboard/Dashboard";
 import AboutUs from "./Pages/AboutUs";
 import Portfolio from "./Portfolio/Portfolio";
 import Blog from "./Blog/Blog";
+import Contact from "./Pages/Contact";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Route path="/about" element={<AboutUs />} />
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/contact" element={<Contact />} />
         </Routes>
       </div>
     </Router>
