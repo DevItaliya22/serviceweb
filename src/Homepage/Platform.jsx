@@ -45,38 +45,39 @@ const Integrations = () => {
                     style={{ animationDuration: '25s' }}></div>
 
                 <div className="absolute left-0 top-1/2 transform -translate-y-1/2 hover:scale-110 transition-all duration-300">
-                    <div className="w-16 h-16 rounded-full bg-white shadow-lg flex items-center justify-center hover:shadow-blue-300/50 border-2 border-gray-100">
-                        <FaSlack size={30} className="text-[#4A154B]" />
+                    <div className="w-[130px] h-[130px] rounded-full bg-white shadow-lg flex items-center justify-center hover:shadow-blue-300/50 border-2 border-gray-100">
+                        <FaSlack size={90} className="text-[#4A154B]" />
                     </div>
                 </div>
 
                 <div className="absolute right-0 top-1/2 transform -translate-y-1/2 hover:scale-110 transition-all duration-300">
-                    <div className="w-16 h-16 rounded-full bg-white shadow-lg flex items-center justify-center hover:shadow-green-300/50 border-2 border-gray-100">
-                        <FcGoogle size={30} />
+                    <div className="w-[130px] h-[130px] rounded-full bg-white shadow-lg flex items-center justify-center hover:shadow-green-300/50 border-2 border-gray-100">
+                        <FcGoogle size={90} />
                     </div>
                 </div>
 
-                <div className="absolute top-0 left-1/2 transform -translate-x-1/2 hover:scale-110 transition-all duration-300">
-                    <div className="w-14 h-14 rounded-full bg-white shadow-md flex items-center justify-center hover:shadow-gray-300/50 border-2 border-gray-100">
-                        <FaGithub size={28} className="text-black" />
+                <div className="absolute top-0 left-1/2 transform -translate-y-1/2 hover:scale-110 transition-all duration-300">
+                    <div className="w-[130px] h-[130px] rounded-full bg-white shadow-md flex items-center justify-center hover:shadow-gray-300/50 border-2 border-gray-100">
+                        <FaGithub size={90} className="text-black" />
                     </div>
                 </div>
+
 
                 <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 hover:scale-110 transition-all duration-300">
-                    <div className="w-14 h-14 rounded-full bg-white shadow-md flex items-center justify-center hover:shadow-blue-300/50 border-2 border-gray-100">
-                        <FaDiscord size={28} />
+                    <div className="w-[130px] h-[130px] rounded-full bg-white shadow-md flex items-center justify-center hover:shadow-blue-300/50 border-2 border-gray-100">
+                        <FaDiscord size={90} />
                     </div>
                 </div>
 
-                <div className="absolute top-[calc(50%-200px)] left-1/2 transform -translate-x-1/2 hover:scale-110 transition-all duration-300">
-                    <div className="w-14 h-14 rounded-full bg-white shadow-md flex items-center justify-center hover:shadow-purple-300/50 border-2 border-gray-100">
-                        <FaGithub size={28} className="text-black" />
+                <div className="absolute top-[calc(50%-200px)] left-1/2 transform -translate-y-1/2 hover:scale-110 transition-all duration-300">
+                    <div className="w-[130px] h-[130px] rounded-full bg-white shadow-md flex items-center justify-center hover:shadow-purple-300/50 border-2 border-gray-100">
+                        <FaGithub size={90} className="text-black" />
                     </div>
                 </div>
 
                 <div className="absolute bottom-[calc(50%-200px)] left-1/2 transform translate-y-full -translate-x-1/2 hover:scale-110 transition-all duration-300">
-                    <div className="w-14 h-14 rounded-full bg-white shadow-md flex items-center justify-center hover:shadow-orange-300/50 border-2 border-gray-100">
-                        <FcAndroidOs size={28} />
+                    <div className="w-[130px] h-[130px] rounded-full bg-white shadow-md flex items-center justify-center hover:shadow-orange-300/50 border-2 border-gray-100">
+                        <FcAndroidOs size={190} />
                     </div>
                 </div>
 
@@ -85,7 +86,7 @@ const Integrations = () => {
                         <img
                             src={logo}
                             alt="Logo"
-                            className="w-16 h-16 object-contain"
+                            className="w-[130px] h-[130px] object-contain"
                         />
                     </div>
                 </div>
@@ -118,7 +119,7 @@ const Integrations = () => {
                                 src={fig2}
                                 alt="Data Analytics Icon"
                                 className="w-16 h-16 mx-auto"
-                                    />
+                            />
                         </div>
                         <div>
                             <h3 className="text-2xl font-bold text-gray-800">5 M+</h3>
