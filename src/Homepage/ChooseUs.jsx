@@ -1,6 +1,5 @@
 import React from 'react';
 import { ArrowRight, Mail } from 'lucide-react';
-import Audience from "../assets/audience.svg";
 import Options from "../assets/option.svg";
 
 export default function ChooseUs() {
@@ -20,7 +19,7 @@ export default function ChooseUs() {
                         <div className="flex justify-between gap-6 mt-16">
                             <div className="flex flex-col items-center p-6 rounded-lg shadow-md bg-white w-1/2">
                                 <div className="w-16 h-16 mb-4">
-                                    <img src={Audience} alt="Audience" className="w-full h-full" />                                 
+                                    <img src={Options} alt="Audience" className="w-full h-full" />                                 
                                 </div>
                                 <h3 className="text-xl font-semibold text-gray-900 text-center">Target Audience</h3>
                             </div>
