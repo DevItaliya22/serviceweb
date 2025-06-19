@@ -88,7 +88,7 @@ export default function Navbar() {
 
                 {/* Desktop CTA Button */}
                 <div className="hidden lg:block">
-                    <button className={`border-2 border-blue-500 text-blue-500 px-6 py-2 rounded-full hover:bg-blue-500 hover:text-white transition-all duration-300 font-medium ${
+                    <button className={`border-2 border-blue-500 hover:border-orange-500 text-blue-500 px-6 py-2 rounded-full hover:bg-orange-500 hover:text-white transition-all duration-300 font-medium ${
                         isScrolled ? 'bg-blue-50' : 'bg-white'
                     }`}>
                         Request A Demo →

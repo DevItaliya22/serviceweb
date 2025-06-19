@@ -1,5 +1,7 @@
 import React from 'react';
 import { ArrowRight, Mail } from 'lucide-react';
+import Audience from "../assets/audience.svg";
+import Options from "../assets/option.svg";
 
 export default function ChooseUs() {
     return (
@@ -18,26 +20,14 @@ export default function ChooseUs() {
                         <div className="flex justify-between gap-6 mt-16">
                             <div className="flex flex-col items-center p-6 rounded-lg shadow-md bg-white w-1/2">
                                 <div className="w-16 h-16 mb-4">
-                                    <svg viewBox="0 0 64 64" className="w-full h-full">
-                                        <path d="M12 20 L32 8 L52 20 L52 44 L32 56 L12 44 Z" fill="#4338ca" />
-                                        <path d="M12 20 L32 8 L52 20 L32 32 Z" fill="#6366f1" />
-                                        <path d="M32 32 L52 20 L52 44 L32 56 Z" fill="#3730a3" />
-                                        <rect x="26" y="24" width="12" height="8" fill="#fbbf24" />
-                                    </svg>
+                                    <img src={Audience} alt="Audience" className="w-full h-full" />                                 
                                 </div>
                                 <h3 className="text-xl font-semibold text-gray-900 text-center">Target Audience</h3>
                             </div>
 
                             <div className="flex flex-col items-center p-6 rounded-lg shadow-md bg-white w-1/2">
                                 <div className="w-16 h-16 mb-4">
-                                    <svg viewBox="0 0 64 64" className="w-full h-full">
-                                        <ellipse cx="32" cy="48" rx="20" ry="6" fill="#e5e7eb" />
-                                        <ellipse cx="32" cy="46" rx="20" ry="6" fill="#6366f1" />
-                                        <ellipse cx="32" cy="36" rx="18" ry="5" fill="#e5e7eb" />
-                                        <ellipse cx="32" cy="34" rx="18" ry="5" fill="#8b5cf6" />
-                                        <ellipse cx="32" cy="24" rx="16" ry="4" fill="#e5e7eb" />
-                                        <ellipse cx="32" cy="22" rx="16" ry="4" fill="#a855f7" />
-                                    </svg>
+                                   <img src={Options} alt="Options" className="w-full h-full" />
                                 </div>
                                 <h3 className="text-xl font-semibold text-gray-900 text-center">Various Options</h3>
                             </div>
@@ -53,9 +43,6 @@ export default function ChooseUs() {
                                 <div className="text-gray-500">
                                     <p className="text-sm">Support Email</p>
                                     <p className="font-semibold text-gray-900">info@support-iteck.com</p>
-                                </div>
-                                <div className="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center">
-                                    <Mail className="w-5 h-5 text-white" />
                                 </div>
                             </div>
                         </div>
