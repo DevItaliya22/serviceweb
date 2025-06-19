@@ -103,32 +103,26 @@ const About = () => {
             <div className="flex items-center gap-4 pt-8">
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-full overflow-hidden">
-                  <img 
+                  {/* <img 
                     src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%23E5E7EB'/%3E%3Ccircle cx='50' cy='35' r='15' fill='%23374151'/%3E%3Cpath d='M25 75 Q25 55 50 55 Q75 55 75 75 Z' fill='%23374151'/%3E%3C/svg%3E" 
                     alt="Alonso D. Dowson"
                     className="w-full h-full object-cover"
-                  />
+                  /> */}
                 </div>
-                <div>
+                {/* <div>
                   <p className="text-blue-600 text-sm">Certified By</p>
                   <p className="font-semibold text-gray-900">Alonso D.Dowson</p>
-                </div>
+                </div> */}
               </div>
-              <div className="ml-8">
+              {/* <div className="ml-8">
                 <div className="text-2xl font-bold text-gray-400 italic">Michael M</div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
       </div>
 
-      <div className="fixed bottom-8 right-8">
-        <button className="w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:shadow-xl transition-shadow">
-          <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
-          </svg>
-        </button>
-      </div>
+
     </div>
   );
 };
