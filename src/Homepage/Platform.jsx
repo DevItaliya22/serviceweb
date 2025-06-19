@@ -1,6 +1,7 @@
 import React from "react";
 import { FaSlack, FaGithub, FaDiscord, FaTrello, FaDropbox, FaSpotify } from "react-icons/fa";
 import { FcGoogle, FcAndroidOs } from "react-icons/fc";
+import logo from '../assets/logo_home8_icon.png';
 
 const Integrations = () => {
   return (
@@ -72,7 +73,7 @@ const Integrations = () => {
         <div className="absolute z-10">
           <div className="w-24 h-24 rounded-full bg-white shadow-lg flex items-center justify-center">
             <img
-              src="http://iteck_vuenuxt.themescamp.com/assets/img/logo_home8_icon.png"
+                src={logo}
               alt="Logo"
               className="w-16 h-16 object-contain"
             />
