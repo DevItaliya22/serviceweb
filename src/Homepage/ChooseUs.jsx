@@ -1,6 +1,6 @@
 import React from 'react';
 import { ArrowRight, Mail } from 'lucide-react';
-import Options from "../assets/option.svg";
+import Options from "../assets/option.png";
 
 export default function ChooseUs() {
     return (
