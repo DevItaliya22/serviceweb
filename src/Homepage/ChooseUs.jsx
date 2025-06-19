@@ -67,7 +67,7 @@ export default function ChooseUs() {
                             alt="Choose Us"
                             className="w-full h-auto rounded-lg"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-r from-transparent to-blue-100 opacity-50 rounded-lg"></div>    
+                        <div className="absolute inset-0  opacity-50 rounded-lg"></div>    
                     </div>
                 </div>
             </div>
