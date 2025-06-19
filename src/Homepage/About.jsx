@@ -9,7 +9,7 @@ const About = () => {
             <img
               src="http://iteck_vuenuxt.themescamp.com/assets/img/about/3d_vector2.svg"
               alt="About Us"
-              className="w-full h-auto rounded-3xl  object-cover"  
+              className="w-full h-auto rounded-3xl"  
               />
           </div>  
 
