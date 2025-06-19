@@ -10,6 +10,7 @@ import About from "../Homepage/About";
 import Expertise from "../Homepage/Expertise";
 import Plan from "../Homepage/Plan";
 import Header from "../Homepage/Header";
+import Platform from "../Homepage/Platform";
 
 export const Dashboard = () => {
     useEffect(() => {
@@ -26,6 +27,9 @@ export const Dashboard = () => {
             </div>
             <div className="mb-2" data-aos="fade-down">
                 <Expertise />
+            </div>
+            <div className="mb-2" data-aos="fade-left">
+                <Platform />
             </div>
             <div data-aos="fade-up">
                 <About />
