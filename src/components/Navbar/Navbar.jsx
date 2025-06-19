@@ -28,10 +28,10 @@ export default function Navbar() {
                         alt="Company Logo" 
                         className="w-16 h-16 object-contain rounded-lg"
                     />
-                    <div>
+                    {/* <div>
                         <h1 className="text-2xl font-bold text-gray-900"> Technitium </h1>
                         <p className="text-sm text-gray-600 -mt-1">Experience The Excellence</p>
-                    </div>
+                    </div> */}
                 </div>
 
                 <div className="hidden md:flex items-center space-x-8">

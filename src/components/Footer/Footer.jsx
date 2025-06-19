@@ -25,12 +25,12 @@ export default function IteckFooter() {
                 className="w-16 h-16 object-contain rounded-lg"
               />
             </div>
-            <div>
+            {/* <div>
               <h1 className="text-2xl font-bold text-gray-900"> Technitium </h1>
               <p className="text-sm text-gray-600 -mt-1">Experience The Excellence</p>
-            </div>
+            </div> */}
           </div>
-          
+
           {/* Social Media Icons */}
           <div className="flex space-x-4">
             <a
