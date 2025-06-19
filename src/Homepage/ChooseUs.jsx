@@ -60,7 +60,7 @@ export default function ChooseUs() {
 
                     <div className="relative">
                         <img
-                            src="https://iteck-html.themescamp.com/assets/img/header/3d_vector_head8.svg"
+                            src="http://iteck_vuenuxt.themescamp.com/assets/img/choose_us/3d_vector1.svg"
                             alt="Choose Us"
                             className="w-full h-auto object-cover rounded-3xl"
                         />
