@@ -1,5 +1,6 @@
 import React from 'react';
 import { ArrowRight, Mail } from 'lucide-react';
+import Choose from "../assets/Choose.svg";
 
 export default function ChooseUs() {
     return (
@@ -60,7 +61,7 @@ export default function ChooseUs() {
 
                     <div className="relative">
                         <img
-                            src="http://iteck_vuenuxt.themescamp.com/assets/img/choose_us/3d_vector1.svg"
+                            src={Choose}
                             alt="Choose Us"
                             className="w-full h-auto object-cover rounded-3xl"
                         />
