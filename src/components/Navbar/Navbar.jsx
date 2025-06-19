@@ -54,23 +54,24 @@ export default function Navbar() {
         <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
             isScrolled
                 ? 'py-2 bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-100'
-                : 'py-4 bg-white/80 backdrop-blur-sm'
+                : 'py-4'
         }`}>
             <nav className="flex items-center justify-between max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Logo Section */}
                 <div className="flex items-center space-x-3">
-                    <Link to="/" className="flex items-center space-x-3">
-                        <img
-                            src={Logo}
-                            alt="Company Logo"
-                            className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 object-contain rounded-lg"
-                        />
-                        {/* <div className="hidden sm:block">
-                            <h1 className="text-xl lg:text-2xl font-bold text-gray-900">Technitium</h1>
-                            <p className="text-xs lg:text-sm text-gray-600 -mt-1">Experience The Excellence</p>
-                        </div> */}
-                    </Link>
-                </div>
+  <Link to="/" className="flex items-center space-x-3">
+    <img
+      src={Logo}
+      alt="Company Logo"
+      className="w-18 h-18 sm:w-20 sm:h-20 lg:w-24 lg:h-24 object-contain rounded-lg"
+    />
+    {/* <div className="hidden sm:block">
+      <h1 className="text-xl lg:text-2xl font-bold text-gray-900">Technitium</h1>
+      <p className="text-xs lg:text-sm text-gray-600 -mt-1">Experience The Excellence</p>
+    </div> */}
+  </Link>
+</div>
+
 
                 {/* Desktop Navigation */}
                 <div className="hidden lg:flex items-center space-x-8">
