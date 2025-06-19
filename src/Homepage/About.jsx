@@ -3,7 +3,7 @@ import Aboutimg from "../assets/About.svg"
 
 const About = () => {
   return (
-    <div className="bg-gray-50  p-4 relative">
+    <div className="bg-gray-50 mt-12 p-4 relative">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div className="relative">
