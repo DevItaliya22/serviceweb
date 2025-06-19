@@ -54,9 +54,6 @@ export default function ChooseUs() {
                                     <p className="text-sm">Support Email</p>
                                     <p className="font-semibold text-gray-900">info@support-iteck.com</p>
                                 </div>
-                                <div className="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center">
-                                    <Mail className="w-5 h-5 text-white" />
-                                </div>
                             </div>
                         </div>
                     </div>
