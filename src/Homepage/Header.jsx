@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Settings } from 'lucide-react';
+import { Settings, Home } from 'lucide-react';
 import Navbar from '../components/Navbar/Navbar';
 
 export default function IteckLandingPage() {
@@ -29,21 +29,21 @@ export default function IteckLandingPage() {
                                 Subscribe & Get 7-Days Trail
                             </p>
 
-                            <div className="flex flex-col sm:flex-row gap-4 max-w-md">
-                                <div className="flex-1 relative">
-                                    <input
-                                        type="email"
-                                        placeholder="Business email address"
-                                        value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
-                                        className="w-full px-4 py-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
-                                    />
+                            <div className="relative">
+                                <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+                                    <Home size={20} />
                                 </div>
-                                <button className="bg-orange-500 text-white px-6 py-4 rounded-lg hover:bg-orange-600 transition-colors font-medium whitespace-nowrap">
+                                <input
+                                    type="email"
+                                    placeholder="Business email address"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    className="w-full pl-12 pr-32 py-4 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent text-gray-700 placeholder-gray-400"
+                                />
+                                <button className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-orange-500 text-white px-4 py-2 rounded-full hover:bg-orange-600 transition-colors font-medium text-sm">
                                     Get A Demo →
                                 </button>
                             </div>
-
                             <p className="text-sm text-gray-500">
                                 *** We are not going to save your data
                             </p>
