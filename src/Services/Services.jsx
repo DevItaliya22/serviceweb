@@ -10,51 +10,58 @@ const SoftwareServices = () => {
     const services = [
         {
             icon: <Calendar className="w-16 h-16 text-blue-500" />,
-            title: "Project Management",
-            subtitle: "and Planning",
+            title: "VBA Coding for Excel Automation",
             description: "Streamline your workflow with comprehensive project tracking and team collaboration tools."
         },
         {
             icon: <Code className="w-16 h-16 text-blue-500" />,
-            title: "Custom Software",
-            subtitle: "Development",
+            title: "Custom Website Development",
             description: "Build tailored applications and solutions that perfectly fit your business requirements."
         },
         {
             icon: <Database className="w-16 h-16 text-blue-500" />,
-            title: "Data Integration and",
-            subtitle: "Analytics",
+            title: "Python coding and Integration",
             description: "Connect multiple data sources and gain insights through advanced analytics dashboards."
         },
         {
             icon: <MessageSquare className="w-16 h-16 text-blue-500" />,
-            title: "Customer Support",
-            subtitle: "Platform",
+            title: "JAVA Script Coding and Development",
             description: "Enhance customer experience with integrated support ticketing and communication systems."
         },
         {
             icon: <Users className="w-16 h-16 text-blue-500" />,
-            title: "User Management",
-            subtitle: "System",
+            title: "Power BI - Data Analysis and Dashboards",
             description: "Secure user authentication, role-based access control, and comprehensive user profiles."
         },
         {
             icon: <FileText className="w-16 h-16 text-blue-500" />,
-            title: "Document Management",
-            subtitle: "and Workflow",
+            title: "MySQL Database Coding and Development",
             description: "Organize, track, and automate document processes with version control and approval workflows."
         },
         {
             icon: <MapPin className="w-16 h-16 text-blue-500" />,
-            title: "Location-Based",
-            subtitle: "Services",
+            title: "Google App Script Coding and Integration",
             description: "Integrate GPS tracking, geofencing, and location analytics for mobile and web applications."
         },
         {
             icon: <Truck className="w-16 h-16 text-blue-500" />,
-            title: "Logistics and",
-            subtitle: "Supply Chain",
+            title: "Custom Android App development in AppSheet",
             description: "Optimize inventory management, order tracking, and supply chain visibility solutions."
+        },
+        {
+            icon: <Truck className="w-16 h-16 text-blue-500" />,
+            title: "Platform integration and Automation via Make.com",
+            description: "Leverage AI and machine learning for predictive analytics and personalized user experiences."
+        },
+        {
+            icon: <Truck className="w-16 h-16 text-blue-500" />,
+            title: "SMS, WhatsApp Automation and Chatbot development",
+            description: "Implement data security measures, encryption, and compliance with industry standards."
+        },
+        {
+            icon: <Truck className="w-16 h-16 text-blue-500" />,
+            title: "System Integration and API coding",   
+            description: "Create custom software solutions that address specific business challenges and enhance operational efficiency."
         }
     ];
 
