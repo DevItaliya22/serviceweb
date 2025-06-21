@@ -1,8 +1,8 @@
 import IteckFooter from "../components/Footer/Footer";
 import Navbar from "../components/Navbar/Navbar";
-import phonesImage from "../../public/img/phonesImage.png";
-import boardImage from "../../public/img/ch_1.png";
-import ipadImage from "../../public/img/ch_2.png";
+import phonesImage from "../assets/phonesImage.png";
+import boardImage from "../assets/ch_1.png";
+import ipadImage from "../assets/ch_2.png";
 import { Circle } from "lucide-react";
 import { FaTwitter, FaFacebookF, FaPinterestP, FaGoogle, FaLinkedinIn } from 'react-icons/fa';
 
