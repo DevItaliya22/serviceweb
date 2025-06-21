@@ -5,6 +5,7 @@ import Portfolio from "./Portfolio/Portfolio";
 import Blog from "./Blog/Blog";
 import Contact from "./Pages/Contact";
 import Services from "./Services/Services";
+import Description from "./Portfolio/Description";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/blog" element={<Blog />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/services" element={<Services />} />
+          <Route path="/portfolio/:id" element={<Description />} />
           {/* Add more routes as needed */}
         </Routes>
       </div>

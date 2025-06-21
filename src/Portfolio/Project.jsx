@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+
 
 const Project = () => {
   const [activeTab, setActiveTab] = useState('All');
@@ -258,11 +260,10 @@ const Project = () => {
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`px-4 py-2 rounded-full text-sm transition-all duration-200 font-bold ${
-                activeTab === tab
+              className={`px-4 py-2 rounded-full text-sm transition-all duration-200 font-bold ${activeTab === tab
                   ? 'bg-blue-500 text-white shadow-lg'
                   : 'bg-white text-gray-600 hover:bg-gray-100 hover:text-gray-800'
-              }`}
+                }`}
             >
               {tab}
             </button>
@@ -271,10 +272,12 @@ const Project = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {currentServices.map((service, index) => (
-            <div
+            <Link
+              to={`/portfolio/${service.id}`}
               key={service.id}
-              className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 group hover:-translate-y-1"
+              className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 group hover:-translate-y-1 block"
             >
+
               <div className="relative h-64 overflow-hidden">
                 <img
                   src={service.image}
@@ -282,7 +285,7 @@ const Project = () => {
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
-                
+
                 {/* Rating Badge on Image */}
                 <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-sm rounded-full px-3 py-1.5 shadow-lg">
                   <div className="flex items-center space-x-1">
@@ -300,11 +303,11 @@ const Project = () => {
                     {service.category}
                   </span>
                 </div>
-                
+
                 <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors">
                   {service.title}
                 </h3>
-                
+
                 <p className="text-gray-600 text-sm mb-4 leading-relaxed">
                   {service.description}
                 </p>
@@ -332,7 +335,7 @@ const Project = () => {
                   ))}
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
 
