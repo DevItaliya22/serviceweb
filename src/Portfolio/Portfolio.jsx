@@ -16,10 +16,11 @@ const Portfolio = () => {
                                 Projects
                             </span>
                         </h1>
-                        
-                        <p className="text-gray-600 text-lg sm:text-xl leading-relaxed max-w-2xl mx-auto">
+
+                        <p className="text-gray-600 text-3xl sm:text-xl whitespace-nowrap overflow-hidden text-ellipsis">
                             We have an experienced team of production and inspection personnel to ensure quality.
                         </p>
+
                     </div>
                 </section>
 
