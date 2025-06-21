@@ -4,7 +4,7 @@ import { FcGoogle, FcAndroidOs } from "react-icons/fc";
 import logo from '../assets/logo_home8_icon.png';
 import fig1 from '../assets/5M.png';
 import fig2 from '../assets/3M.png';
-import fig3 from '../assets/DM.png';
+import fig3 from '../assets/Dm.png';
 import fig4 from '../assets/100k.png';
 
 const Integrations = () => {
