@@ -60,7 +60,7 @@ const SoftwareServices = () => {
         },
         {
             icon: <Truck className="w-16 h-16 text-blue-500" />,
-            title: "System Integration and API coding",   
+            title: "System Integration and API coding",
             description: "Create custom software solutions that address specific business challenges and enhance operational efficiency."
         }
     ];
@@ -70,6 +70,10 @@ const SoftwareServices = () => {
             <div className="max-w-7xl mx-auto">
                 <div className="text-center mb-12">
                     <Navbar />
+                </div>
+
+                <div className="max-w-7xl mx-auto px-4 mt-16">
+                    <TopServices />
                 </div>
 
                 <div className="text-center mb-16">
@@ -154,15 +158,15 @@ const SoftwareServices = () => {
             </div>
 
             <section className="w-full py-20 px-4 md:px-20 flex flex-col md:flex-row items-center justify-between gap-10">
-                <div className="w-full md:w-1/2">
+                {/* <div className="w-full md:w-1/2">
                     <img
                         src="https://niograph.com/wp-content/uploads/2021/01/image2-home7.png"
                         alt="Payment Logos"
                         className="w-full h-auto"
                     />
-                </div>
+                </div> */}
 
-                <div className="w-full md:w-1/2">
+                {/* <div className="w-full md:w-1/2">
                     <h2 className="text-4xl md:text-5xl font-bold text-black leading-tight mb-6">
                         100+ Payment <span className="text-blue-600  px-1 rounded ">Gateways</span>
                     </h2>
@@ -186,18 +190,10 @@ const SoftwareServices = () => {
                     <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-full shadow-lg transition-all">
                         Book A Free Demo
                     </button>
-                </div>
+                </div> */}
             </section>
-            <div className="">
-                <div className="max-w-7xl mx-auto px-4">
-                    <Reviews />
-                </div>
-            </div>
-            <div className="max-w-7xl mx-auto px-4 mt-16">
-                <TopServices />
-                    </div>
             {/* Footer */}
-            <div className="mt-16">
+            <div className="mt-6">
                 <Footer />
             </div>
         </div>

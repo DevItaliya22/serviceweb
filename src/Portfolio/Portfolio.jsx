@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from '../components/Navbar/Navbar';
 import Project from './Project';
 import IteckFooter from '../components/Footer/Footer';
+import Reviews from '../Services/Reviews';
 
 const Portfolio = () => {
     return (
@@ -65,6 +66,11 @@ const Portfolio = () => {
                                 </div>
                             </div>
                         </div>
+                                    <div className="">
+                                        <div className="max-w-7xl mx-auto px-4">
+                                            <Reviews />
+                                        </div>
+                                    </div>
                     </div>
                 </section>
             </main>

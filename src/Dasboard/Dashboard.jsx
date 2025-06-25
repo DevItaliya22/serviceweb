@@ -8,7 +8,7 @@ import ChooseUs from "../Homepage/ChooseUs";
 import CompletedProject from "../Homepage/CompleteProject";
 import About from "../Homepage/About";
 import Expertise from "../Homepage/Expertise";
-import Plan from "../Homepage/Plan";
+// import Plan from "../Homepage/Plan";
 import Header from "../Homepage/Header";
 import Platform from "../Homepage/Platform";
 
@@ -43,9 +43,9 @@ export const Dashboard = () => {
             <div data-aos="flip-left">
                 <Review />
             </div>
-            <div className="mb-2" data-aos="fade-right">
+            {/* <div className="mb-2" data-aos="fade-right">
                 <Plan />
-            </div>
+            </div> */}
             <div data-aos="fade-up" className="w-screen">
                 <Footer />
             </div>
