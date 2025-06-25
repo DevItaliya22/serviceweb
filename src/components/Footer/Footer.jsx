@@ -22,7 +22,7 @@ export default function IteckFooter() {
               <img
                 src={Logo}
                 alt="Company Logo"
-                className="w-16 h-16 object-contain rounded-lg"
+                className="w-30 h-28 object-contain rounded-lg"
               />
             </div>
             {/* <div>
