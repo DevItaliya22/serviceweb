@@ -6,11 +6,12 @@ import Blog from "./Blog/Blog";
 import Contact from "./Pages/Contact";
 import Services from "./Services/Services";
 import Description from "./Portfolio/Description";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   return (
     <Router>
-      {/* Option 1: Using custom CSS to hide scrollbar */}
+      <ScrollToTop />
       <div 
         className="min-h-screen w-full bg-gray-100 overflow-y-auto"
         style={{
