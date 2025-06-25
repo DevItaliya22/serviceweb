@@ -208,7 +208,7 @@ export default function AboutUs() {
             </section>
 
             <div className="bg-white py-16 px-4 md:px-12 lg:px-20">
-                <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-10">
+                {/* <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-10">
                     <div>
                         <img
                             src="https://rrfinserve.com/wp-content/uploads/2023/03/img_012.jpg"
@@ -279,7 +279,7 @@ export default function AboutUs() {
                             </button>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
 
             {/* <section className="py-16 bg-[#f7f8fd]">

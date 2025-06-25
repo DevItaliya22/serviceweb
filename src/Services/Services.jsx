@@ -113,52 +113,10 @@ const SoftwareServices = () => {
             </div>
 
             <div className="mt-16 py-12">
-                <div className="flex flex-col lg:flex-row items-center justify-between  py-16 px-6 lg:px-20">
-                    {/* Left Content */}
-                    <div className="lg:w-1/2 mb-10 lg:mb-0">
-                        <h1 className="text-4xl md:text-5xl font-bold text-gray-900">
-                            Optimized User <br />
-                            <span className="text-blue-600 relative inline-block">
-                                Experiences
-                                <span className="absolute bottom-0 left-0 w-full h-2 bg-blue-100 -z-10" />
-                            </span>
-                        </h1>
-                        <p className="mt-6 text-gray-500 max-w-lg">
-                            The uploading and updating processes made by suppliers can be
-                            streamlined through front-end dashboards that create better ease of
-                            access.
-                        </p>
+                {/* Left Content */}
 
-                        {/* Links */}
-                        <div className="mt-10 space-y-6 text-sm text-black font-semibold ">
-                            <div className="border-b pb-2 cursor-pointer hover:text-blue-600">
-                                Sales Breakdown & Funnel
-                            </div>
-                            <div className="border-b pb-2 cursor-pointer hover:text-blue-600">
-                                Abandoned Carts
-                            </div>
-                            <div className="border-b pb-2 cursor-pointer hover:text-blue-600">
-                                Revenue by Channel & Devices
-                            </div>
-                            <div className="pb-2 cursor-pointer hover:text-blue-600">
-                                Sales Forecast
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Right Dashboard Image (Static) */}
-                    <div className="lg:w-1/2 flex justify-center">
-                        <img
-                            src="https://cdn.dribbble.com/users/3316972/screenshots/15779528/media/293f4765747578a091fb286cf6a15083.jpg?resize=400x300&vertical=center"
-                            alt="Dashboard"
-                            className="max-w-[600px] w-full"
-                        />
-                    </div>
-                </div>
-            </div>
-
-            <section className="w-full py-20 px-4 md:px-20 flex flex-col md:flex-row items-center justify-between gap-10">
-                {/* <div className="w-full md:w-1/2">
+                <section className="w-full py-20 px-4 md:px-20 flex flex-col md:flex-row items-center justify-between gap-10">
+                    {/* <div className="w-full md:w-1/2">
                     <img
                         src="https://niograph.com/wp-content/uploads/2021/01/image2-home7.png"
                         alt="Payment Logos"
@@ -166,7 +124,7 @@ const SoftwareServices = () => {
                     />
                 </div> */}
 
-                {/* <div className="w-full md:w-1/2">
+                    {/* <div className="w-full md:w-1/2">
                     <h2 className="text-4xl md:text-5xl font-bold text-black leading-tight mb-6">
                         100+ Payment <span className="text-blue-600  px-1 rounded ">Gateways</span>
                     </h2>
@@ -191,10 +149,11 @@ const SoftwareServices = () => {
                         Book A Free Demo
                     </button>
                 </div> */}
-            </section>
-            {/* Footer */}
-            <div className="mt-6">
-                <Footer />
+                </section>
+                {/* Footer */}
+                <div className="mt-6">
+                    <Footer />
+                </div>
             </div>
         </div>
     );
