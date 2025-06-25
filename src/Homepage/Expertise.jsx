@@ -68,7 +68,7 @@ const Expertise = () => {
       <div className="absolute bottom-32 right-16 w-12 h-12 bg-indigo-200 rounded transform rotate-45 opacity-30"></div>
       <div className="absolute bottom-20 right-32 w-6 h-6 bg-orange-300 rounded transform rotate-45 opacity-40"></div>
 
-      <div className="max-w-7xl mx-auto">
+      <div className="w-screen mx-auto">
         <div className="text-center mb-16">
           <p className="text-blue-600 text-sm font-medium tracking-wider uppercase mb-4">OUR SERVICES</p>
           <h1 className="text-5xl font-bold text-gray-900">Our Expertise Field</h1>

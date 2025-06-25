@@ -22,7 +22,7 @@ export const Dashboard = () => {
 
     return (
         <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-4 space-y-6">
-            <div className="w-full max-w-7xl">
+            <div className="w-screen">
                 <Header />
             </div>
             <div className="mb-2" data-aos="fade-down">
@@ -31,13 +31,13 @@ export const Dashboard = () => {
             <div className="mb-2" data-aos="fade-left">
                 <Platform />
             </div>
-            <div data-aos="fade-up">
+            <div data-aos="fade-up" className="w-screen">
                 <About />
             </div>
-            <div className="mb-2" data-aos="zoom-in">
+            <div className="mb-2 w-screen" data-aos="zoom-in">
                 <CompletedProject />
             </div>
-            <div className="mt-0" data-aos="fade-right">
+            <div className="mt-0 w-screen" data-aos="fade-right">
                 <ChooseUs />
             </div>
             <div data-aos="flip-left">
@@ -46,7 +46,7 @@ export const Dashboard = () => {
             <div className="mb-2" data-aos="fade-right">
                 <Plan />
             </div>
-            <div data-aos="fade-up">
+            <div data-aos="fade-up" className="w-screen">
                 <Footer />
             </div>
         </div>

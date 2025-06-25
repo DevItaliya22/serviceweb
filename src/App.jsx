@@ -10,17 +10,31 @@ import Description from "./Portfolio/Description";
 function App() {
   return (
     <Router>
-      <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-4">
-        <Routes>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/about" element={<AboutUs />} />
-          <Route path="/portfolio" element={<Portfolio />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/portfolio/:id" element={<Description />} />
-          {/* Add more routes as needed */}
-        </Routes>
+      {/* Option 1: Using custom CSS to hide scrollbar */}
+      <div 
+        className="min-h-screen w-full bg-gray-100 overflow-y-auto"
+        style={{
+          scrollbarWidth: 'none', /* Firefox */
+          msOverflowStyle: 'none', /* Internet Explorer 10+ */
+          WebkitScrollbar: 'none' /* WebKit */
+        }}
+      >
+        <style jsx>{`
+          div::-webkit-scrollbar {
+            display: none;
+          }
+        `}</style>
+        <div className="max-w-full">
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/about" element={<AboutUs />} />
+            <Route path="/portfolio" element={<Portfolio />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/portfolio/:id" element={<Description />} />
+          </Routes>
+        </div>
       </div>
     </Router>
   );
