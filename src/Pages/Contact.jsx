@@ -1,181 +1,166 @@
 import React, { useState } from 'react';
+import Navbar from '../components/Navbar/Navbar';
+import IteckFooter from '../components/Footer/Footer';
 
-export default function ContactForm() {
+const ContactForm = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
     website: '',
-    message: ''
+    inquiry: '',
+    message: '',
+    agree: false,
   });
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [agreed, setAgreed] = useState(false);
 
-  const handleInputChange = (e) => {
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [name]: type === 'checkbox' ? checked : value,
     });
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('Form Data Submitted:', formData);
+  };
+
   return (
-    <div className="min-h-screen" style={{background: 'linear-gradient(135deg, #e0f2fe 0%, #f3e5f5 100%)'}}>
-      {/* Background decorative elements */}
-      <div className="absolute top-16 right-16 z-0">
-        <div className="relative">
-          {/* Blue circle */}
-          <div className="w-8 h-8 bg-blue-500 rounded-full absolute top-0 right-0"></div>
-          {/* Orange envelope */}
-          <div className="w-16 h-12 bg-orange-400 absolute top-4 right-8 transform rotate-12 rounded-lg shadow-lg flex items-center justify-center">
-            <div className="w-8 h-6 bg-white rounded-sm relative">
-              <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-3 border-r-3 border-b-3 border-transparent border-b-white"></div>
-            </div>
-          </div>
-          {/* Blue question mark circle */}
-          <div className="w-6 h-6 bg-blue-600 rounded-full absolute top-2 right-6 flex items-center justify-center">
-            <span className="text-white text-xs font-bold">?</span>
-          </div>
-        </div>
-      </div>
+    <div className="bg-white min-h-screen flex flex-col justify-between">
+      <Navbar />
 
-      {/* Bottom left decorative element */}
-      <div className="absolute bottom-0 left-0 z-0">
-        <div className="relative">
-          {/* Blue circle */}
-          <div className="w-24 h-24 bg-blue-400 rounded-full opacity-20"></div>
-          {/* Gray rectangle */}
-          <div className="w-16 h-20 bg-gray-300 absolute bottom-0 left-8 opacity-30"></div>
-        </div>
-      </div>
+      <main className="flex-grow pt-24 pb-16 px-4">
+        <div className="max-w-4xl mx-auto text-center mb-12 mt-24">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+            Get In <span className="text-purple-500">Touch</span>
+          </h1>
+          <p className="text-gray-600 text-lg mb-12">
+            We will contact again after receive your request in 24h
+          </p>
 
-      <div className="relative z-10 flex items-center justify-center min-h-screen p-8">
-        <div className="w-full max-w-4xl bg-white rounded-3xl shadow-2xl p-12 relative">
-          {/* Required field notice */}
-          <div className="text-center mb-8">
-            <p className="text-red-400 text-sm font-medium">The field is required mark as *</p>
-          </div>
-
-          <div className="space-y-8">
-            {/* First row - Name and Email */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div>
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="Name"
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  className="w-full px-8 py-5 bg-gray-50 border-0 rounded-3xl text-gray-700 placeholder-gray-400 text-lg focus:outline-none focus:ring-0 focus:bg-gray-100 transition-all"
-                />
-              </div>
-              <div>
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Email Address *"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  className="w-full px-8 py-5 bg-gray-50 border-0 rounded-3xl text-gray-700 placeholder-gray-400 text-lg focus:outline-none focus:ring-0 focus:bg-gray-100 transition-all"
-                />
-              </div>
-            </div>
-
-            {/* Second row - Phone and Website */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div>
-                <input
-                  type="tel"
-                  name="phone"
-                  placeholder="Phone Number (option)"
-                  value={formData.phone}
-                  onChange={handleInputChange}
-                  className="w-full px-8 py-5 bg-gray-50 border-0 rounded-3xl text-gray-700 placeholder-gray-400 text-lg focus:outline-none focus:ring-0 focus:bg-gray-100 transition-all"
-                />
-              </div>
-              <div>
-                <input
-                  type="url"
-                  name="website"
-                  placeholder="Your Website (option)"
-                  value={formData.website}
-                  onChange={handleInputChange}
-                  className="w-full px-8 py-5 bg-gray-50 border-0 rounded-3xl text-gray-700 placeholder-gray-400 text-lg focus:outline-none focus:ring-0 focus:bg-gray-100 transition-all"
-                />
-              </div>
-            </div>
-
-            {/* Dropdown */}
-            <div className="relative">
-              <button
-                type="button"
-                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                className="w-full px-8 py-5 bg-gray-50 border-0 rounded-3xl text-left text-gray-400 text-lg focus:outline-none focus:bg-gray-100 transition-all flex justify-between items-center"
-              >
-                How can we help you?
-                <svg 
-                  className={`w-6 h-6 transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`} 
-                  fill="none" 
-                  stroke="currentColor" 
-                  viewBox="0 0 24 24"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          <div className="flex flex-col md:flex-row justify-center items-center gap-8 md:gap-16 mb-16">
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center">
+                <svg className="w-6 h-6 text-yellow-600" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" />
                 </svg>
-              </button>
-              {isDropdownOpen && (
-                <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-gray-200 rounded-3xl shadow-xl z-20">
-                  <div className="p-4">
-                    <div className="px-6 py-4 hover:bg-gray-50 rounded-2xl cursor-pointer text-gray-600 text-lg">Web Development</div>
-                    <div className="px-6 py-4 hover:bg-gray-50 rounded-2xl cursor-pointer text-gray-600 text-lg">Mobile App Development</div>
-                    <div className="px-6 py-4 hover:bg-gray-50 rounded-2xl cursor-pointer text-gray-600 text-lg">UI/UX Design</div>
-                    <div className="px-6 py-4 hover:bg-gray-50 rounded-2xl cursor-pointer text-gray-600 text-lg">Consulting</div>
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* Message textarea */}
-            <div className="relative">
-              <textarea
-                name="message"
-                placeholder="How can we help you?"
-                rows={8}
-                value={formData.message}
-                onChange={handleInputChange}
-                className="w-full px-8 py-6 bg-white border-2 border-blue-300 rounded-3xl text-gray-700 placeholder-gray-400 text-lg focus:outline-none focus:border-blue-400 transition-all resize-none"
-              ></textarea>
-              <div className="absolute bottom-4 right-6">
-                <span className="text-red-400 text-2xl font-bold">*</span>
               </div>
+              <span className="text-gray-800 font-semibold">contact@iteck.com</span>
             </div>
 
-            {/* Terms checkbox */}
-            <div className="flex items-start space-x-4 px-2">
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                <svg className="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <span className="text-gray-800 font-semibold">58 Howard St, Toronto</span>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                <svg className="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                </svg>
+              </div>
+              <span className="text-gray-800 font-semibold">(+23) 5535 68 68</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="relative max-w-4xl mx-auto">
+          <div className="h-8 bg-gradient-to-b from-purple-500 via-purple-600 to-purple-700 shadow-lg rounded-t-full relative z-10"></div>
+          <div className="absolute top-0 left-0 w-full h-2 bg-white/30 rounded-t-full blur-sm z-20"></div>
+
+          <form onSubmit={handleSubmit} className="bg-white p-8 rounded-b-xl shadow-md relative z-0 space-y-5">
+            <p className="text-red-500 text-center font-medium">
+              The field is required mark as <span className="text-red-700">*</span>
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <input
+                type="text"
+                name="name"
+                placeholder="Name *"
+                className="p-3 rounded-full border border-gray-300"
+                value={formData.name}
+                onChange={handleChange}
+                required
+              />
+              <input
+                type="email"
+                name="email"
+                placeholder="Email Address *"
+                className="p-3 rounded-full border border-gray-300"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
+              <input
+                type="text"
+                name="phone"
+                placeholder="Phone Number *"
+                className="p-3 rounded-full border border-gray-300"
+                value={formData.phone}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <select
+              name="inquiry"
+              value={formData.inquiry}
+              onChange={handleChange}
+              className="w-full p-3 rounded-full border border-gray-300"
+            >
+              <option value="">How can we help you?</option>
+              <option value="web">Web Development</option>
+              <option value="app">App Development</option>
+              <option value="design">UI/UX Design</option>
+            </select>
+
+            <textarea
+              name="message"
+              rows={5}
+              placeholder="Your message..."
+              className="w-full p-4 rounded-2xl border border-gray-300"
+              value={formData.message}
+              onChange={handleChange}
+            />
+
+            <div className="flex items-start space-x-2">
               <input
                 type="checkbox"
-                id="terms"
-                checked={agreed}
-                onChange={(e) => setAgreed(e.target.checked)}
-                className="mt-1 w-5 h-5 text-blue-600 border-2 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
+                name="agree"
+                checked={formData.agree}
+                onChange={handleChange}
+                className="w-4 h-4 mt-1"
+                required
               />
-              <label htmlFor="terms" className="text-gray-600 text-lg leading-relaxed">
+              <label htmlFor="agree" className="text-sm text-gray-700">
                 By submitting, I'm agreed to the{' '}
-                <span className="text-gray-800 underline cursor-pointer font-medium">Terms & Conditions</span>
+                <a href="#" className="underline text-blue-600">
+                  Terms & Conditions
+                </a>
               </label>
             </div>
 
-            {/* Submit button */}
-            <div className="text-center pt-6">
+            <div className="text-center pt-2">
               <button
                 type="submit"
-                className="px-16 py-5 text-white text-lg font-semibold rounded-3xl shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
-                style={{background: 'linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%)'}}
+                className="bg-[#5f3dc4] hover:bg-[#4b2fa0] text-white font-semibold py-3 px-8 rounded-full transition"
               >
                 Send Your Request
               </button>
             </div>
-          </div>
+          </form>
         </div>
-      </div>
+      </main>
+
+      <IteckFooter />
     </div>
   );
-}
+};
+
+export default ContactForm;
