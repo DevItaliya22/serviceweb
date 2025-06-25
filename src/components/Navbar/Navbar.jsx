@@ -46,7 +46,7 @@ export default function Navbar() {
         { to: "/services", label: "Services" },
         { to: "/about", label: "About Us" },
         { to: "/portfolio", label: "Portfolio" },
-        { to: "/blog", label: "Blog" },
+        // { to: "/blog", label: "Blog" },
         { to: "/contact", label: "Contact" }
     ];
 
