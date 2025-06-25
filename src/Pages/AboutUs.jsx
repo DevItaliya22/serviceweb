@@ -282,7 +282,7 @@ export default function AboutUs() {
                 </div>
             </div>
 
-            <section className="py-16 bg-[#f7f8fd]">
+            {/* <section className="py-16 bg-[#f7f8fd]">
                 <div className="text-center mb-10">
                     <h2 className="text-4xl font-bold text-gray-800">
                         Our <span className="text-blue-600 underline decoration-blue-300">Leaders</span>
@@ -323,7 +323,7 @@ export default function AboutUs() {
                         </div>
                     ))}
                 </div>
-            </section>
+            </section> */}
 
             <IteckFooter />
         </div>
