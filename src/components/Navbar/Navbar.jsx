@@ -51,26 +51,21 @@ export default function Navbar() {
     ];
 
     return (
-        <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-            isScrolled
-                ? 'py-2 bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-100'
-                : 'py-4'
-        }`}>
-            <nav className="flex items-center justify-between max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
+            ? 'py-2 bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-100'
+            : 'py-4'
+            }`}>
+            <nav className="flex items-center justify-between max-screen mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Logo Section */}
                 <div className="flex items-center space-x-3">
-  <Link to="/" className="flex items-center space-x-3">
-    <img
-      src={Logo}
-      alt="Company Logo"
-      className="w-18 h-18 sm:w-20 sm:h-20 lg:w-24 lg:h-24 object-contain rounded-lg"
-    />
-    {/* <div className="hidden sm:block">
-      <h1 className="text-xl lg:text-2xl font-bold text-gray-900">Technitium</h1>
-      <p className="text-xs lg:text-sm text-gray-600 -mt-1">Experience The Excellence</p>
-    </div> */}
-  </Link>
-</div>
+                    <Link to="/" className="flex items-center space-x-3">
+                        <img
+                            src={Logo}
+                            alt="Company Logo"
+                            className="w-30 h-24 object-contain rounded-lg transition-transform duration-300 hover:scale-105"
+                        />
+                    </Link>
+                </div>
 
 
                 {/* Desktop Navigation */}
@@ -89,9 +84,8 @@ export default function Navbar() {
 
                 {/* Desktop CTA Button */}
                 <div className="hidden lg:block">
-                    <button className={`border-2 border-blue-500 hover:border-orange-500 text-blue-500 px-6 py-2 rounded-full hover:bg-orange-500 hover:text-white transition-all duration-300 font-medium ${
-                        isScrolled ? 'bg-blue-50' : 'bg-white'
-                    }`}>
+                    <button className={`border-2 border-blue-500 hover:border-orange-500 text-blue-500 px-6 py-2 rounded-full hover:bg-orange-500 hover:text-white transition-all duration-300 font-medium ${isScrolled ? 'bg-blue-50' : 'bg-white'
+                        }`}>
                         Request A Demo →
                     </button>
                 </div>
@@ -118,11 +112,10 @@ export default function Navbar() {
             </nav>
 
             {/* Mobile Menu */}
-            <div className={`lg:hidden transition-all duration-300 ease-in-out ${
-                isMobileMenuOpen
-                    ? 'max-h-96 opacity-100'
-                    : 'max-h-0 opacity-0 pointer-events-none'
-            } overflow-hidden bg-white/95 backdrop-blur-md border-t border-gray-100`}>
+            <div className={`lg:hidden transition-all duration-300 ease-in-out ${isMobileMenuOpen
+                ? 'max-h-96 opacity-100'
+                : 'max-h-0 opacity-0 pointer-events-none'
+                } overflow-hidden bg-white/95 backdrop-blur-md border-t border-gray-100`}>
                 <div className="px-4 py-4 space-y-3">
                     {navLinks.map((link) => (
                         <Link
