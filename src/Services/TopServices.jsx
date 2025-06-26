@@ -35,7 +35,7 @@ const TopServices = () => {
     {
       icon: <Instagram className="w-8 h-8 text-pink-500" />,
       title: "Social Media",
-      description: "Get more website traffic, more customers for your social chanel",
+      description: "Get more website traffic, more customers for your social channel",
       bgColor: "bg-gradient-to-br from-pink-50 to-pink-100",
       iconBg: "bg-white",
       accentColor: "pink"
@@ -105,7 +105,7 @@ const TopServices = () => {
 
   const getVisibleServices = () => {
     const visible = [];
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 4; i++) {
       const index = (currentIndex + i) % services.length;
       visible.push({ ...services[index], originalIndex: index, position: i });
     }
@@ -124,25 +124,25 @@ const TopServices = () => {
   };
 
   return (
-    <div className="w-full max-w-8xl mx-auto px-4 py-16  overflow-hidden">
+    <div className="w-full min-h-screen flex flex-col justify-center py-16 overflow-hidden">
       {/* Animated Header */}
-      <div className="text-center mb-16 animate-fadeInDown">
+      <div className="text-center mb-16 animate-fadeInDown px-4">
         <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-blue-900 to-gray-900 bg-clip-text text-transparent animate-pulse">
           Our Top <span className="text-blue-500 inline-block">Services</span>
         </h2>
-        <p className="text-gray-600 text-lg max-w-3xl mx-auto leading-relaxed animate-fadeInUp">
+        <p className="text-gray-600 text-lg max-w-4xl mx-auto leading-relaxed animate-fadeInUp">
           Iteck Dashboard is a powerhouse when it comes to the feature list. This ensures you have every 
           functionality you need to build, run, and expand your marketplace
         </p>
       </div>
 
-      {/* Carousel Container */}
-      <div className="relative">
+      {/* Carousel Container - Full Width */}
+      <div className="relative w-full px-4">
         {/* Animated Navigation Buttons */}
         <button
           onClick={prevSlide}
           disabled={isTransitioning}
-          className="absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-white rounded-full p-4 shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-125 hover:rotate-12 disabled:opacity-50 animate-slideInLeft group"
+          className="absolute left-8 top-1/2 -translate-y-1/2 z-20 bg-white rounded-full p-4 shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-125 hover:rotate-12 disabled:opacity-50 animate-slideInLeft group"
         >
           <ChevronLeft className="w-6 h-6 text-gray-600 group-hover:text-blue-500 transition-colors duration-300" />
           <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
@@ -151,18 +151,18 @@ const TopServices = () => {
         <button
           onClick={nextSlide}
           disabled={isTransitioning}
-          className="absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-white rounded-full p-4 shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-125 hover:-rotate-12 disabled:opacity-50 animate-slideInRight group"
+          className="absolute right-8 top-1/2 -translate-y-1/2 z-20 bg-white rounded-full p-4 shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-125 hover:-rotate-12 disabled:opacity-50 animate-slideInRight group"
         >
           <ChevronRight className="w-6 h-6 text-gray-600 group-hover:text-blue-500 transition-colors duration-300" />
           <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
         </button>
 
-        {/* Animated Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-16 relative">
+        {/* Services Grid - 4 Cards Full Width */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-20 relative">
           {getVisibleServices().map((service, index) => (
             <div
               key={`${service.originalIndex}-${currentIndex}`}
-              className={`bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-700 transform hover:-translate-y-6 hover:rotate-1 group cursor-pointer border-2 ${getAccentColors(service.accentColor)} relative overflow-hidden ${
+              className={`bg-white rounded-3xl p-6 shadow-lg hover:shadow-2xl transition-all duration-700 transform hover:-translate-y-6 hover:rotate-1 group cursor-pointer border-2 ${getAccentColors(service.accentColor)} relative overflow-hidden h-full flex flex-col ${
                 isTransitioning 
                   ? direction === 'next' 
                     ? 'animate-slideOutLeft' 
@@ -170,18 +170,18 @@ const TopServices = () => {
                   : 'animate-slideInUp'
               }`}
               style={{ 
-                animationDelay: `${index * 0.2}s`,
+                animationDelay: `${index * 0.15}s`,
                 animationFillMode: 'both'
               }}
             >
               {/* Animated Background Effects */}
               <div className="absolute inset-0 bg-gradient-to-br from-transparent via-blue-50/20 to-purple-50/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-br from-blue-400/10 to-purple-400/10 rounded-full blur-xl group-hover:scale-150 transition-transform duration-700"></div>
+              <div className="absolute -top-4 -right-4 w-20 h-20 bg-gradient-to-br from-blue-400/10 to-purple-400/10 rounded-full blur-xl group-hover:scale-150 transition-transform duration-700"></div>
               
               {/* Animated Icon Container */}
-              <div className={`${service.bgColor} rounded-2xl p-6 mb-6 relative overflow-hidden group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 animate-bounceIn`}>
+              <div className={`${service.bgColor} rounded-2xl p-4 mb-6 relative overflow-hidden group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 animate-bounceIn`}>
                 <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-transparent animate-shimmer"></div>
-                <div className={`${service.iconBg} rounded-xl p-4 shadow-lg relative z-10 mx-auto w-fit group-hover:shadow-xl transition-all duration-300 animate-pulse`}>
+                <div className={`${service.iconBg} rounded-xl p-3 shadow-lg relative z-10 mx-auto w-fit group-hover:shadow-xl transition-all duration-300 animate-pulse`}>
                   <div className="animate-spin-slow">
                     {service.icon}
                   </div>
@@ -193,16 +193,16 @@ const TopServices = () => {
                 <div className="absolute top-1/2 right-1 w-1 h-1 bg-blue-400 rounded-full animate-bounce"></div>
                 
                 {/* Floating particles */}
-                <div className="absolute top-4 left-4 w-1 h-1 bg-purple-400 rounded-full animate-float"></div>
-                <div className="absolute bottom-4 right-4 w-1 h-1 bg-green-400 rounded-full animate-float-delayed"></div>
+                <div className="absolute top-3 left-3 w-1 h-1 bg-purple-400 rounded-full animate-float"></div>
+                <div className="absolute bottom-3 right-3 w-1 h-1 bg-green-400 rounded-full animate-float-delayed"></div>
               </div>
 
               {/* Animated Content */}
-              <div className="text-center relative z-10">
-                <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors duration-300 animate-fadeInUp">
+              <div className="text-center relative z-10 flex-grow flex flex-col">
+                <h3 className="text-lg font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors duration-300 animate-fadeInUp">
                   {service.title}
                 </h3>
-                <p className="text-gray-600 leading-relaxed group-hover:text-gray-700 transition-colors duration-300 animate-fadeInUp">
+                <p className="text-gray-600 text-sm leading-relaxed group-hover:text-gray-700 transition-colors duration-300 animate-fadeInUp flex-grow">
                   {service.description}
                 </p>
               </div>

@@ -126,7 +126,7 @@ const SoftwareServices = () => {
                     <Navbar />
                 </div>
 
-                <div className="max-w-7xl mx-auto px-4 mt-16">
+                <div className="w-screen mt-12">
                     <TopServices />
                 </div>
 
