@@ -1,8 +1,31 @@
-import React, {} from 'react';
+import React, { useState, useEffect } from 'react';
 import { Facebook, Twitter, Youtube, Linkedin, Mail, Phone, MapPin } from 'lucide-react';
 import Logo from "../../assets/Logo.jpg"
+import { getContactDetails } from '../../api/contact';
 
 export default function IteckFooter() {
+  const [contactDetails, setContactDetails] = useState({
+    email: 'info@iteck-info.com',
+    phone: '907 000 999 22',
+    address: '12/A, New Booston, NYC'
+  });
+
+  useEffect(() => {
+    const fetchContactDetails = async () => {
+      try {
+        const details = await getContactDetails();
+        setContactDetails({
+          email: details.email || 'info@iteck-info.com',
+          phone: details.phone || '907 000 999 22',
+          address: details.address || '12/A, New Booston, NYC'
+        });
+      } catch (error) {
+        console.error('Error fetching contact details:', error);
+      }
+    };
+
+    fetchContactDetails();
+  }, []);
 
   return (
     <footer className="bg-gray-50 py-16 px-4">
@@ -64,15 +87,15 @@ export default function IteckFooter() {
             <div className="space-y-3">
               <div className="flex items-center space-x-3">
                 <Mail className="w-5 h-5 text-blue-600" />
-                <span className="text-gray-700">info@iteck-info.com</span>
+                <span className="text-gray-700">{contactDetails.email}</span>
               </div>
               <div className="flex items-center space-x-3">
                 <Phone className="w-5 h-5 text-blue-600" />
-                <span className="text-gray-700">907 000 999 22</span>
+                <span className="text-gray-700">{contactDetails.phone}</span>
               </div>
               <div className="flex items-center space-x-3">
                 <MapPin className="w-5 h-5 text-blue-600" />
-                <span className="text-gray-700">12/A, New Booston, NYC</span>
+                <span className="text-gray-700">{contactDetails.address}</span>
               </div>
             </div>
           </div>
