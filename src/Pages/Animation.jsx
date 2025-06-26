@@ -25,11 +25,13 @@ export default function IconsDisplay() {
   ];
 
   return (
-    <div className="relative h-[320px] bg-white overflow-hidden w-full">
+    <div className="relative h-[320px]  overflow-hidden w-full ">
       <style jsx>{`
-        @keyframes slowFloat {
+        @keyframes bubbleFloat {
           0%, 100% { transform: translate(-50%, 0px) scale(1); }
-          50% { transform: translate(-50%, -8px) scale(1.05); }
+          25% { transform: translate(-50%, -20px) scale(1.02); }
+          50% { transform: translate(-50%, -35px) scale(1.05); }
+          75% { transform: translate(-50%, -15px) scale(1.02); }
         }
         
         @keyframes slowBounce {
@@ -48,19 +50,14 @@ export default function IconsDisplay() {
           50% { transform: scale(1.1); }
         }
         
-        @keyframes iconHover {
-          0%, 100% { transform: rotate(0deg) scale(1); }
-          25% { transform: rotate(-5deg) scale(1.05); }
-          75% { transform: rotate(5deg) scale(1.05); }
+        @keyframes iconRotate {
+          0%, 100% { transform: rotate(0deg); }
+          25% { transform: rotate(-3deg); }
+          75% { transform: rotate(3deg); }
         }
         
-        @keyframes gradientShift {
-          0%, 100% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-        }
-        
-        .animate-slowFloat {
-          animation: slowFloat 4s ease-in-out infinite;
+        .animate-bubbleFloat {
+          animation: bubbleFloat 4s ease-in-out infinite;
         }
         
         .animate-slowBounce {
@@ -75,14 +72,8 @@ export default function IconsDisplay() {
           animation: iconPulse 2s ease-in-out infinite;
         }
         
-        .animate-iconHover {
-          animation: iconHover 6s ease-in-out infinite;
-        }
-        
-        .animate-gradientShift {
-          background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #f5576c);
-          background-size: 400% 400%;
-          animation: gradientShift 8s ease infinite;
+        .animate-iconRotate {
+          animation: iconRotate 6s ease-in-out infinite;
         }
       `}</style>
 
@@ -163,34 +154,39 @@ export default function IconsDisplay() {
         </div>
       ))}
 
-      {/* Enhanced Icon Circles */}
+      {/* Enhanced Icon Circles with Bubble Movement */}
       <div className="absolute top-[120px] left-0 w-full">
         {icons.map((item, idx) => (
           <div
             key={idx}
             style={{ 
               left: item.left,
-              animationDelay: `${idx * 0.3}s`
+              animationDelay: `${idx * 0.4}s`
             }}
-            className={`absolute transform -translate-x-1/2 rounded-full ${item.bg} w-28 h-28 flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 animate-slowFloat border-2 border-white/20 backdrop-blur-sm`}
+            className={`absolute transform -translate-x-1/2 rounded-full ${item.bg} w-28 h-28 flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 animate-bubbleFloat border-2 border-white/20 backdrop-blur-sm`}
             onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'translate(-50%, -12px) scale(1.1)';
-              e.currentTarget.style.boxShadow = '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)';
+              e.currentTarget.style.transform = 'translate(-50%, -50px) scale(1.15)';
+              e.currentTarget.style.boxShadow = '0 25px 35px -5px rgba(0, 0, 0, 0.15), 0 15px 15px -5px rgba(0, 0, 0, 0.08)';
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'translate(-50%, 0px) scale(1)';
-              e.currentTarget.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)';
+              e.currentTarget.style.transform = '';
+              e.currentTarget.style.boxShadow = '';
             }}
           >
             <div 
-              className="animate-iconHover"
-              style={{ animationDelay: `${idx * 0.8}s` }}
+              className="animate-iconRotate"
+              style={{ animationDelay: `${idx * 0.6}s` }}
             >
               {item.icon}
             </div>
             
-            {/* Ripple effect */}
-            <div className="absolute inset-0 rounded-full border-2 border-blue-400/30 animate-iconPulse" style={{ animationDelay: `${idx * 0.4}s` }}></div>
+            {/* Enhanced ripple effect */}
+            <div className="absolute inset-0 rounded-full border-2 border-blue-400/30 animate-iconPulse" 
+                 style={{ animationDelay: `${idx * 0.4}s` }}>
+            </div>
+            <div className="absolute inset-2 rounded-full border border-purple-300/20 animate-iconPulse" 
+                 style={{ animationDelay: `${idx * 0.6}s` }}>
+            </div>
           </div>
         ))}
       </div>

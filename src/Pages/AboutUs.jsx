@@ -32,6 +32,10 @@ export default function AboutUs() {
     return (
         <div className="min-h-screen">
             <Navbar />
+            <div className="mt-60 mb-8">
+                <FloatingBubbles />
+            </div>
+
             <div className="w-full h-screen relative overflow-hidden">
                 <div className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-8">
                     <div className="relative">
@@ -113,11 +117,6 @@ export default function AboutUs() {
                 </div>
             </div>
 
-            {/* FloatingBubbles Animation Section */}
-            <div className="relative py-20 bg-gradient-to-br from-blue-50 to-purple-50 overflow-hidden">
-                <FloatingBubbles />
-            </div>
-
             <div className="py-16 px-4">
                 <div className="w-screen mx-auto">
                     <div className="text-center mb-16">
@@ -173,7 +172,7 @@ export default function AboutUs() {
                     </div>
                 </div>
             </div>
-            
+
             <section className="flex flex-col lg:flex-row items-center justify-between px-8 py-20 max-w-7xl mx-auto">
                 <div className="lg:w-1/2 mb-10 lg:mb-0">
                     <h2 className="text-4xl sm:text-5xl font-bold text-gray-900">
