@@ -2,7 +2,7 @@ import React from 'react';
 import Navbar from '../components/Navbar/Navbar';
 import Project from './Project';
 import IteckFooter from '../components/Footer/Footer';
-import Reviews from '../Services/Reviews';
+import Review from '../Homepage/Review'
 
 const Portfolio = () => {
     return (
@@ -37,10 +37,10 @@ const Portfolio = () => {
                                 <svg width="100%" height="100%" className="absolute inset-0">
                                     <defs>
                                         <pattern id="diagonalLines" patternUnits="userSpaceOnUse" width="40" height="40" patternTransform="rotate(45)">
-                                            <line x1="0" y1="0" x2="0" y2="40" stroke="#000000" strokeWidth="1"/>
+                                            <line x1="0" y1="0" x2="0" y2="40" stroke="#000000" strokeWidth="1" />
                                         </pattern>
                                     </defs>
-                                    <rect width="100%" height="100%" fill="url(#diagonalLines)"/>
+                                    <rect width="100%" height="100%" fill="url(#diagonalLines)" />
                                 </svg>
                             </div>
 
@@ -50,7 +50,7 @@ const Portfolio = () => {
                                     <span className="relative inline-block">
                                         bigger success
                                         <svg className="absolute -bottom-2 left-0 w-full h-2" viewBox="0 0 200 8">
-                                            <path d="M0,4 Q50,0 100,4 T200,4" stroke="#3B82F6" strokeWidth="3" fill="none"/>
+                                            <path d="M0,4 Q50,0 100,4 T200,4" stroke="#3B82F6" strokeWidth="3" fill="none" />
                                         </svg>
                                         <span className="absolute -right-6 -top-4 text-3xl">✏️</span>
                                     </span>
@@ -66,11 +66,11 @@ const Portfolio = () => {
                                 </div>
                             </div>
                         </div>
-                                    <div className="">
-                                        <div className="max-w-7xl mx-auto px-4">
-                                            <Reviews />
-                                        </div>
-                                    </div>
+                        <div className="">
+                            <div className="max-w-7xl mx-auto px-4">
+                                <Review />
+                            </div>
+                        </div>
                     </div>
                 </section>
             </main>
