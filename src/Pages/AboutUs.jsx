@@ -3,6 +3,7 @@ import { Code, Smartphone, MessageSquare } from 'lucide-react';
 import IteckFooter from '../components/Footer/Footer';
 import { FaFacebookF, FaLinkedinIn, FaPinterestP } from "react-icons/fa";
 import Navbar from '../components/Navbar/Navbar';
+import FloatingBubbles from './Animation';
 
 const teamMembers = [
     {
@@ -112,8 +113,13 @@ export default function AboutUs() {
                 </div>
             </div>
 
+            {/* FloatingBubbles Animation Section */}
+            <div className="relative py-20 bg-gradient-to-br from-blue-50 to-purple-50 overflow-hidden">
+                <FloatingBubbles />
+            </div>
+
             <div className="py-16 px-4">
-                <div className="max-w-6xl mx-auto">
+                <div className="w-screen mx-auto">
                     <div className="text-center mb-16">
                         <h2 className="text-5xl font-bold text-gray-900 mb-4">
                             Top <span className="text-blue-600">Reasons</span>
@@ -164,15 +170,14 @@ export default function AboutUs() {
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
                 </div>
             </div>
+            
             <section className="flex flex-col lg:flex-row items-center justify-between px-8 py-20 max-w-7xl mx-auto">
                 <div className="lg:w-1/2 mb-10 lg:mb-0">
                     <h2 className="text-4xl sm:text-5xl font-bold text-gray-900">
-                        Iteck’s <br />
+                        Iteck's <br />
                         <span className="text-blue-600 underline underline-offset-4 decoration-blue-300">
                             Philosophy
                         </span>
