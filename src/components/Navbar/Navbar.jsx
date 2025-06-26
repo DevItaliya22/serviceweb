@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Logo from "../../assets/Logo.jpg";
 
 export default function Navbar() {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const location = useLocation();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -17,7 +18,6 @@ export default function Navbar() {
         };
     }, []);
 
-    // Close mobile menu when clicking outside
     useEffect(() => {
         const handleClickOutside = () => {
             setIsMobileMenuOpen(false);
@@ -56,7 +56,7 @@ export default function Navbar() {
             : 'py-4'
             }`}>
             <nav className="flex items-center justify-between max-screen mx-auto px-4 sm:px-6 lg:px-8">
-                {/* Logo Section */}
+                {/* Logo */}
                 <div className="flex items-center space-x-3">
                     <Link to="/" className="flex items-center space-x-3">
                         <img
@@ -67,24 +67,26 @@ export default function Navbar() {
                     </Link>
                 </div>
 
-
                 {/* Desktop Navigation */}
                 <div className="hidden lg:flex items-center space-x-8">
-                    {navLinks.map((link) => (
-                        <Link
-                            key={link.to}
-                            to={link.to}
-                            className="text-gray-700 hover:text-blue-600 transition-colors duration-200 font-bold relative group"
-                        >
-                            {link.label}
-                            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
-                        </Link>
-                    ))}
+                    {navLinks.map((link) => {
+                        const isActive = location.pathname === link.to;
+                        return (
+                            <Link
+                                key={link.to}
+                                to={link.to}
+                                className={`relative group font-bold transition-colors duration-200 ${isActive ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'}`}
+                            >
+                                {link.label}
+                                <span className={`absolute -bottom-1 left-0 h-0.5 bg-blue-600 transition-all duration-300 ${isActive ? 'w-full' : 'w-0 group-hover:w-full'}`}></span>
+                            </Link>
+                        );
+                    })}
                 </div>
 
                 {/* Desktop CTA Button */}
                 <div className="hidden lg:block">
-  
+                    {/* Add CTA button here if needed */}
                 </div>
 
                 {/* Mobile Menu Button */}
@@ -114,17 +116,19 @@ export default function Navbar() {
                 : 'max-h-0 opacity-0 pointer-events-none'
                 } overflow-hidden bg-white/95 backdrop-blur-md border-t border-gray-100`}>
                 <div className="px-4 py-4 space-y-3">
-                    {navLinks.map((link) => (
-                        <Link
-                            key={link.to}
-                            to={link.to}
-                            onClick={closeMobileMenu}
-                            className="block py-3 px-4 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors duration-200 font-medium"
-                        >
-                            {link.label}
-                        </Link>
-                    ))}
-
+                    {navLinks.map((link) => {
+                        const isActive = location.pathname === link.to;
+                        return (
+                            <Link
+                                key={link.to}
+                                to={link.to}
+                                onClick={closeMobileMenu}
+                                className={`block py-3 px-4 rounded-lg transition-colors duration-200 font-medium ${isActive ? 'text-blue-600 bg-blue-50' : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50'}`}
+                            >
+                                {link.label}
+                            </Link>
+                        );
+                    })}
                 </div>
             </div>
         </header>
