@@ -13,9 +13,10 @@ const Portfolio = () => {
                     <div className="max-w-4xl mx-auto">
                         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
                             <span className="text-gray-900">Our </span>
-                            <span className="text-blue-600 bg-[linear-gradient(transparent_60%,#dbeafe_60%)] px-2">
-                                Projects
-                            </span>
+<span className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent font-semibold">
+    Projects
+</span>
+
                         </h1>
 
                         <p className="text-gray-600 text-3xl sm:text-xl whitespace-nowrap overflow-hidden text-ellipsis">
