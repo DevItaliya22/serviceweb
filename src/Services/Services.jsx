@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Calendar, Code, Database, MessageSquare, Users, FileText, MapPin, Truck } from 'lucide-react';
 import Navbar from '../components/Navbar/Navbar';
 import Footer from '../components/Footer/Footer';
@@ -7,67 +7,121 @@ import Reviews from './Reviews';
 import TopServices from './TopServices';
 
 const SoftwareServices = () => {
+    const [currentIndex, setCurrentIndex] = useState(0);
+
     const services = [
         {
-            icon: <Calendar className="w-16 h-16 text-blue-500" />,
+            icon: <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                <Calendar className="w-6 h-6 text-blue-500" />
+            </div>,
             title: "VBA Coding for Excel Automation",
             description: "Streamline your workflow with comprehensive project tracking and team collaboration tools."
         },
         {
-            icon: <Code className="w-16 h-16 text-blue-500" />,
+            icon: <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                <Code className="w-6 h-6 text-blue-500" />
+            </div>,
             title: "Custom Website Development",
             description: "Build tailored applications and solutions that perfectly fit your business requirements."
         },
         {
-            icon: <Database className="w-16 h-16 text-blue-500" />,
+            icon: <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                <Database className="w-6 h-6 text-blue-500" />
+            </div>,
             title: "Python coding and Integration",
             description: "Connect multiple data sources and gain insights through advanced analytics dashboards."
         },
         {
-            icon: <MessageSquare className="w-16 h-16 text-blue-500" />,
+            icon: <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                <MessageSquare className="w-6 h-6 text-blue-500" />
+            </div>,
             title: "JAVA Script Coding and Development",
             description: "Enhance customer experience with integrated support ticketing and communication systems."
         },
         {
-            icon: <Users className="w-16 h-16 text-blue-500" />,
+            icon: <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                <Users className="w-6 h-6 text-blue-500" />
+            </div>,
             title: "Power BI - Data Analysis and Dashboards",
             description: "Secure user authentication, role-based access control, and comprehensive user profiles."
         },
         {
-            icon: <FileText className="w-16 h-16 text-blue-500" />,
+            icon: <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                <FileText className="w-6 h-6 text-blue-500" />
+            </div>,
             title: "MySQL Database Coding and Development",
             description: "Organize, track, and automate document processes with version control and approval workflows."
         },
         {
-            icon: <MapPin className="w-16 h-16 text-blue-500" />,
+            icon: <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                <MapPin className="w-6 h-6 text-blue-500" />
+            </div>,
             title: "Google App Script Coding and Integration",
             description: "Integrate GPS tracking, geofencing, and location analytics for mobile and web applications."
         },
         {
-            icon: <Truck className="w-16 h-16 text-blue-500" />,
+            icon: <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                <Truck className="w-6 h-6 text-blue-500" />
+            </div>,
             title: "Custom Android App development in AppSheet",
             description: "Optimize inventory management, order tracking, and supply chain visibility solutions."
         },
         {
-            icon: <Truck className="w-16 h-16 text-blue-500" />,
+            icon: <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                <Truck className="w-6 h-6 text-blue-500" />
+            </div>,
             title: "Platform integration and Automation via Make.com",
             description: "Leverage AI and machine learning for predictive analytics and personalized user experiences."
         },
         {
-            icon: <Truck className="w-16 h-16 text-blue-500" />,
+            icon: <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                <Truck className="w-6 h-6 text-blue-500" />
+            </div>,
             title: "SMS, WhatsApp Automation and Chatbot development",
             description: "Implement data security measures, encryption, and compliance with industry standards."
         },
         {
-            icon: <Truck className="w-16 h-16 text-blue-500" />,
+            icon: <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                <Truck className="w-6 h-6 text-blue-500" />
+            </div>,
             title: "System Integration and API coding",
             description: "Create custom software solutions that address specific business challenges and enhance operational efficiency."
         }
     ];
 
+    const duplicatedServices = [...services, ...services];
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentIndex(prev => {
+                const next = prev + 1;
+                if (next >= services.length) {
+                    setTimeout(() => {
+                        setCurrentIndex(next);
+                    }, 700); 
+                    return next;
+                }
+                return next;
+            });
+        }, 3000);
+
+        return () => clearInterval(interval);
+    }, [services.length]);
+
+    const getStaggeredMargin = (index) => {
+        const pattern = index % 4;
+        switch (pattern) {
+            case 0: return 'mt-16'; // Down
+            case 1: return 'mt-0';  // Up
+            case 2: return 'mt-8';  // Middle
+            case 3: return 'mt-24'; // More down
+            default: return 'mt-0';
+        }
+    };
+
     return (
-        <div className="min-h-screen py-16 px-4">
-            <div className="max-w-7xl mx-auto">
+        <div className="py-16 px-4">
+            <div className="w-screen mx-auto">
                 <div className="text-center mb-12">
                     <Navbar />
                 </div>
@@ -84,31 +138,48 @@ const SoftwareServices = () => {
                         We provide perfect IT Solutions for your business
                     </p>
                 </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    {services.map((service, index) => (
+                <div className="relative mb-16 py-12">
+                    <div className="overflow-hidden">
                         <div
-                            key={index}
-                            className="bg-white rounded-3xl p-8 shadow-lg hover:shadow-xl transition-shadow duration-300 text-center"
+                            className="flex transition-transform duration-700 ease-in-out gap-6"
+                            style={{
+                                transform: `translateX(-${currentIndex * 280}px)`,
+                                transitionDuration: currentIndex >= services.length ? '0ms' : '700ms'
+                            }}
                         >
-                            <div className="flex justify-center mb-6">
-                                <div className="bg-blue-50 rounded-2xl p-4">
-                                    {service.icon}
+                            {duplicatedServices.map((service, index) => (
+                                <div
+                                    key={index}
+                                    className={`flex-shrink-0 w-64 min-w-0 ${getStaggeredMargin(index)}`}
+                                >
+                                    <div className="bg-white rounded-3xl p-8 h-80 shadow-lg hover:shadow-2xl transition-all duration-500 flex flex-col group hover:scale-105 border border-gray-100">
+                                        <div className="mb-6 group-hover:scale-110 transition-transform duration-300">
+                                            {service.icon}
+                                        </div>
+                                        <h3 className="text-xl font-bold text-gray-900 mb-4 leading-tight group-hover:text-blue-600 transition-colors duration-300">
+                                            {service.title}
+                                        </h3>
+                                        <p className="text-gray-600 text-sm leading-relaxed flex-1">
+                                            {service.description}
+                                        </p>
+                                    </div>
                                 </div>
-                            </div>
-
-                            <h3 className="text-xl font-bold text-gray-800 mb-2">
-                                {service.title}
-                            </h3>
-                            <h4 className="text-xl font-bold text-gray-800 mb-4">
-                                {service.subtitle}
-                            </h4>
-
-                            <p className="text-gray-600 text-sm leading-relaxed">
-                                {service.description}
-                            </p>
+                            ))}
                         </div>
-                    ))}
+                    </div>
+
+                    <div className="flex justify-center mt-8 space-x-2">
+                        {services.map((_, index) => (
+                            <div
+                                key={index}
+                                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                                    index === (currentIndex % services.length) 
+                                        ? 'bg-blue-500 w-8' 
+                                        : 'bg-gray-300'
+                                }`}
+                            />
+                        ))}
+                    </div>
                 </div>
             </div>
 
@@ -151,7 +222,7 @@ const SoftwareServices = () => {
                 </div> */}
                 </section>
                 {/* Footer */}
-                <div className="mt-6">
+                <div>
                     <Footer />
                 </div>
             </div>
