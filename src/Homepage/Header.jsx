@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Settings, Home } from 'lucide-react';
 import Navbar from '../components/Navbar/Navbar';
 
 export default function IteckLandingPage() {
-    const [email, setEmail] = useState('');
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-gray-50  relative overflow-hidden">
@@ -30,23 +29,11 @@ export default function IteckLandingPage() {
                             </p>
 
                             <div className="relative">
-                                <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
-                                    <Home size={20} />
-                                </div>
-                                <input
-                                    type="email"
-                                    placeholder="Email address"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    className="w-full pl-12 pr-32 py-4 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent text-gray-700 placeholder-gray-400"
-                                />
-                                <button className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-orange-500 text-white px-4 py-2 rounded-full hover:bg-orange-600 transition-colors font-medium text-sm">
+                                <button className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-orange-500 text-white px-4 py-2 rounded-full hover:bg-orange-600 transition-colors font-medium text-sm">
                                     Contact →
                                 </button>
                             </div>
-                            <p className="text-sm text-gray-500">
-                                *** We are not going to save your data
-                            </p>
+
                         </div>
                         <div>
                             <img

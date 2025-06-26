@@ -84,10 +84,7 @@ export default function Navbar() {
 
                 {/* Desktop CTA Button */}
                 <div className="hidden lg:block">
-                    <button className={`border-2 border-blue-500 hover:border-orange-500 text-blue-500 px-6 py-2 rounded-full hover:bg-orange-500 hover:text-white transition-all duration-300 font-medium ${isScrolled ? 'bg-blue-50' : 'bg-white'
-                        }`}>
-                        Request A Demo →
-                    </button>
+  
                 </div>
 
                 {/* Mobile Menu Button */}
@@ -127,14 +124,7 @@ export default function Navbar() {
                             {link.label}
                         </Link>
                     ))}
-                    <div className="pt-4 border-t border-gray-200">
-                        <button
-                            onClick={closeMobileMenu}
-                            className="w-full bg-blue-500 text-white px-6 py-3 rounded-full hover:bg-blue-600 transition-colors duration-300 font-medium"
-                        >
-                            Request A Demo →
-                        </button>
-                    </div>
+
                 </div>
             </div>
         </header>
