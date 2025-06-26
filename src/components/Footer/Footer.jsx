@@ -1,15 +1,8 @@
-import React, { useState } from 'react';
+import React, {} from 'react';
 import { Facebook, Twitter, Youtube, Linkedin, Mail, Phone, MapPin } from 'lucide-react';
 import Logo from "../../assets/Logo.jpg"
 
 export default function IteckFooter() {
-  const [email, setEmail] = useState('');
-
-  const handleSubscribe = () => {
-    // Handle newsletter subscription
-    console.log('Subscribing email:', email);
-    setEmail('');
-  };
 
   return (
     <footer className="bg-gray-50 py-16 px-4">
@@ -60,7 +53,7 @@ export default function IteckFooter() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
           {/* About Us Section */}
           <div className="space-y-6">
             <h4 className="text-xl font-semibold text-gray-900">About Us</h4>
@@ -168,33 +161,6 @@ export default function IteckFooter() {
             </ul>
           </div>
 
-          {/* Newsletter Section */}
-          <div className="space-y-6">
-            <h4 className="text-xl font-semibold text-gray-900">Get Newsletter</h4>
-            <p className="text-gray-600 leading-relaxed">
-              Get every single promotional & business update.
-            </p>
-
-            <div className="space-y-4">
-              <div className="relative">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Email address"
-                  className="w-full px-4 py-3 pl-12 bg-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                />
-                <Mail className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-              </div>
-              <button
-                onClick={handleSubscribe}
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 flex items-center justify-center space-x-2"
-              >
-                <span>Subscribe Now</span>
-                <span>→</span>
-              </button>
-            </div>
-          </div>
         </div>
 
         {/* Copyright Section */}
