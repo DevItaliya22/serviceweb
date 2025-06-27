@@ -188,7 +188,7 @@ const ContactForm = () => {
               onChange={handleChange}
               className="w-full p-3 rounded-full border border-gray-300"
             >
-              <option value="">How can we help you?</option>
+              <option value="">Enquiry Type</option>
               {Array.isArray(services) && services.length > 0 ? (
                 services.map((service, index) => (
                   <option
