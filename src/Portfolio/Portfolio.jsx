@@ -10,20 +10,19 @@ const Portfolio = () => {
             <Navbar />
             <main className="pt-32 pb-16">
                 <section className="text-center px-4 sm:px-6 lg:px-8 mb-16">
-                    <div className="max-w-4xl mx-auto">
+                    <div className="max-w-4xl mx-auto px-4">
                         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
                             <span className="text-gray-900">Our </span>
-<span className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent font-semibold">
-    Projects
-</span>
-
+                            <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent font-semibold">
+                                Projects
+                            </span>
                         </h1>
 
-                        <p className="text-gray-600 text-3xl sm:text-xl whitespace-nowrap overflow-hidden text-ellipsis">
+                        <p className="text-gray-600 text-lg sm:text-lg lg:text-xl">
                             We have an experienced team of production and inspection personnel to ensure quality.
                         </p>
-
                     </div>
+
                 </section>
 
                 <section className="px-4 sm:px-6 lg:px-8">
