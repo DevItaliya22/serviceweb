@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar/Navbar';
 import IteckFooter from '../components/Footer/Footer';
 import { getContactDetails } from '../api/contact';
+import { getServices } from '../api/service';
 import Loader from '../Spinner/Loader';
 
 const ContactForm = () => {
@@ -20,6 +21,8 @@ const ContactForm = () => {
     phone: '907 000 999 22',
     address: '12/A, New Booston, NYC'
   });
+
+  const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const handleChange = (e) => {
@@ -36,7 +39,7 @@ const ContactForm = () => {
   };
 
   useEffect(() => {
-    const fetchContactDetails = async () => {
+    const fetchData = async () => {
       try {
         setLoading(true);
         const details = await getContactDetails();
@@ -45,15 +48,30 @@ const ContactForm = () => {
           phone: details.phone || '907 000 999 22',
           address: details.address || '12/A, New Booston, NYC',
         });
+        const servicesData = await getServices();
+        
+        if (Array.isArray(servicesData)) {
+          setServices(servicesData);
+        } else if (servicesData && Array.isArray(servicesData.data)) {
+          setServices(servicesData.data);
+        } else if (servicesData && Array.isArray(servicesData.services)) {
+          setServices(servicesData.services);
+        } else {
+          console.warn('Services data is not an array:', servicesData);
+          setServices([]);
+        }
+        
       } catch (error) {
-        console.error('Error fetching contact details:', error);
-      }finally {
+        console.error('Error fetching data:', error);
+        setServices([]); 
+      } finally {
         setLoading(false);
       }
     };
 
-    fetchContactDetails();
+    fetchData();
   }, []);
+
   if (loading) {
     return <Loader />;
   }
@@ -148,9 +166,22 @@ const ContactForm = () => {
               className="w-full p-3 rounded-full border border-gray-300"
             >
               <option value="">How can we help you?</option>
-              <option value="web">Web Development</option>
-              <option value="app">App Development</option>
-              <option value="design">UI/UX Design</option>
+              {Array.isArray(services) && services.length > 0 ? (
+                services.map((service, index) => (
+                  <option 
+                    key={service.id || service._id || index} 
+                    value={service.name || service.title || service.serviceName}
+                  >
+                    {service.name || service.title || service.serviceName}
+                  </option>
+                ))
+              ) : (
+                <>
+                  <option value="web">Web Development</option>
+                  <option value="app">App Development</option>
+                  <option value="design">UI/UX Design</option>
+                </>
+              )}
             </select>
 
             <textarea
