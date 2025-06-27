@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Facebook, Twitter, Youtube, Linkedin, Mail, Phone, MapPin } from 'lucide-react';
 import Logo from "../../assets/Logo.jpg"
 import { getContactDetails } from '../../api/contact';
+import Loader from '../../Spinner/Loader';
 
 export default function IteckFooter() {
   const [contactDetails, setContactDetails] = useState({
@@ -9,10 +10,12 @@ export default function IteckFooter() {
     phone: '907 000 999 22',
     address: '12/A, New Booston, NYC'
   });
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchContactDetails = async () => {
       try {
+        setLoading(true);
         const details = await getContactDetails();
         setContactDetails({
           email: details.email || 'info@iteck-info.com',
@@ -21,11 +24,17 @@ export default function IteckFooter() {
         });
       } catch (error) {
         console.error('Error fetching contact details:', error);
+      }finally {
+        setLoading(false);
       }
     };
 
     fetchContactDetails();
   }, []);
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <footer className="bg-gray-50 py-16 px-4">

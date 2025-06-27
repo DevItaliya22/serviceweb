@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar/Navbar';
 import IteckFooter from '../components/Footer/Footer';
 import { getContactDetails } from '../api/contact';
+import Loader from '../Spinner/Loader';
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -19,6 +20,7 @@ const ContactForm = () => {
     phone: '907 000 999 22',
     address: '12/A, New Booston, NYC'
   });
+  const [loading, setLoading] = useState(true);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -36,6 +38,7 @@ const ContactForm = () => {
   useEffect(() => {
     const fetchContactDetails = async () => {
       try {
+        setLoading(true);
         const details = await getContactDetails();
         setContactDetails({
           email: details.email || 'info@iteck-info.com',
@@ -44,11 +47,16 @@ const ContactForm = () => {
         });
       } catch (error) {
         console.error('Error fetching contact details:', error);
+      }finally {
+        setLoading(false);
       }
     };
 
     fetchContactDetails();
   }, []);
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <div className="bg-white min-h-screen flex flex-col justify-between">
