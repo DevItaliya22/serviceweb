@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar/Navbar';
 import IteckFooter from '../components/Footer/Footer';
-import { getContactDetails } from '../api/contact';
+import { getContactDetails, submitform } from '../api/contact';
 import { getServices } from '../api/service';
 import Loader from '../Spinner/Loader';
 
@@ -35,7 +35,30 @@ const ContactForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Form Data Submitted:', formData);
+    const { name, email, phone, inquiry, message } = formData;
+
+    if (!name || !email || !phone || !inquiry || !message) {
+      alert('Please fill in all required fields.');
+      return;
+    }
+    try {
+      const res = submitform(name, email, phone, inquiry, message);
+      if (res) {
+        alert('Your request has been sent successfully. We will contact you within 24 hours.');
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          website: '',
+          inquiry: '',
+          message: '',
+          agree: false,
+        });
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      alert('There was an error submitting your request. Please try again later.');
+    }
   };
 
   useEffect(() => {
@@ -49,7 +72,7 @@ const ContactForm = () => {
           address: details.address || '12/A, New Booston, NYC',
         });
         const servicesData = await getServices();
-        
+
         if (Array.isArray(servicesData)) {
           setServices(servicesData);
         } else if (servicesData && Array.isArray(servicesData.data)) {
@@ -60,10 +83,10 @@ const ContactForm = () => {
           console.warn('Services data is not an array:', servicesData);
           setServices([]);
         }
-        
+
       } catch (error) {
         console.error('Error fetching data:', error);
-        setServices([]); 
+        setServices([]);
       } finally {
         setLoading(false);
       }
@@ -168,8 +191,8 @@ const ContactForm = () => {
               <option value="">How can we help you?</option>
               {Array.isArray(services) && services.length > 0 ? (
                 services.map((service, index) => (
-                  <option 
-                    key={service.id || service._id || index} 
+                  <option
+                    key={service.id || service._id || index}
                     value={service.name || service.title || service.serviceName}
                   >
                     {service.name || service.title || service.serviceName}
