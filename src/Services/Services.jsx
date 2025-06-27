@@ -2,12 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Calendar, Code, Database, MessageSquare, Users, FileText, MapPin, Truck } from 'lucide-react';
 import Navbar from '../components/Navbar/Navbar';
 import Footer from '../components/Footer/Footer';
-import { CheckCircle2 } from 'lucide-react';
-import Reviews from './Reviews';
 import TopServices from './TopServices';
 
 const SoftwareServices = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [isTransitioning, setIsTransitioning] = useState(true);
 
     const services = [
         {
@@ -93,20 +92,24 @@ const SoftwareServices = () => {
 
     useEffect(() => {
         const interval = setInterval(() => {
-            setCurrentIndex(prev => {
-                const next = prev + 1;
-                if (next >= services.length) {
-                    setTimeout(() => {
-                        setCurrentIndex(next);
-                    }, 700); 
-                    return next;
-                }
-                return next;
-            });
+            setCurrentIndex(prev => prev + 1);
         }, 3000);
 
         return () => clearInterval(interval);
-    }, [services.length]);
+    }, []);
+    useEffect(() => {
+        if (currentIndex === services.length) {
+            const timer = setTimeout(() => {
+                setIsTransitioning(false);
+                setCurrentIndex(0);
+                setTimeout(() => {
+                    setIsTransitioning(true);
+                }, 50);
+            }, 700); 
+            
+            return () => clearTimeout(timer);
+        }
+    }, [currentIndex, services.length]);
 
     const getStaggeredMargin = (index) => {
         const pattern = index % 4;
@@ -138,19 +141,20 @@ const SoftwareServices = () => {
                         We provide perfect IT Solutions for your business
                     </p>
                 </div>
+                
                 <div className="relative mb-16 py-12">
                     <div className="overflow-hidden">
                         <div
-                            className="flex transition-transform duration-700 ease-in-out gap-6"
+                            className="flex gap-6"
                             style={{
-                                transform: `translateX(-${currentIndex * 280}px)`,
-                                transitionDuration: currentIndex >= services.length ? '0ms' : '700ms'
+                                transform: `translateX(-${currentIndex * (256 + 24)}px)`, // 256px width + 24px gap
+                                transition: isTransitioning ? 'transform 700ms ease-in-out' : 'none'
                             }}
                         >
                             {duplicatedServices.map((service, index) => (
                                 <div
                                     key={index}
-                                    className={`flex-shrink-0 w-64 min-w-0 ${getStaggeredMargin(index)}`}
+                                    className={`flex-shrink-0 w-64 ${getStaggeredMargin(index)}`}
                                 >
                                     <div className="bg-white rounded-3xl p-8 h-80 shadow-lg hover:shadow-2xl transition-all duration-500 flex flex-col group hover:scale-105 border border-gray-100">
                                         <div className="mb-6 group-hover:scale-110 transition-transform duration-300">
@@ -186,48 +190,13 @@ const SoftwareServices = () => {
             <div className="mt-16 py-12">
                 {/* Left Content */}
 
-                <section className="w-full py-20 px-4 md:px-20 flex flex-col md:flex-row items-center justify-between gap-10">
-                    {/* <div className="w-full md:w-1/2">
-                    <img
-                        src="https://niograph.com/wp-content/uploads/2021/01/image2-home7.png"
-                        alt="Payment Logos"
-                        className="w-full h-auto"
-                    />
-                </div> */}
-
-                    {/* <div className="w-full md:w-1/2">
-                    <h2 className="text-4xl md:text-5xl font-bold text-black leading-tight mb-6">
-                        100+ Payment <span className="text-blue-600  px-1 rounded ">Gateways</span>
-                    </h2>
-                    <p className="text-gray-500 text-lg mb-6">
-                        With Iteck Marketplace, choose from hundreds of payment gateways for your customers. From PayPal to Stripe to Skrill, Visa Debit, Master Card, etc
-                    </p>
-                    <ul className="space-y-4 text-black font-semibold mb-8">
-                        <li className="flex items-center gap-3">
-                            <CheckCircle2 className="text-blue-600 w-5 h-5" />
-                            100% Guarantee Secure Payment
-                        </li>
-                        <li className="flex items-center gap-3">
-                            <CheckCircle2 className="text-blue-600 w-5 h-5" />
-                            1% Extra Fees For All
-                        </li>
-                        <li className="flex items-center gap-3">
-                            <CheckCircle2 className="text-blue-600 w-5 h-5" />
-                            Support Dispute & Refund 24/7
-                        </li>
-                    </ul>
-                    <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-full shadow-lg transition-all">
-                        Book A Free Demo
-                    </button>
-                </div> */}
-                </section>
                 {/* Footer */}
                 <div>
                     <Footer />
                 </div>
             </div>
         </div>
-    );
+    )
 };
 
 export default SoftwareServices;
