@@ -97,6 +97,7 @@ const SoftwareServices = () => {
 
         return () => clearInterval(interval);
     }, []);
+    
     useEffect(() => {
         if (currentIndex === services.length) {
             const timer = setTimeout(() => {
@@ -122,45 +123,80 @@ const SoftwareServices = () => {
         }
     };
 
+    const getCardWidth = () => {
+        if (typeof window !== 'undefined') {
+            if (window.innerWidth < 640) return 280; 
+            if (window.innerWidth < 768) return 256; 
+            if (window.innerWidth < 1024) return 256; 
+            return 256; 
+        }
+        return 256;
+    };
+
+    const getGapSize = () => {
+        if (typeof window !== 'undefined') {
+            if (window.innerWidth < 640) return 16; 
+            if (window.innerWidth < 768) return 20; 
+            return 24; 
+        }
+        return 24;
+    };
+
+    const [cardWidth, setCardWidth] = useState(256);
+    const [gapSize, setGapSize] = useState(24);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setCardWidth(getCardWidth());
+            setGapSize(getGapSize());
+        };
+
+        handleResize(); 
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
     return (
-        <div className="py-16 px-4">
-            <div className="w-screen mx-auto">
-                <div className="text-center mb-12">
+        <div className="py-8 sm:py-12 lg:py-16 px-4">
+            <div className="w-full max-w-full mx-auto">
+                <div className="text-center mb-8 sm:mb-12">
                     <Navbar />
                 </div>
 
-                <div className="w-screen mt-12">
+                <div className="w-full mt-8 sm:mt-12">
                     <TopServices />
                 </div>
 
-                <div className="text-center mb-16">
-                    <h1 className="text-5xl font-bold text-gray-800 mb-4">
+                <div className="text-center mb-12 sm:mb-16 px-4">
+                    <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-800 mb-4">
                         Our <span className="text-blue-500">Services</span>
                     </h1>
-                    <p className="text-xl text-gray-600">
+                    <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">
                         We provide perfect IT Solutions for your business
                     </p>
                 </div>
                 
-                <div className="relative mb-16 py-12">
+                <div className="relative mb-12 sm:mb-16 py-8 sm:py-12">
                     <div className="overflow-hidden">
                         <div
-                            className="flex gap-6"
+                            className="flex"
                             style={{
-                                transform: `translateX(-${currentIndex * (256 + 24)}px)`, // 256px width + 24px gap
+                                gap: `${gapSize}px`,
+                                transform: `translateX(-${currentIndex * (cardWidth + gapSize)}px)`,
                                 transition: isTransitioning ? 'transform 700ms ease-in-out' : 'none'
                             }}
                         >
                             {duplicatedServices.map((service, index) => (
                                 <div
                                     key={index}
-                                    className={`flex-shrink-0 w-64 ${getStaggeredMargin(index)}`}
+                                    className={`flex-shrink-0 ${getStaggeredMargin(index)}`}
+                                    style={{ width: `${cardWidth}px` }}
                                 >
-                                    <div className="bg-white rounded-3xl p-8 h-80 shadow-lg hover:shadow-2xl transition-all duration-500 flex flex-col group hover:scale-105 border border-gray-100">
-                                        <div className="mb-6 group-hover:scale-110 transition-transform duration-300">
+                                    <div className="bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 h-72 sm:h-80 shadow-lg hover:shadow-2xl transition-all duration-500 flex flex-col group hover:scale-105 border border-gray-100">
+                                        <div className="mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300">
                                             {service.icon}
                                         </div>
-                                        <h3 className="text-xl font-bold text-gray-900 mb-4 leading-tight group-hover:text-blue-600 transition-colors duration-300">
+                                        <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4 leading-tight group-hover:text-blue-600 transition-colors duration-300">
                                             {service.title}
                                         </h3>
                                         <p className="text-gray-600 text-sm leading-relaxed flex-1">
@@ -172,13 +208,13 @@ const SoftwareServices = () => {
                         </div>
                     </div>
 
-                    <div className="flex justify-center mt-8 space-x-2">
+                    <div className="flex justify-center mt-6 sm:mt-8 space-x-2 px-4">
                         {services.map((_, index) => (
                             <div
                                 key={index}
                                 className={`w-2 h-2 rounded-full transition-all duration-300 ${
                                     index === (currentIndex % services.length) 
-                                        ? 'bg-blue-500 w-8' 
+                                        ? 'bg-blue-500 w-6 sm:w-8' 
                                         : 'bg-gray-300'
                                 }`}
                             />
@@ -187,7 +223,7 @@ const SoftwareServices = () => {
                 </div>
             </div>
 
-            <div className="mt-16 py-12">
+            <div className="mt-12 sm:mt-16 py-8 sm:py-12">
                 {/* Left Content */}
 
                 {/* Footer */}

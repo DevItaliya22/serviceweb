@@ -6,6 +6,7 @@ const TopServices = () => {
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [direction, setDirection] = useState('next');
+  const [visibleCards, setVisibleCards] = useState(4);
 
   const services = [
     {
@@ -49,6 +50,23 @@ const TopServices = () => {
       accentColor: "blue"
     }
   ];
+
+  // Handle responsive breakpoints
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 640) {
+        setVisibleCards(1);
+      } else if (window.innerWidth < 1024) {
+        setVisibleCards(2);
+      } else {
+        setVisibleCards(4);
+      }
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     if (!isAutoPlaying) return;
@@ -105,7 +123,7 @@ const TopServices = () => {
 
   const getVisibleServices = () => {
     const visible = [];
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < visibleCards; i++) {
       const index = (currentIndex + i) % services.length;
       visible.push({ ...services[index], originalIndex: index, position: i });
     }
@@ -124,45 +142,49 @@ const TopServices = () => {
   };
 
   return (
-    <div className="w-full min-h-screen flex flex-col justify-center py-16 overflow-hidden">
+    <div className="w-full min-h-screen flex flex-col justify-center py-8 md:py-16 overflow-hidden">
       {/* Animated Header */}
-      <div className="text-center mb-16 animate-fadeInDown px-4">
-        <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-blue-900 to-gray-900 bg-clip-text text-transparent animate-pulse">
+      <div className="text-center mb-8 md:mb-16 animate-fadeInDown px-4">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 bg-gradient-to-r from-gray-900 via-blue-900 to-gray-900 bg-clip-text text-transparent animate-pulse">
           Our Top <span className="text-blue-500 inline-block">Services</span>
         </h2>
-        <p className="text-gray-600 text-lg max-w-4xl mx-auto leading-relaxed animate-fadeInUp">
+        <p className="text-gray-600 text-sm sm:text-base md:text-lg max-w-4xl mx-auto leading-relaxed animate-fadeInUp">
           Iteck Dashboard is a powerhouse when it comes to the feature list. This ensures you have every 
           functionality you need to build, run, and expand your marketplace
         </p>
       </div>
 
       {/* Carousel Container - Full Width */}
-      <div className="relative w-full px-4">
-        {/* Animated Navigation Buttons */}
+      <div className="relative w-full px-2 sm:px-4">
+        {/* Animated Navigation Buttons - Responsive positioning */}
         <button
           onClick={prevSlide}
           disabled={isTransitioning}
-          className="absolute left-8 top-1/2 -translate-y-1/2 z-20 bg-white rounded-full p-4 shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-125 hover:rotate-12 disabled:opacity-50 animate-slideInLeft group"
+          className="absolute left-1 sm:left-2 md:left-4 lg:left-8 top-1/2 -translate-y-1/2 z-20 bg-white rounded-full p-2 sm:p-3 md:p-4 shadow-lg md:shadow-xl hover:shadow-xl md:hover:shadow-2xl transition-all duration-500 hover:scale-110 md:hover:scale-125 hover:rotate-6 md:hover:rotate-12 disabled:opacity-50 animate-slideInLeft group"
         >
-          <ChevronLeft className="w-6 h-6 text-gray-600 group-hover:text-blue-500 transition-colors duration-300" />
+          <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-gray-600 group-hover:text-blue-500 transition-colors duration-300" />
           <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
         </button>
         
         <button
           onClick={nextSlide}
           disabled={isTransitioning}
-          className="absolute right-8 top-1/2 -translate-y-1/2 z-20 bg-white rounded-full p-4 shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-125 hover:-rotate-12 disabled:opacity-50 animate-slideInRight group"
+          className="absolute right-1 sm:right-2 md:right-4 lg:right-8 top-1/2 -translate-y-1/2 z-20 bg-white rounded-full p-2 sm:p-3 md:p-4 shadow-lg md:shadow-xl hover:shadow-xl md:hover:shadow-2xl transition-all duration-500 hover:scale-110 md:hover:scale-125 hover:-rotate-6 md:hover:-rotate-12 disabled:opacity-50 animate-slideInRight group"
         >
-          <ChevronRight className="w-6 h-6 text-gray-600 group-hover:text-blue-500 transition-colors duration-300" />
+          <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-gray-600 group-hover:text-blue-500 transition-colors duration-300" />
           <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
         </button>
 
-        {/* Services Grid - 4 Cards Full Width */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-20 relative">
+        {/* Services Grid - Responsive */}
+        <div className={`grid gap-3 sm:gap-4 md:gap-6 px-8 sm:px-12 md:px-16 lg:px-20 relative ${
+          visibleCards === 1 ? 'grid-cols-1' : 
+          visibleCards === 2 ? 'grid-cols-2' : 
+          'grid-cols-4'
+        }`}>
           {getVisibleServices().map((service, index) => (
             <div
               key={`${service.originalIndex}-${currentIndex}`}
-              className={`bg-white rounded-3xl p-6 shadow-lg hover:shadow-2xl transition-all duration-700 transform hover:-translate-y-6 hover:rotate-1 group cursor-pointer border-2 ${getAccentColors(service.accentColor)} relative overflow-hidden h-full flex flex-col ${
+              className={`bg-white rounded-2xl md:rounded-3xl p-4 sm:p-5 md:p-6 shadow-lg hover:shadow-2xl transition-all duration-700 transform hover:-translate-y-2 md:hover:-translate-y-6 hover:rotate-1 group cursor-pointer border-2 ${getAccentColors(service.accentColor)} relative overflow-hidden h-full flex flex-col ${
                 isTransitioning 
                   ? direction === 'next' 
                     ? 'animate-slideOutLeft' 
@@ -176,45 +198,47 @@ const TopServices = () => {
             >
               {/* Animated Background Effects */}
               <div className="absolute inset-0 bg-gradient-to-br from-transparent via-blue-50/20 to-purple-50/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="absolute -top-4 -right-4 w-20 h-20 bg-gradient-to-br from-blue-400/10 to-purple-400/10 rounded-full blur-xl group-hover:scale-150 transition-transform duration-700"></div>
+              <div className="absolute -top-4 -right-4 w-12 h-12 md:w-20 md:h-20 bg-gradient-to-br from-blue-400/10 to-purple-400/10 rounded-full blur-xl group-hover:scale-150 transition-transform duration-700"></div>
               
               {/* Animated Icon Container */}
-              <div className={`${service.bgColor} rounded-2xl p-4 mb-6 relative overflow-hidden group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 animate-bounceIn`}>
+              <div className={`${service.bgColor} rounded-xl md:rounded-2xl p-3 md:p-4 mb-4 md:mb-6 relative overflow-hidden group-hover:scale-105 md:group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 animate-bounceIn`}>
                 <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-transparent animate-shimmer"></div>
-                <div className={`${service.iconBg} rounded-xl p-3 shadow-lg relative z-10 mx-auto w-fit group-hover:shadow-xl transition-all duration-300 animate-pulse`}>
+                <div className={`${service.iconBg} rounded-lg md:rounded-xl p-2 md:p-3 shadow-lg relative z-10 mx-auto w-fit group-hover:shadow-xl transition-all duration-300 animate-pulse`}>
                   <div className="animate-spin-slow">
-                    {service.icon}
+                    {React.cloneElement(service.icon, { 
+                      className: "w-6 h-6 md:w-8 md:h-8 " + service.icon.props.className.split(' ').slice(2).join(' ')
+                    })}
                   </div>
                 </div>
                 
                 {/* Animated Decorative elements */}
-                <div className="absolute top-2 right-2 w-2 h-2 bg-red-400 rounded-full animate-ping"></div>
-                <div className="absolute bottom-2 left-2 w-1 h-1 bg-yellow-400 rounded-full animate-pulse"></div>
-                <div className="absolute top-1/2 right-1 w-1 h-1 bg-blue-400 rounded-full animate-bounce"></div>
+                <div className="absolute top-1 md:top-2 right-1 md:right-2 w-1.5 h-1.5 md:w-2 md:h-2 bg-red-400 rounded-full animate-ping"></div>
+                <div className="absolute bottom-1 md:bottom-2 left-1 md:left-2 w-1 h-1 bg-yellow-400 rounded-full animate-pulse"></div>
+                <div className="absolute top-1/2 right-0.5 md:right-1 w-1 h-1 bg-blue-400 rounded-full animate-bounce"></div>
                 
                 {/* Floating particles */}
-                <div className="absolute top-3 left-3 w-1 h-1 bg-purple-400 rounded-full animate-float"></div>
-                <div className="absolute bottom-3 right-3 w-1 h-1 bg-green-400 rounded-full animate-float-delayed"></div>
+                <div className="absolute top-2 md:top-3 left-2 md:left-3 w-1 h-1 bg-purple-400 rounded-full animate-float"></div>
+                <div className="absolute bottom-2 md:bottom-3 right-2 md:right-3 w-1 h-1 bg-green-400 rounded-full animate-float-delayed"></div>
               </div>
 
               {/* Animated Content */}
               <div className="text-center relative z-10 flex-grow flex flex-col">
-                <h3 className="text-lg font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors duration-300 animate-fadeInUp">
+                <h3 className="text-base sm:text-lg md:text-lg font-bold text-gray-900 mb-3 md:mb-4 group-hover:text-blue-600 transition-colors duration-300 animate-fadeInUp">
                   {service.title}
                 </h3>
-                <p className="text-gray-600 text-sm leading-relaxed group-hover:text-gray-700 transition-colors duration-300 animate-fadeInUp flex-grow">
+                <p className="text-gray-600 text-xs sm:text-sm md:text-sm leading-relaxed group-hover:text-gray-700 transition-colors duration-300 animate-fadeInUp flex-grow">
                   {service.description}
                 </p>
               </div>
 
               {/* Hover glow effect */}
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-blue-400/0 via-purple-400/0 to-pink-400/0 group-hover:from-blue-400/5 group-hover:via-purple-400/5 group-hover:to-pink-400/5 transition-all duration-500"></div>
+              <div className="absolute inset-0 rounded-2xl md:rounded-3xl bg-gradient-to-r from-blue-400/0 via-purple-400/0 to-pink-400/0 group-hover:from-blue-400/5 group-hover:via-purple-400/5 group-hover:to-pink-400/5 transition-all duration-500"></div>
             </div>
           ))}
         </div>
 
         {/* Animated Dots Indicator */}
-        <div className="flex justify-center mt-12 space-x-3 animate-fadeInUp">
+        <div className="flex justify-center mt-8 md:mt-12 space-x-2 md:space-x-3 animate-fadeInUp">
           {services.map((_, index) => (
             <button
               key={index}
@@ -222,8 +246,8 @@ const TopServices = () => {
               disabled={isTransitioning}
               className={`relative overflow-hidden transition-all duration-500 rounded-full ${
                 index === currentIndex 
-                  ? 'w-8 h-3 bg-gradient-to-r from-blue-500 to-purple-500 scale-125' 
-                  : 'w-3 h-3 bg-gray-300 hover:bg-gray-400 hover:scale-110'
+                  ? 'w-6 md:w-8 h-2.5 md:h-3 bg-gradient-to-r from-blue-500 to-purple-500 scale-110 md:scale-125' 
+                  : 'w-2.5 md:w-3 h-2.5 md:h-3 bg-gray-300 hover:bg-gray-400 hover:scale-110'
               }`}
             >
               {index === currentIndex && (
