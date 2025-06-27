@@ -11,3 +11,22 @@ export const getContactDetails = async () => {
         throw error;
     }
 }
+
+export const submitform = async(name, email, phone, enquiryType, message) => {
+    try {
+        const response = await axios.post(
+            `${import.meta.env.VITE_BASE_URL}/api/contact`,
+            {
+                name,
+                email,
+                phone,
+                enquiryType,
+                message
+            }
+        );
+        return response.data;
+    } catch (error) {
+        console.error('Error submitting form:', error);
+        throw error;
+    }
+}
