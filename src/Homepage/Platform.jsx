@@ -1,6 +1,7 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { FaSlack, FaGithub, FaDiscord, FaTrello, FaDropbox, FaSpotify, FaCube } from "react-icons/fa";
 import { FcGoogle, FcAndroidOs } from "react-icons/fc";
+import { getStats } from "../api/stats";
 import logo from '../assets/logo_home8_icon.png';
 import fig1 from '../assets/5M.png';
 import fig2 from '../assets/3M.png';
@@ -8,6 +9,31 @@ import fig3 from '../assets/Dm.png';
 import fig4 from '../assets/100K.png';
 
 const Integrations = () => {
+
+    const [stats, setStats] = useState({
+        projectsExecuted: 0,
+        dataAnalytics: 0,
+        dataManagement: 0,
+        happyUsers: 0
+    });
+
+    useEffect(() => {
+        const fetchStats = async () => {
+            try {
+                const data = await getStats();
+                setStats({
+                    projectsExecuted: data.projectsExecuted || 0,
+                    dataAnalytics: data.dataAnalytics || 0,
+                    dataManagement: data.dataManagement || 0,
+                    happyUsers: data.happyUsers || 0
+                });
+            } catch (error) {
+                console.error('Error fetching stats:', error);
+            }
+        };
+
+        fetchStats();
+    }, []);
     return (
         <div className="w-screen min-h-screen bg-white relative overflow-visible flex flex-col items-center">
             <div className="absolute left-0 top-1/4 transform -translate-y-1/2 z-2 ">
@@ -108,7 +134,7 @@ const Integrations = () => {
                             />
                         </div>
                         <div>
-                            <h3 className="text-2xl font-bold text-gray-800">3 M+</h3>
+                            <h3 className="text-2xl font-bold text-gray-800">{stats.projectsExecuted}</h3>
                             <p className="text-gray-500 text-sm">Projects Executed</p>
                         </div>
                     </div>
@@ -122,7 +148,7 @@ const Integrations = () => {
                             />
                         </div>
                         <div>
-                            <h3 className="text-2xl font-bold text-gray-800">5 M+</h3>
+                            <h3 className="text-2xl font-bold text-gray-800">{stats.dataAnalytics}</h3>
                             <p className="text-gray-500 text-sm">Data Analytics</p>
                         </div>
                     </div>
@@ -136,7 +162,7 @@ const Integrations = () => {
                             />
                         </div>
                         <div>
-                            <h3 className="text-2xl font-bold text-gray-800">3 M+</h3>
+                            <h3 className="text-2xl font-bold text-gray-800">{stats.dataManagement}</h3>
                             <p className="text-gray-500 text-sm">Data Management</p>
                         </div>
                     </div>
@@ -150,7 +176,7 @@ const Integrations = () => {
                             />
                         </div>
                         <div>
-                            <h3 className="text-2xl font-bold text-gray-800">100 K+</h3>
+                            <h3 className="text-2xl font-bold text-gray-800">{stats.happyUsers}</h3>
                             <p className="text-gray-500 text-sm">Happy Users</p>
                         </div>
                     </div>
