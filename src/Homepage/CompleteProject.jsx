@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, Star } from 'lucide-react';
 import { getProjects } from '../api/project'; 
+import Loader from '../Spinner/Loader';
 
 const CompletedProject = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -51,18 +52,9 @@ const CompletedProject = () => {
     };
 
     // Loading state
-    if (loading) {
-        return (
-            <div className="p-8">
-                <div className="max-w-7xl mx-auto flex items-center justify-center h-64">
-                    <div className="text-center">
-                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-                        <p className="text-gray-600">Loading completed projects...</p>
-                    </div>
-                </div>
-            </div>
-        );
-    }
+  if (loading) {
+    return <Loader />;
+  }
 
     // Error state
     if (error) {
