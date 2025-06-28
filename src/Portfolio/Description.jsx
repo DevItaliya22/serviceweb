@@ -5,46 +5,80 @@ import boardImage from "../assets/ch_1.png";
 import ipadImage from "../assets/ch_2.png";
 import { Circle } from "lucide-react";
 import { FaTwitter, FaFacebookF, FaPinterestP, FaGoogle, FaLinkedinIn } from 'react-icons/fa';
+import { getProjectById } from "../api/project";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import Loader from "../Spinner/Loader";
 
 
 const Description = () => {
+
+    const { id } = useParams();
+    const [project, setProject] = useState(null);
+    const [loading, setLoading] = useState(true);
+    console.log("Project ID:", id);
+    console.log("Project Data:", project);
+
+    useEffect(() => {
+        const fetchProject = async () => {
+            try {
+                setLoading(true);
+                const res = await getProjectById(id);
+                setProject(res?.data);
+            } catch (error) {
+                console.error("Error fetching project:", error);
+            } finally {
+                setLoading(false);
+            }
+        }
+        fetchProject();
+    }, [id]);
+    if (loading) {
+        return <Loader />;
+    }
     return (
         <div className="min-h-screen flex flex-col bg-white">
             <Navbar />
             <div className="flex-grow text-center px-4 py-16 mt-24">
                 <h1 className="text-4xl sm:text-5xl font-bold text-black mb-10">
-                    Notero - Easy Notes App
+                    {project?.title}
                 </h1>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-5xl mx-auto text-left ">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto text-left ">
                     <div className="text-center mt-8">
                         <p className="text-sm text-gray-400 font-medium mb-1">CLIENT</p>
                         <p className="text-sm font-semibold text-black leading-snug">
-                            Micosoft Holding Ltd,<br />
-                            Australia Area
+                            {project?.createdBy?.name}<br />
                         </p>
                     </div>
 
                     <div className="text-center mt-8">
                         <p className="text-sm text-gray-400 font-medium mb-1">SERVICES</p>
                         <p className="text-sm font-semibold text-black leading-snug">
-                            IT Consultation, UI/UX Design,<br />
-                            Cloud Service
+                            {project?.technologies}<br />
                         </p>
                     </div>
 
                     <div className="text-center mt-8">
                         <p className="text-sm text-gray-400 font-medium mb-1">DATE</p>
-                        <p className="text-sm font-semibold text-black">February 25th, 2023</p>
+                        <p className="text-sm font-semibold text-black">
+                            {project?.createdAt &&
+                                new Date(project.createdAt).toLocaleDateString('en-GB', {
+                                    day: '2-digit',
+                                    month: 'short',
+                                    year: 'numeric',
+                                }).replace(/ /g, '-')}
+                        </p>
                     </div>
 
+{/* 
                     <div className="text-center mt-8">
                         <p className="text-sm text-gray-400 font-medium mb-1">TEAM</p>
                         <p className="text-sm font-semibold text-black leading-snug">
                             Logan Cee – Designer<br />
                             Martin Moussa – iOS Developer
                         </p>
-                    </div>
+                    </div> */}
                 </div>
                 <div className="w-full max-w-screen-lg mx-auto">
                     <div className="mt-12 h-1 w-full bg-gray-200 rounded"></div>
@@ -84,19 +118,19 @@ const Description = () => {
 
                         </div>
                         <div className="text-gray-700 space-y-4 text-[17px]">
-                            <p>
-                                Create an unconventional yet user-friendly website – innovative, with a clean & simple design that
-                                communicates and showcases multi-media content. Site that spreads the message: "It’s stories your love.”
-                            </p>
+                            <p>{project?.mainDescription?.challenge}</p>
+
                             <ul className="list-disc list-inside space-y-2 text-black">
-                                <li>Develop easy-to-find and easy-to-navigate mobile friendly website</li>
-                                <li>
-                                    Showcase each type of content: interactive books, animated stories and picture books, audio stories.
-                                    Create an experience people want to share with others
-                                </li>
-                                <li>Persuade to download app and subscribe</li>
+                                {project?.mainDescription?.challenge &&
+                                    project.mainDescription.challenge
+                                        .split(/[.;\n]+/) 
+                                        .map((point, index) => {
+                                            const trimmed = point.trim();
+                                            return trimmed ? <li key={index}>{trimmed}</li> : null;
+                                        })}
                             </ul>
                         </div>
+
                     </div>
 
                     <div className="grid md:grid-cols-2 gap-8">
@@ -131,32 +165,39 @@ const Description = () => {
                     </div>
 
                     <div className="md:col-span-3">
-                        <div className="text-gray-600 text-lg leading-relaxed mb-8">
-                            <p>
-                                Our approach was to present the site as a visual editorial platform with quarterly features
-                                based on events and occasions the brand was focused on. Each quarterly focus would be marked
-                                by the hero and custom tags that filter content.
-                            </p>
-                            <p className="mt-6">
-                                There are many variations of passages of Lorem Ipsum available, but the majority have suffered
-                                alteration in some form, by injected humour, or randomised words which don’t look even slightly
-                                believable.
-                            </p>
-                        </div>
+                        {project?.mainDescription?.solution && (() => {
+                            const solutionText = project.mainDescription.solution;
+                            const parts = solutionText.split(/[.;\n]+/).map(s => s.trim()).filter(Boolean);
 
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                            {[
-                                "Create & Save your notes with multi-media",
-                                "Web Clipper Extension",
-                                "Complete note editor with rich text options",
-                                "Automatically sync in real time",
-                            ].map((text, index) => (
-                                <div key={index} className="flex items-start space-x-2">
-                                    <Circle className="h-6 w-6 text-blue-500 flex-shrink-0" />
-                                    <span className="font-semibold text-black">{text}</span>
-                                </div>
-                            ))}
-                        </div>
+                            const introParagraph = parts[0];
+                            const bulletPoints = parts.slice(1);
+
+                            return (
+                                <>
+                                    <div className="text-gray-600 text-lg leading-relaxed mb-8">
+                                        <p>{introParagraph}</p>
+
+                                        {bulletPoints.length > 0 && (
+                                            <p className="mt-6">
+                                                These were the key implementations and outcomes we achieved:
+                                            </p>
+                                        )}
+                                    </div>
+
+                                    {bulletPoints.length > 0 && (
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                            {bulletPoints.map((text, index) => (
+                                                <div key={index} className="flex items-start space-x-2">
+                                                    <Circle className="h-6 w-6 text-blue-500 flex-shrink-0" />
+                                                    <span className="font-semibold text-black">{text}</span>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )}
+                                </>
+                            );
+                        })()}
+
                     </div>
                 </div>
             </div>
