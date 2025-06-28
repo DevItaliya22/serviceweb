@@ -43,11 +43,11 @@ export default function Navbar() {
 
     const navLinks = [
         { to: "/", label: "Home" },
-        { to: "/services", label: "Services" },
-        { to: "/about", label: "About Us" },
         { to: "/portfolio", label: "Portfolio" },
+        { to: "/services", label: "Our Services" },
+        { to: "/about", label: "About Us" },
         // { to: "/blog", label: "Blog" },
-        { to: "/contact", label: "Contact" }
+        { to: "/contact", label: "Contact Us" }
     ];
 
     return (
