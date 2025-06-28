@@ -3,6 +3,7 @@ import { Calendar, Code, Database, MessageSquare, Users, FileText, MapPin, Truck
 import Navbar from '../components/Navbar/Navbar';
 import Footer from '../components/Footer/Footer';
 import TopServices from './TopServices';
+import 'aos/dist/aos.css'; 
 
 const SoftwareServices = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -163,7 +164,7 @@ const SoftwareServices = () => {
                     <Navbar />
                 </div>
 
-                <div className="w-full mt-8 sm:mt-12">
+                <div className="w-full sm:mt-12 ">
                     <TopServices />
                 </div>
 
@@ -176,7 +177,7 @@ const SoftwareServices = () => {
                     </p>
                 </div>
                 
-                <div className="relative mb-12 sm:mb-16 py-8 sm:py-12">
+                <div className="relative mb-12 sm:mb-16 py-8 sm:py-12" data-aos="fade-up">
                     <div className="overflow-hidden">
                         <div
                             className="flex"

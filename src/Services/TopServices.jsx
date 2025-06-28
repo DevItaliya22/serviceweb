@@ -142,10 +142,10 @@ const TopServices = () => {
   };
 
   return (
-    <div className="w-full min-h-screen flex flex-col justify-center py-8 md:py-16 overflow-hidden">
+    <div className="w-screen flex flex-col justify-center py-8 md:py-16 overflow-hidden">
       {/* Animated Header */}
       <div className="text-center mb-8 md:mb-16 animate-fadeInDown px-4">
-        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 bg-gradient-to-r from-gray-900 via-blue-900 to-gray-900 bg-clip-text text-transparent animate-pulse">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 bg-gradient-to-r from-gray-900 via-blue-900 to-gray-900 bg-clip-text text-transparent">
           Our Top <span className="text-blue-500 inline-block">Services</span>
         </h2>
         <p className="text-gray-600 text-sm sm:text-base md:text-lg max-w-4xl mx-auto leading-relaxed animate-fadeInUp">
