@@ -3,6 +3,7 @@ import { Calendar, Code, Database, MessageSquare, Users, FileText, MapPin, Truck
 import Navbar from '../components/Navbar/Navbar';
 import Footer from '../components/Footer/Footer';
 import TopServices from './TopServices';
+import CarouselComponent from './ScroolService';
 
 const SoftwareServices = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -165,6 +166,10 @@ const SoftwareServices = () => {
 
                 <div className="w-full sm:mt-12 ">
                     <TopServices />
+                </div>
+
+                <div className="w-full mt-12 sm:mt-16 mb-8 sm:mb-12">
+                    <CarouselComponent />
                 </div>
 
                 <div className="text-center mb-12 sm:mb-16 px-4">
