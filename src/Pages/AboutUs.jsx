@@ -1,44 +1,70 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Code, Smartphone, MessageSquare } from 'lucide-react';
 import IteckFooter from '../components/Footer/Footer';
 import { FaFacebookF, FaLinkedinIn, FaPinterestP } from "react-icons/fa";
 import Navbar from '../components/Navbar/Navbar';
 import FloatingBubbles from './Animation';
 
-const teamMembers = [
-    {
-        name: "Michael Edwards",
-        title: "CEO Founder",
-        img: "https://images.pexels.com/photos/834863/pexels-photo-834863.jpeg",
-    },
-    {
-        name: "Bobby Kane",
-        title: "CTO",
-        img: "https://images.pexels.com/photos/3778875/pexels-photo-3778875.jpeg",
-    },
-    {
-        name: "Robert Downey Jr",
-        title: "Project Manager",
-        img: "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg",
-    },
-    {
-        name: "Andrew Robertson",
-        title: "Marketing Leader",
-        img: "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg",
-    },
-];
+const useInView = (threshold = 0.1) => {
+  const [inView, setInView] = useState(false);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+        }
+      },
+      { threshold }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => {
+      if (ref.current) {
+        observer.unobserve(ref.current);
+      }
+    };
+  }, [threshold]);
+
+  return [ref, inView];
+};
+
+const AnimatedSection = ({ children, delay = 0, className = "" }) => {
+  const [ref, inView] = useInView(0.1);
+  
+  return (
+    <div
+      ref={ref}
+      className={`transition-all duration-1000 ease-out ${
+        inView 
+          ? 'opacity-100 translate-y-0' 
+          : 'opacity-0 translate-y-8'
+      } ${className}`}
+      style={{ 
+        transitionDelay: inView ? `${delay}ms` : '0ms' 
+      }}
+    >
+      {children}
+    </div>
+  );
+};
+
+
 
 export default function AboutUs() {
     return (
         <div className="min-h-screen">
-            <Navbar />
-            <div className="mt-60 mb-8">
-                <FloatingBubbles />
-            </div>
+            <AnimatedSection>
+                <Navbar />
+            </AnimatedSection>
 
             <div className="w-full min-h-screen relative overflow-hidden">
-                {/* Left decorative element - responsive positioning */}
-                <div className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-8 lg:-translate-x-8 md:-translate-x-6 sm:-translate-x-4 hidden sm:block">
+                {/* Left decorative element */}
+                <AnimatedSection delay={200} className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-8 lg:-translate-x-8 md:-translate-x-6 sm:-translate-x-4 hidden sm:block">
                     <div className="relative scale-75 md:scale-90 lg:scale-100">
                         <div className="w-20 h-32 bg-gradient-to-br from-pink-300 to-orange-300 rounded-full relative transform rotate-12">
                             <div className="absolute top-6 -left-2 w-6 h-12 bg-gradient-to-br from-pink-200 to-orange-200 rounded-full transform -rotate-45"></div>
@@ -61,18 +87,18 @@ export default function AboutUs() {
                             </div>
                         </div>
                     </div>
-                </div>
+                </AnimatedSection>
 
-                {/* Top right decorative element - responsive positioning and scaling */}
-                <div className="absolute right-4 md:right-10 lg:right-20 top-10 md:top-16 lg:top-20">
+                {/* Top right decorative element */}
+                <AnimatedSection delay={400} className="absolute right-4 md:right-10 lg:right-20 top-10 md:top-16 lg:top-20">
                     <div className="relative scale-75 md:scale-90 lg:scale-100">
                         <div className="w-12 h-12 bg-gradient-to-br from-orange-400 to-pink-400 rounded-lg transform rotate-45 shadow-lg"></div>
                         <div className="absolute top-8 left-8 w-8 h-8 bg-gradient-to-br from-blue-400 to-purple-400 rounded-full shadow-lg"></div>
                     </div>
-                </div>
+                </AnimatedSection>
 
-                {/* Bottom right decorative element - responsive positioning and scaling */}
-                <div className="absolute bottom-8 md:bottom-12 lg:bottom-16 right-4 md:right-10 lg:right-16 hidden md:block">
+                {/* Bottom right decorative element */}
+                <AnimatedSection delay={600} className="absolute bottom-8 md:bottom-12 lg:bottom-16 right-4 md:right-10 lg:right-16 hidden md:block">
                     <div className="relative transform rotate-12 scale-75 md:scale-90 lg:scale-100">
                         <div className="w-32 h-40 bg-gradient-to-br from-purple-600 to-purple-800 rounded-2xl shadow-2xl relative">
                             <div className="absolute inset-4 bg-gradient-to-br from-purple-500 to-purple-700 rounded-xl">
@@ -85,10 +111,10 @@ export default function AboutUs() {
                             <div className="absolute -right-2 top-2 w-32 h-40 bg-gradient-to-br from-purple-700 to-purple-900 rounded-2xl -z-10 transform translate-x-1"></div>
                         </div>
                     </div>
-                </div>
+                </AnimatedSection>
 
-                {/* Main content - responsive text and spacing */}
-                <div className="w-full min-h-screen flex items-center justify-center px-4 sm:px-6 md:px-8 lg:px-8 py-8 md:py-16">
+                {/* Main content */}
+                <AnimatedSection delay={100} className="w-full min-h-screen flex items-center justify-center px-4 sm:px-6 md:px-8 lg:px-8 py-8 md:py-16">
                     <div className="text-center max-w-6xl w-full">
                         <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-black leading-tight mb-4 md:mb-6">
                             We provide perfect
@@ -114,15 +140,19 @@ export default function AboutUs() {
 
                         <div className="flex justify-center items-center space-x-1">
                             {Array.from({ length: 5 }).map((_, i) => (
-                                <span key={i} className="text-2xl md:text-3xl">⭐</span>
+                                <span key={i} className="text-2xl md:text-3xl animate-pulse" style={{ animationDelay: `${i * 0.2}s` }}>⭐</span>
                             ))}
                         </div>
                     </div>
-                </div>
+                </AnimatedSection>
             </div>
 
-            {/* Top Reasons Section - responsive grid and spacing */}
-            <div className="py-8 md:py-12 lg:py-16 px-4">
+            <AnimatedSection delay={200} className="mt-20 mb-8">
+                <FloatingBubbles />
+            </AnimatedSection>
+
+            {/* Top Reasons Section */}
+            <AnimatedSection delay={100} className="py-8 md:py-12 lg:py-16 px-4">
                 <div className="w-full max-w-7xl mx-auto">
                     <div className="text-center mb-8 md:mb-12 lg:mb-16">
                         <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4">
@@ -136,8 +166,8 @@ export default function AboutUs() {
                     <div className="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300 p-4 md:p-6 lg:p-8 mx-4 md:mx-0">
                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8 relative">
                             {/* Card 1 */}
-                            <div className="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-4 relative lg:after:content-[''] lg:after:absolute lg:after:top-0 lg:after:right-0 lg:after:h-full lg:after:w-px lg:after:bg-gray-300 lg:after:mx-4 pb-6 lg:pb-0 border-b lg:border-b-0 border-gray-200 lg:border-none">
-                                <div className="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <AnimatedSection delay={300} className="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-4 relative lg:after:content-[''] lg:after:absolute lg:after:top-0 lg:after:right-0 lg:after:h-full lg:after:w-px lg:after:bg-gray-300 lg:after:mx-4 pb-6 lg:pb-0 border-b lg:border-b-0 border-gray-200 lg:border-none">
+                                <div className="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center flex-shrink-0 transform hover:scale-110 transition-transform duration-300">
                                     <Code className="w-8 h-8 text-blue-600" />
                                 </div>
                                 <div className="text-center sm:text-left">
@@ -146,11 +176,11 @@ export default function AboutUs() {
                                         Easy-to-use interfaces built with modern design principles.
                                     </p>
                                 </div>
-                            </div>
+                            </AnimatedSection>
 
                             {/* Card 2 */}
-                            <div className="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-4 relative lg:after:content-[''] lg:after:absolute lg:after:top-0 lg:after:right-0 lg:after:h-full lg:after:w-px lg:after:bg-gray-300 lg:after:mx-4 pb-6 lg:pb-0 border-b lg:border-b-0 border-gray-200 lg:border-none">
-                                <div className="w-16 h-16 bg-green-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <AnimatedSection delay={500} className="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-4 relative lg:after:content-[''] lg:after:absolute lg:after:top-0 lg:after:right-0 lg:after:h-full lg:after:w-px lg:after:bg-gray-300 lg:after:mx-4 pb-6 lg:pb-0 border-b lg:border-b-0 border-gray-200 lg:border-none">
+                                <div className="w-16 h-16 bg-green-100 rounded-xl flex items-center justify-center flex-shrink-0 transform hover:scale-110 transition-transform duration-300">
                                     <Smartphone className="w-8 h-8 text-green-600" />
                                 </div>
                                 <div className="text-center sm:text-left">
@@ -159,11 +189,11 @@ export default function AboutUs() {
                                         Budget-friendly plans tailored for startups and businesses.
                                     </p>
                                 </div>
-                            </div>
+                            </AnimatedSection>
 
                             {/* Card 3 */}
-                            <div className="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-4">
-                                <div className="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <AnimatedSection delay={700} className="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-4">
+                                <div className="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center flex-shrink-0 transform hover:scale-110 transition-transform duration-300">
                                     <MessageSquare className="w-8 h-8 text-blue-600" />
                                 </div>
                                 <div className="text-center sm:text-left">
@@ -172,15 +202,15 @@ export default function AboutUs() {
                                         Reliable support to assist you anytime, anywhere.
                                     </p>
                                 </div>
-                            </div>
+                            </AnimatedSection>
                         </div>
                     </div>
                 </div>
-            </div>
+            </AnimatedSection>
 
-            {/* Philosophy Section - responsive layout and text */}
-            <section className="flex flex-col lg:flex-row items-center justify-between px-4 sm:px-6 md:px-8 py-12 md:py-16 lg:py-20 max-w-7xl mx-auto">
-                <div className="lg:w-1/2 mb-8 md:mb-10 lg:mb-0 text-center lg:text-left">
+            {/* Philosophy Section */}
+            <AnimatedSection delay={100} className="flex flex-col lg:flex-row items-center justify-between px-4 sm:px-6 md:px-8 py-12 md:py-16 lg:py-20 max-w-7xl mx-auto">
+                <AnimatedSection delay={200} className="lg:w-1/2 mb-8 md:mb-10 lg:mb-0 text-center lg:text-left">
                     <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900">
                         Iteck's <br />
                         <span className="text-blue-600 underline underline-offset-4 decoration-blue-300">
@@ -195,31 +225,33 @@ export default function AboutUs() {
                     </p>
 
                     <div className="mt-6 md:mt-8 lg:mt-10 space-y-4 md:space-y-6 text-black font-semibold">
-                        <div className="border-b border-gray-200 pb-2 hover:border-blue-500 cursor-pointer transition duration-200">
+                        <AnimatedSection delay={400} className="border-b border-gray-200 pb-2 hover:border-blue-500 cursor-pointer transition duration-200">
                             Become 1st in the IT industrial
-                        </div>
-                        <div className="border-b border-gray-200 pb-2 hover:border-blue-500 cursor-pointer transition duration-200">
+                        </AnimatedSection>
+                        <AnimatedSection delay={600} className="border-b border-gray-200 pb-2 hover:border-blue-500 cursor-pointer transition duration-200">
                             Competitive Price
-                        </div>
-                        <div className="pb-2 hover:border-b hover:border-blue-500 cursor-pointer transition duration-200">
+                        </AnimatedSection>
+                        <AnimatedSection delay={800} className="pb-2 hover:border-b hover:border-blue-500 cursor-pointer transition duration-200">
                             Enhance the quality of life
-                        </div>
+                        </AnimatedSection>
                     </div>
-                </div>
+                </AnimatedSection>
 
-                <div className="lg:w-1/2 flex justify-center">
+                <AnimatedSection delay={400} className="lg:w-1/2 flex justify-center">
                     <img
                         src="https://digitalzeroz.com/assets/img/about/digital-zero-001.png"
                         alt="Philosophy illustration"
-                        className="max-w-full w-full max-w-md lg:max-w-full h-auto object-contain"
+                        className="max-w-full w-full max-w-md lg:max-w-full h-auto object-contain transform hover:scale-105 transition-transform duration-500"
                     />
-                </div>
-            </section>
+                </AnimatedSection>
+            </AnimatedSection>
 
-            <div className="bg-white py-8 md:py-12 lg:py-16 px-4 md:px-12 lg:px-20">
-            </div>
+            <AnimatedSection className="bg-white py-8 md:py-12 lg:py-16 px-4 md:px-12 lg:px-20">
+            </AnimatedSection>
 
-            <IteckFooter />
+            <AnimatedSection>
+                <IteckFooter />
+            </AnimatedSection>
         </div>
     );
 }
