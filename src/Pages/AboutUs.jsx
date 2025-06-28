@@ -33,6 +33,7 @@ const useInView = (threshold = 0.1) => {
   return [ref, inView];
 };
 
+
 const AnimatedSection = ({ children, delay = 0, className = "" }) => {
   const [ref, inView] = useInView(0.1);
   
@@ -58,9 +59,7 @@ const AnimatedSection = ({ children, delay = 0, className = "" }) => {
 export default function AboutUs() {
     return (
         <div className="min-h-screen">
-            <AnimatedSection>
                 <Navbar />
-            </AnimatedSection>
 
             <div className="w-full min-h-screen relative overflow-hidden">
                 {/* Left decorative element */}
