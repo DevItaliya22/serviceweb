@@ -103,7 +103,7 @@ const ContactForm = () => {
     <div className="bg-white min-h-screen flex flex-col justify-between">
       <Navbar />
 
-      <main className="flex-grow pt-24 pb-16 px-4">
+      <main className="flex-grow pt-10 pb-16 px-4">
         <div className="max-w-4xl mx-auto text-center mb-12 mt-24">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
             Get In <span className="text-purple-500">Touch</span>
