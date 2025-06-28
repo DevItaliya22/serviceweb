@@ -8,7 +8,7 @@ export default function IteckLandingPage() {
         <div className="min-h-screen bg-gradient-to-br from-gray-50  relative overflow-hidden">
             <Navbar />
 
-            <main className="relative z-10 px-6 py-12 mt-20">
+            <main className="fixed top-0 left-0 w-full px-6 py-12 mt-20">
                 <div className="max-w-7xl mx-auto">
                     <div className="grid lg:grid-cols-2 gap-12 items-center">
 
