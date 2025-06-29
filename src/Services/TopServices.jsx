@@ -178,23 +178,24 @@ const TopServices = () => {
 
         {/* Services Grid - Responsive */}
         <div className={`grid gap-3 sm:gap-4 md:gap-6 px-8 sm:px-12 md:px-16 lg:px-20 relative ${visibleCards === 1 ? 'grid-cols-1' :
-            visibleCards === 2 ? 'grid-cols-2' :
-              'grid-cols-4'
+          visibleCards === 2 ? 'grid-cols-2' :
+            'grid-cols-4'
           }`}>
           {getVisibleServices().map((service, index) => (
             <div
               key={`${service.originalIndex}-${currentIndex}`}
               className={`bg-white rounded-2xl md:rounded-3xl p-4 sm:p-5 md:p-6 shadow-lg hover:shadow-2xl transition-all duration-700 transform hover:-translate-y-2 md:hover:-translate-y-6 hover:rotate-1 group cursor-pointer border-2 ${getAccentColors(service.accentColor)} relative overflow-hidden h-full flex flex-col ${isTransitioning
-                  ? direction === 'next'
-                    ? 'animate-slideOutLeft'
-                    : 'animate-slideOutRight'
-                  : 'animate-slideInUp'
+                ? direction === 'next'
+                  ? 'animate-slideOutLeft'
+                  : 'animate-slideOutRight'
+                : 'animate-slideInUp'
                 }`}
               style={{
                 animationDelay: `${index * 0.15}s`,
                 animationFillMode: 'both'
               }}
             >
+
               {/* Animated Background Effects */}
               <div className="absolute inset-0 bg-gradient-to-br from-transparent via-blue-50/20 to-purple-50/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               <div className="absolute -top-4 -right-4 w-12 h-12 md:w-20 md:h-20 bg-gradient-to-br from-blue-400/10 to-purple-400/10 rounded-full blur-xl group-hover:scale-150 transition-transform duration-700"></div>
@@ -232,6 +233,17 @@ const TopServices = () => {
 
               {/* Hover glow effect */}
               <div className="absolute inset-0 rounded-2xl md:rounded-3xl bg-gradient-to-r from-blue-400/0 via-purple-400/0 to-pink-400/0 group-hover:from-blue-400/5 group-hover:via-purple-400/5 group-hover:to-pink-400/5 transition-all duration-500"></div>
+              <div className="flex justify-center mt-6">
+                <button className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
+                  onClick={() => {
+                    console.log("Button clicked");
+                    window.location.href = '/contact';
+                  }}
+
+                >
+                  Submit Enquiry
+                </button>
+              </div>
             </div>
           ))}
         </div>
@@ -244,14 +256,15 @@ const TopServices = () => {
               onClick={() => goToSlide(index)}
               disabled={isTransitioning}
               className={`relative overflow-hidden transition-all duration-500 rounded-full ${index === currentIndex
-                  ? 'w-6 md:w-8 h-2.5 md:h-3 bg-gradient-to-r from-blue-500 to-purple-500 scale-110 md:scale-125'
-                  : 'w-2.5 md:w-3 h-2.5 md:h-3 bg-gray-300 hover:bg-gray-400 hover:scale-110'
+                ? 'w-6 md:w-8 h-2.5 md:h-3 bg-gradient-to-r from-blue-500 to-purple-500 scale-110 md:scale-125'
+                : 'w-2.5 md:w-3 h-2.5 md:h-3 bg-gray-300 hover:bg-gray-400 hover:scale-110'
                 }`}
             >
               {index === currentIndex && (
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-400 animate-pulse"></div>
               )}
             </button>
+
           ))}
         </div>
       </div>
