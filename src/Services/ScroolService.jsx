@@ -59,8 +59,8 @@ export default function WaveCarousel() {
     const animate = () => {
       const currentTime = Date.now();
       const elapsedTime = currentTime - startTimeRef.current;
-      const speed = 25; // Reduced speed - pixels per second (was 50 pixels per millisecond!)
-      
+      const speed = 25; // pixels per second
+
       const newTranslateX = (elapsedTime * speed / 1000) % (serviceLength * cardWidth);
       setTranslateX(newTranslateX);
 
@@ -78,18 +78,19 @@ export default function WaveCarousel() {
 
   // Create a smooth wave pattern using sine function
   const getWaveOffset = (index) => {
-    const waveHeight = 60; // Reduced wave height for smoother effect
-    const frequency = 2; // Number of complete waves across all items
-    const time = translateX * 0.05; // Use translateX for wave animation
+    const waveHeight = 60;
+    const frequency = 2;
+    const time = translateX * 0.05;
     const phase = (index / serviceLength) * frequency * 2 * Math.PI + time;
     const offset = Math.sin(phase) * waveHeight;
     return offset;
   };
 
 
+
   return (
-    <div className="w-full overflow-hidden py-24 ">
-      <div 
+    <div className="w-full overflow-hidden py-24 bg-gray-50">
+      <div
         className="flex gap-6"
         style={{
           transform: `translateX(-${translateX}px)`,
@@ -99,30 +100,49 @@ export default function WaveCarousel() {
         {infiniteServices.map((service, index) => (
           <div
             key={index}
-            className="flex-shrink-0 w-64 h-96 bg-white rounded-2xl shadow-lg hover:shadow-xl p-6 text-center transition-all duration-300 hover:scale-105 flex flex-col"
+            className="flex-shrink-0 w-64 bg-white rounded-2xl shadow-lg hover:shadow-xl p-6 text-center transition-all duration-300 hover:scale-105"
             style={{
               transform: `translateY(${getWaveOffset(index)}px)`,
+              height: '400px', 
+              display: 'flex',
+              flexDirection: 'column'
             }}
           >
-            <div className="text-6xl mb-6 transform hover:scale-110 transition-transform duration-300">
-              {service.icon}
+            <div className="flex-shrink-0 mb-4">
+              <div className="text-6xl transform hover:scale-110 transition-transform duration-300">
+                {service.icon}
+              </div>
             </div>
-            <div className="flex-1 flex flex-col">
-              <h3 className="text-xl font-bold mb-4 text-gray-800 leading-tight">
-                {service.title}
-              </h3>
-              <p className="text-gray-600 text-base leading-relaxed">
-                {service.description}
-              </p>
+
+            <div className="flex-grow flex flex-col justify-between">
+              <div>
+                <h3 className="text-xl font-bold mb-3 text-gray-800 leading-tight">
+                  {service.title}
+                </h3>
+                <p className="text-gray-600 text-sm leading-relaxed mb-4">
+                  {service.description}
+                </p>
+              </div>
+
+              <div className="flex-shrink-0 mt-4">
+                <button
+                  className="w-full px-4 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg"
+                  onClick={() => {
+                    window.location.href = '/contact';
+                  }}
+                >
+                  Submit Enquiry
+                </button>
+              </div>
             </div>
           </div>
         ))}
       </div>
-      
+
       <div className="mt-8 px-8">
         <svg width="100%" height="80" className="opacity-30" viewBox="0 0 100 80">
           <path
-            d={`M 0,40 ${Array.from({length: 50}, (_, i) => {
+            d={`M 0,40 ${Array.from({ length: 50 }, (_, i) => {
               const x = (i / 49) * 100;
               const y = 40 + Math.sin((i / 49) * 1.5 * 2 * Math.PI + translateX * 0.01) * 15;
               return `L ${x},${y}`;
