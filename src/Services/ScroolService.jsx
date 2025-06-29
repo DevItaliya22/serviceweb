@@ -144,15 +144,55 @@ export default function ImprovedServicesCarousel() {
           </div>
         </div>
 
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-3">
+        <div className="max-w-7xl mx-auto relative">
+          {/* Left Arrow */}
+          {totalPages > 1 && currentPage > 0 && (
+            <button
+              onClick={() => goToPage(currentPage - 1)}
+              className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-20 z-10 p-3 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-200 hover:border-blue-300 group"
+            >
+              <svg className="w-6 h-6 text-slate-600 group-hover:text-blue-600 transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+          )}
+
+          {/* Right Arrow */}
+          {totalPages > 1 && currentPage < totalPages - 1 && (
+            <button
+              onClick={() => goToPage(currentPage + 1)}
+              className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-20 z-10 p-3 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-200 hover:border-blue-300 group"
+            >
+              <svg className="w-6 h-6 text-slate-600 group-hover:text-blue-600 transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          )}
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6">
             {currentServices.map((service, index) => (
               <ServiceCard key={`${service.title}-${startIndex + index}`} service={service} />
             ))}
           </div>
 
           {totalPages > 1 && (
-            <div className="flex justify-center mt-8 space-x-3">
+            <div className="flex justify-center items-center mt-8 space-x-3">
+              {/* Previous Arrow */}
+              <button
+                onClick={() => goToPage(Math.max(0, currentPage - 1))}
+                disabled={currentPage === 0}
+                className={`p-2 rounded-full transition-all duration-300 ${
+                  currentPage === 0
+                    ? 'text-slate-300 cursor-not-allowed'
+                    : 'text-slate-600 hover:text-blue-600 hover:bg-slate-100'
+                }`}
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+
+              {/* Page Dots */}
               {Array.from({ length: totalPages }).map((_, index) => (
                 <button
                   key={index}
@@ -163,6 +203,21 @@ export default function ImprovedServicesCarousel() {
                     }`}
                 />
               ))}
+
+              {/* Next Arrow */}
+              <button
+                onClick={() => goToPage(Math.min(totalPages - 1, currentPage + 1))}
+                disabled={currentPage === totalPages - 1}
+                className={`p-2 rounded-full transition-all duration-300 ${
+                  currentPage === totalPages - 1
+                    ? 'text-slate-300 cursor-not-allowed'
+                    : 'text-slate-600 hover:text-blue-600 hover:bg-slate-100'
+                }`}
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
             </div>
           )}
         </div>
