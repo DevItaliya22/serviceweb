@@ -142,7 +142,7 @@ const TopServices = () => {
   };
 
   return (
-    <div className="w-screen flex flex-col justify-center py-3 md:py-8   overflow-hidden">
+    <div className="w-full flex flex-col justify-center py-3 md:py-8   overflow-hidden">
       {/* Animated Header */}
       <div className="text-center mt-12 md:mt-0 mb-8 md:mb-16 px-4">
         <h2 className="text-4xl sm:text-5xl md:text-4xl lg:text-6xl font-bold mb-4 md:mb-6 bg-gradient-to-r from-gray-900 via-blue-900 to-gray-900 bg-clip-text text-transparent">
