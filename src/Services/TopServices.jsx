@@ -101,6 +101,14 @@ const TopServices = () => {
     }, 300);
   };
 
+  useEffect(() => {
+    const autoPlay = setInterval(() => {
+      handleTransition('next');
+    }, 2000); 
+
+    return () => clearInterval(autoPlay);
+  }, [currentIndex, isTransitioning]);
+
   const nextSlide = () => {
     setIsAutoPlaying(false);
     handleTransition('next');
