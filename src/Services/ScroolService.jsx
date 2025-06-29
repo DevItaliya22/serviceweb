@@ -116,7 +116,7 @@ export default function ImprovedServicesCarousel() {
         </div>
 
         <div className="flex justify-center mb-6">
-          <div className="flex gap-1 flex-wrap justify-center">
+          <div className="flex justify-between items-center w-full max-w-3xl px-4 gap-2">
             {categories.map((category) => {
               const count = category === 'All' ? services.length : services.filter(s => s.category === category).length;
               return (
