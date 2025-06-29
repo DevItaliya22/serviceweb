@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const services = [
   {
@@ -55,25 +55,65 @@ const services = [
     icon: '📊',
     category: 'Development'
   },
+  {
+    title: 'Mobile App Development',
+    description: 'Native and cross-platform mobile applications that engage users and drive business growth.',
+    icon: '📱',
+    category: 'Development'
+  },
+  {
+    title: 'E-commerce Solutions',
+    description: 'Complete online store solutions with secure payment gateways and inventory management.',
+    icon: '🛒',
+    category: 'Development'
+  },
+  {
+    title: 'Digital Consulting',
+    description: 'Strategic digital transformation consulting to optimize your business processes and growth.',
+    icon: '💼',
+    category: 'Consulting'
+  },
+  {
+    title: 'Digital Consulting',
+    description: 'Strategic digital transformation consulting to optimize your business processes and growth.',
+    icon: '💼',
+    category: 'Consulting'
+  },
 ];
 
 export default function ImprovedServicesCarousel() {
   const [activeTab, setActiveTab] = useState('All');
+  const [currentPage, setCurrentPage] = useState(0);
+  const servicesPerPage = 12;
 
   const categories = ['All', ...new Set(services.map(service => service.category))];
   const filteredServices = activeTab === 'All'
     ? services
     : services.filter(service => service.category === activeTab);
 
+  const totalPages = Math.ceil(filteredServices.length / servicesPerPage);
+  
+  const startIndex = currentPage * servicesPerPage;
+  const endIndex = startIndex + servicesPerPage;
+  const currentServices = filteredServices.slice(startIndex, endIndex);
+
+  useEffect(() => {
+    setCurrentPage(0);
+  }, [activeTab]);
+
+  const goToPage = (pageIndex) => {
+    setCurrentPage(pageIndex);
+  };
+
   return (
     <div className="py-8">
       <div className="w-full mx-auto px-4">
 
         <div className="text-center mb-6">
-          <h2 className="text-2xl md:text-3xl font-bold text-slate-800 mb-2">
-            Our <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Services</span>
+          <h2 className="text-4xl md:text-5xl font-bold text-slate-800 mb-3">
+            Our <span className="bg-gradient-to-r from-[#87CEEB] to-[#4682B4] bg-clip-text text-transparent">Services</span>
           </h2>
-          <p className="text-slate-600 text-sm max-w-2xl mx-auto">
+          <p className="text-slate-600 text-lg max-w-2xl mx-auto">
           We provide perfect IT Solutions for your business
           </p>
         </div>
@@ -86,13 +126,13 @@ export default function ImprovedServicesCarousel() {
                 <button
                   key={category}
                   onClick={() => setActiveTab(category)}
-                  className={`px-4 py-2 rounded-lg font-semibold text-xs transition-all duration-300 shadow-md border-2 ${activeTab === category
+                  className={`px-6 py-3 rounded-full font-semibold text-base transition-all duration-300 shadow-md border-2 ${activeTab === category
                       ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white border-transparent shadow-lg transform scale-105'
-                      : 'bg-white text-slate-700 border-slate-200 hover:border-blue-300 hover:shadow-lg hover:scale-105'
+                      : 'bg-white text-black border-slate-200 hover:border-blue-300 hover:shadow-lg hover:scale-105'
                     }`}
                 >
                   {category}
-                  <span className={`ml-1 text-xs px-1.5 py-0.5 rounded-full font-medium ${activeTab === category
+                  <span className={`ml-2 text-xs px-2 py-1 rounded-full font-medium ${activeTab === category
                       ? 'bg-white/20 text-white'
                       : 'bg-slate-100 text-slate-600'
                     }`}>
@@ -106,10 +146,25 @@ export default function ImprovedServicesCarousel() {
 
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-3">
-            {filteredServices.map((service, index) => (
-              <ServiceCard key={`${service.title}-${index}`} service={service} />
+            {currentServices.map((service, index) => (
+              <ServiceCard key={`${service.title}-${startIndex + index}`} service={service} />
             ))}
           </div>
+
+          {totalPages > 1 && (
+            <div className="flex justify-center mt-8 space-x-3">
+              {Array.from({ length: totalPages }).map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => goToPage(index)}
+                  className={`w-3 h-3 rounded-full transition-all duration-300 ${currentPage === index
+                      ? 'bg-blue-600 w-10'
+                      : 'bg-slate-300 hover:bg-slate-400'
+                    }`}
+                />
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>
