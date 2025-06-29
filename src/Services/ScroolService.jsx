@@ -111,7 +111,7 @@ export default function ImprovedServicesCarousel() {
 
         <div className="text-center mb-6">
           <h2 className="text-4xl md:text-5xl font-bold text-slate-800 mb-3">
-            Our <span className="bg-gradient-to-r from-[#87CEEB] to-[#4682B4] bg-clip-text text-transparent">Services</span>
+            Our <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">Services</span>
           </h2>
           <p className="text-slate-600 text-lg max-w-2xl mx-auto">
           We provide perfect IT Solutions for your business
