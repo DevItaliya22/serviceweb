@@ -141,45 +141,47 @@ export default function ImprovedServicesCarousel() {
           </div>
         </div>
 
-        <div className="max-w-7xl mx-auto relative">
-          {/* Left Arrow */}
-          {totalPages > 1 && (
-            <button
-              onClick={() => currentPage > 0 && goToPage(currentPage - 1)}
-              disabled={currentPage === 0}
-              className={`absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-20 z-10 p-3 rounded-full shadow-lg transition-all duration-300 border group ${
-                currentPage === 0
-                  ? 'bg-gray-100 text-gray-300 cursor-not-allowed border-gray-200'
-                  : 'bg-white text-slate-600 hover:text-blue-600 hover:shadow-xl border-slate-200 hover:border-blue-300'
-              }`}
-            >
-              <svg className="w-6 h-6 transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
-            </button>
-          )}
+        <div className="max-w-7xl mx-auto">
+          <div className="relative">
+            {/* Left Arrow */}
+            {totalPages > 1 && (
+              <button
+                onClick={() => currentPage > 0 && goToPage(currentPage - 1)}
+                disabled={currentPage === 0}
+                className={`absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-20 z-10 p-3 rounded-full shadow-lg transition-all duration-300 border group ${
+                  currentPage === 0
+                    ? 'bg-gray-100 text-gray-300 cursor-not-allowed border-gray-200'
+                    : 'bg-white text-slate-600 hover:text-blue-600 hover:shadow-xl border-slate-200 hover:border-blue-300'
+                }`}
+              >
+                <svg className="w-6 h-6 transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+            )}
 
-          {/* Right Arrow */}
-          {totalPages > 1 && (
-            <button
-              onClick={() => currentPage < totalPages - 1 && goToPage(currentPage + 1)}
-              disabled={currentPage === totalPages - 1}
-              className={`absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-20 z-10 p-3 rounded-full shadow-lg transition-all duration-300 border group ${
-                currentPage === totalPages - 1
-                  ? 'bg-gray-100 text-gray-300 cursor-not-allowed border-gray-200'
-                  : 'bg-white text-slate-600 hover:text-blue-600 hover:shadow-xl border-slate-200 hover:border-blue-300'
-              }`}
-            >
-              <svg className="w-6 h-6 transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </button>
-          )}
+            {/* Right Arrow */}
+            {totalPages > 1 && (
+              <button
+                onClick={() => currentPage < totalPages - 1 && goToPage(currentPage + 1)}
+                disabled={currentPage === totalPages - 1}
+                className={`absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-20 z-10 p-3 rounded-full shadow-lg transition-all duration-300 border group ${
+                  currentPage === totalPages - 1
+                    ? 'bg-gray-100 text-gray-300 cursor-not-allowed border-gray-200'
+                    : 'bg-white text-slate-600 hover:text-blue-600 hover:shadow-xl border-slate-200 hover:border-blue-300'
+                }`}
+              >
+                <svg className="w-6 h-6 transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+            )}
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6">
-            {currentServices.map((service, index) => (
-              <ServiceCard key={`${service.title}-${startIndex + index}`} service={service} />
-            ))}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6">
+              {currentServices.map((service, index) => (
+                <ServiceCard key={`${service.title}-${startIndex + index}`} service={service} />
+              ))}
+            </div>
           </div>
 
           {totalPages > 1 && (
