@@ -96,30 +96,14 @@ export default function AboutUs() {
                     </div>
                 </AnimatedSection>
 
-                {/* Bottom right decorative element */}
-                <AnimatedSection delay={600} className="absolute bottom-8 md:bottom-12 lg:bottom-16 right-4 md:right-10 lg:right-16 hidden md:block">
-                    <div className="relative transform rotate-12 scale-75 md:scale-90 lg:scale-100">
-                        <div className="w-32 h-40 bg-gradient-to-br from-purple-600 to-purple-800 rounded-2xl shadow-2xl relative">
-                            <div className="absolute inset-4 bg-gradient-to-br from-purple-500 to-purple-700 rounded-xl">
-                                <div className="absolute top-3 left-1/2 transform -translate-x-1/2 w-12 h-1 bg-purple-400 rounded-full"></div>
-                                <div className="absolute top-6 inset-x-2 bottom-6 bg-gradient-to-br from-purple-400 to-purple-600 rounded-lg opacity-80">
-                                    <div className="absolute inset-2 bg-white opacity-10 rounded-lg"></div>
-                                </div>
-                            </div>
-
-                            <div className="absolute -right-2 top-2 w-32 h-40 bg-gradient-to-br from-purple-700 to-purple-900 rounded-2xl -z-10 transform translate-x-1"></div>
-                        </div>
-                    </div>
-                </AnimatedSection>
-
                 {/* Main content */}
-                <AnimatedSection delay={100} className="w-full min-h-screen flex items-center justify-center px-4 sm:px-6 md:px-8 lg:px-8 py-8 md:py-16">
-                    <div className="text-center max-w-6xl w-full">
-                        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-black leading-tight mb-4 md:mb-6">
+                <AnimatedSection delay={100} className="w-full min-h-screen flex items-center justify-center px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-8 md:py-12 lg:py-16 xl:py-20 mt-8 sm:mt-12 md:mt-16 lg:mt-20 xl:mt-24">
+                    <div className="text-center max-w-4xl lg:max-w-6xl w-full">
+                        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold text-black leading-tight mb-4 md:mb-6 lg:mb-8">
                             We provide perfect
-                            <br />
-                            <span className="block mt-2 md:mt-0">IT Solutions & Technology for</span>
-                            <span className="block mt-2 md:mt-0">
+                            <br className="hidden sm:block" />
+                            <span className="block mt-1 sm:mt-2 md:mt-0">IT Solutions & Technology for</span>
+                            <span className="block mt-1 sm:mt-2 md:mt-0">
                                 any{' '}
                                 <span className="relative inline-block">
                                     Startups
@@ -127,28 +111,29 @@ export default function AboutUs() {
                                         <path d="M0 4 Q50 0 100 4 T200 4" stroke="#60A5FA" strokeWidth="3" fill="none" className="opacity-80" />
                                     </svg>
                                 </span>
-                                <span className="ml-2 md:ml-4 text-3xl sm:text-4xl md:text-5xl lg:text-6xl">✏️</span>
+                                <span className="ml-1 sm:ml-2 md:ml-4 text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl">✏️</span>
                             </span>
                         </h1>
 
-                        <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed mb-6 md:mb-8 px-4">
+                        <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-gray-600 max-w-3xl lg:max-w-4xl mx-auto leading-relaxed mb-6 md:mb-8 lg:mb-10 px-2 sm:px-4">
                             Iteck helps you unify your brand identity by collecting, storing and distributing
                             <br className="hidden lg:block" />
                             design tokens and assets — automatically.
                         </p>
 
-                        <div className="flex justify-center items-center space-x-1">
+                        <div className="flex justify-center items-center space-x-1 mb-8 md:mb-12 lg:mb-16">
                             {Array.from({ length: 5 }).map((_, i) => (
-                                <span key={i} className="text-2xl md:text-3xl animate-pulse" style={{ animationDelay: `${i * 0.2}s` }}>⭐</span>
+                                <span key={i} className="text-xl sm:text-2xl md:text-3xl animate-pulse" style={{ animationDelay: `${i * 0.2}s` }}>⭐</span>
                             ))}
+                        </div>
+                        
+                        {/* Floating Bubbles below the main content */}
+                        <div className="mt-8 sm:mt-12 md:mt-16 lg:mt-20 xl:mt-24">
+                            <FloatingBubbles />
                         </div>
                     </div>
                 </AnimatedSection>
             </div>
-
-            <AnimatedSection delay={200} className="mt-20 mb-8">
-                <FloatingBubbles />
-            </AnimatedSection>
 
             {/* Top Reasons Section */}
             <AnimatedSection delay={100} className="py-8 md:py-12 lg:py-16 px-4">
