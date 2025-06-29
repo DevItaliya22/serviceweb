@@ -228,7 +228,7 @@ export default function ImprovedServicesCarousel() {
 
 function ServiceCard({ service }) {
   return (
-    <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 p-3 group border border-slate-100 hover:border-blue-200">
+    <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 p-3 group border border-slate-100 hover:border-blue-200 flex flex-col h-full">
       <div className="text-center mb-3">
         <div className="text-2xl mb-2 group-hover:scale-110 transition-transform duration-300">
           {service.icon}
@@ -238,7 +238,7 @@ function ServiceCard({ service }) {
         </span>
       </div>
 
-      <div className="text-center">
+      <div className="text-center flex-grow">
         <h3 className="text-sm font-bold text-slate-800 mb-2 group-hover:text-blue-700 transition-colors duration-300">
           {service.title}
         </h3>
@@ -247,14 +247,14 @@ function ServiceCard({ service }) {
         </p>
       </div>
 
-      <div className="text-center">
+      <div className="text-center mt-auto">
         <button 
           onClick={() => {
             window.location.href = '/contact';
           }}
           className="px-2 py-1 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-md shadow-sm hover:shadow-md transform hover:-translate-y-0.5 transition-all duration-300 group text-xs"
         >
-          Submit Enquiry
+          Enquiry
           <svg className="inline-block w-2 h-2 ml-1 group-hover:translate-x-0.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
           </svg>
