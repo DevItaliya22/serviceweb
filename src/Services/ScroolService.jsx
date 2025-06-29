@@ -126,13 +126,13 @@ export default function ImprovedServicesCarousel() {
                 <button
                   key={category}
                   onClick={() => setActiveTab(category)}
-                  className={`px-6 py-3 rounded-full font-semibold text-base transition-all duration-300 shadow-md border-2 ${activeTab === category
-                      ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white border-transparent shadow-lg transform scale-105'
-                      : 'bg-white text-black border-slate-200 hover:border-blue-300 hover:shadow-lg hover:scale-105'
+                  className={`px-4 py-2 rounded-full font-medium text-sm transition-all duration-300 shadow-sm border-2 ${activeTab === category
+                      ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white border-transparent shadow-md transform scale-105'
+                      : 'bg-white text-black border-slate-200 hover:border-blue-300 hover:shadow-md hover:scale-105'
                     }`}
                 >
-                  {category}
-                  <span className={`ml-2 text-xs px-2 py-1 rounded-full font-medium ${activeTab === category
+                  <span className="inline-block align-middle">{category}</span>
+                  <span className={`ml-1.5 text-xs px-1.5 py-0.5 rounded-full font-medium inline-block align-middle ${activeTab === category
                       ? 'bg-white/20 text-white'
                       : 'bg-slate-100 text-slate-600'
                     }`}>
@@ -228,9 +228,10 @@ export default function ImprovedServicesCarousel() {
 
 function ServiceCard({ service }) {
   return (
-    <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 p-3 group border border-slate-100 hover:border-blue-200 flex flex-col h-full">
+    <div className="bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 p-3 group border border-slate-100 hover:border-blue-200 flex flex-col h-full transform hover:scale-105 hover:-translate-y-2">
       <div className="text-center mb-3">
-        <div className="text-2xl mb-2 group-hover:scale-110 transition-transform duration-300">
+        <div className="text-3xl mb-2 group-hover:scale-110 transition-transform duration-300 relative">
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-200 to-purple-200 rounded-full blur-lg opacity-0 group-hover:opacity-50 transition-opacity duration-300 -z-10"></div>
           {service.icon}
         </div>
         <span className="inline-block px-1.5 py-0.5 bg-gradient-to-r from-blue-100 to-purple-100 text-blue-700 text-xs font-semibold rounded-full">
