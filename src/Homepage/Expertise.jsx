@@ -71,8 +71,12 @@ const Expertise = () => {
 
       <div className="w-screen mx-auto">
         <div className="text-center mb-16">
-          <p className="text-blue-600 text-sm font-medium tracking-wider uppercase mb-4">OUR SERVICES</p>
-          <h1 className="text-5xl font-bold text-gray-900">Our Expertise Field</h1>
+          <p className="text-blue-600 text-sm font-medium tracking-wider uppercase mb-4 mr-4  ">OUR SERVICES</p>
+          <h1 className="text-center text-4xl sm:text-xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 mr-8">
+            Our Expertise Field
+          </h1>
+
+
         </div>
 
         <div className="relative overflow-hidden">

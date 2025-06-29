@@ -15,9 +15,12 @@ export default function IteckLandingPage() {
 
                         <div className="space-y-8">
                             <div className="space-y-6">
-                                <p className="text-blue-600 font-semibold text-lg tracking-wide">
-                                    WE BRING IDEAS TO LIFE
-                                </p>
+                                <main className="pt-14  ">
+                                    <p className="text-blue-600 font-semibold text-base sm:text-lg md:text-xl tracking-normal sm:tracking-wide">
+                                        WE BRING IDEAS TO LIFE
+                                    </p>
+                                </main>
+
                                 <h1 className="text-6xl lg:text-6xl font-bold text-gray-900 leading-tight">
                                     Ai & Data Machine
                                     <br />
