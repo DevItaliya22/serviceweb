@@ -48,34 +48,22 @@ const services = [
 export default function WaveCarousel() {
   const [translateX, setTranslateX] = useState(0);
   const animationRef = useRef();
-  const lastTimeRef = useRef(0);
+  const startTimeRef = useRef(Date.now());
 
   // Create multiple copies for seamless infinite scroll
-  const infiniteServices = [...services, ...services, ...services, ...services];
+  const infiniteServices = [...services, ...services, ...services];
   const cardWidth = 280; // Width including gap
   const serviceLength = services.length;
 
   useEffect(() => {
-    const animate = (currentTime) => {
-      if (lastTimeRef.current === 0) {
-        lastTimeRef.current = currentTime;
-      }
+    const animate = () => {
+      const currentTime = Date.now();
+      const elapsedTime = currentTime - startTimeRef.current;
+      const speed = 25; // Reduced speed - pixels per second (was 50 pixels per millisecond!)
+      
+      const newTranslateX = (elapsedTime * speed / 1000) % (serviceLength * cardWidth);
+      setTranslateX(newTranslateX);
 
-      const deltaTime = currentTime - lastTimeRef.current;
-      const speed = 0.05; // Pixels per millisecond
-
-      setTranslateX(prev => {
-        const newTranslateX = prev + deltaTime * speed;
-        
-        // Reset position seamlessly when we've moved one full set
-        if (newTranslateX >= serviceLength * cardWidth) {
-          return newTranslateX - serviceLength * cardWidth;
-        }
-        
-        return newTranslateX;
-      });
-
-      lastTimeRef.current = currentTime;
       animationRef.current = requestAnimationFrame(animate);
     };
 
@@ -89,19 +77,18 @@ export default function WaveCarousel() {
   }, [serviceLength, cardWidth]);
 
   // Create a smooth wave pattern using sine function
-  const getWaveOffset = (index, scrollOffset = 0) => {
-    const waveHeight = 120; // Maximum wave height in pixels
+  const getWaveOffset = (index) => {
+    const waveHeight = 60; // Reduced wave height for smoother effect
     const frequency = 2; // Number of complete waves across all items
-    const phase = ((index + scrollOffset * 0.01) / serviceLength) * frequency * 2 * Math.PI;
+    const time = translateX * 0.05; // Use translateX for wave animation
+    const phase = (index / serviceLength) * frequency * 2 * Math.PI + time;
     const offset = Math.sin(phase) * waveHeight;
     return offset;
   };
 
-  // Calculate current index for dots indicator
-  const currentIndex = Math.floor((translateX / cardWidth) % serviceLength);
 
   return (
-    <div className="w-full overflow-hidden py-24 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+    <div className="w-full overflow-hidden py-24 ">
       <div 
         className="flex gap-6"
         style={{
@@ -114,7 +101,7 @@ export default function WaveCarousel() {
             key={index}
             className="flex-shrink-0 w-64 h-96 bg-white rounded-2xl shadow-lg hover:shadow-xl p-6 text-center transition-all duration-300 hover:scale-105 flex flex-col"
             style={{
-              transform: `translateY(${getWaveOffset(index, translateX)}px)`,
+              transform: `translateY(${getWaveOffset(index)}px)`,
             }}
           >
             <div className="text-6xl mb-6 transform hover:scale-110 transition-transform duration-300">
@@ -132,29 +119,16 @@ export default function WaveCarousel() {
         ))}
       </div>
       
-      {/* Dots indicator */}
-      <div className="flex justify-center mt-8 gap-2">
-        {services.map((_, index) => (
-          <div
-            key={index}
-            className={`w-3 h-3 rounded-full transition-all duration-300 ${
-              index === currentIndex ? 'bg-blue-500 scale-125' : 'bg-gray-300'
-            }`}
-          />
-        ))}
-      </div>
-
-      {/* Wave visualization at bottom */}
       <div className="mt-8 px-8">
-        <svg width="100%" height="120" className="opacity-30">
+        <svg width="100%" height="80" className="opacity-30" viewBox="0 0 100 80">
           <path
-            d={`M 0 60 ${services.map((_, index) => {
-              const x = (index / (services.length - 1)) * 100;
-              const y = 60 + getWaveOffset(index, translateX) * 0.5;
-              return `L ${x} ${y}`;
+            d={`M 0,40 ${Array.from({length: 50}, (_, i) => {
+              const x = (i / 49) * 100;
+              const y = 40 + Math.sin((i / 49) * 1.5 * 2 * Math.PI + translateX * 0.01) * 15;
+              return `L ${x},${y}`;
             }).join(' ')}`}
             stroke="url(#gradient)"
-            strokeWidth="3"
+            strokeWidth="2"
             fill="none"
           />
           <defs>
