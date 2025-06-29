@@ -113,26 +113,23 @@ export default function ImprovedServicesCarousel() {
           <h2 className="text-4xl md:text-5xl font-bold text-slate-800 mb-3">
             Our <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">Services</span>
           </h2>
-          <p className="text-slate-600 text-lg max-w-2xl mx-auto">
-          We provide perfect IT Solutions for your business
-          </p>
         </div>
 
         <div className="flex justify-center mb-6">
-          <div className="flex gap-2 flex-wrap justify-center">
+          <div className="flex gap-1 flex-wrap justify-center">
             {categories.map((category) => {
               const count = category === 'All' ? services.length : services.filter(s => s.category === category).length;
               return (
                 <button
                   key={category}
                   onClick={() => setActiveTab(category)}
-                  className={`px-4 py-2 rounded-full font-medium text-sm transition-all duration-300 shadow-sm border-2 ${activeTab === category
+                  className={`px-2 py-1 rounded-full font-medium text-xs transition-all duration-300 shadow-sm border ${activeTab === category
                       ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white border-transparent shadow-md transform scale-105'
                       : 'bg-white text-black border-slate-200 hover:border-blue-300 hover:shadow-md hover:scale-105'
                     }`}
                 >
                   <span className="inline-block align-middle">{category}</span>
-                  <span className={`ml-1.5 text-xs px-1.5 py-0.5 rounded-full font-medium inline-block align-middle ${activeTab === category
+                  <span className={`ml-1 text-xs px-1 py-0.5 rounded-full font-medium inline-block align-middle ${activeTab === category
                       ? 'bg-white/20 text-white'
                       : 'bg-slate-100 text-slate-600'
                     }`}>
