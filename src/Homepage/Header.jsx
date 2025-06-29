@@ -15,7 +15,7 @@ export default function IteckLandingPage() {
 
                         <div className="space-y-8">
                             <div className="space-y-6">
-                                <main className="pt-14  ">
+                                <main>
                                     <p className="text-blue-600 font-semibold text-base sm:text-lg md:text-xl tracking-normal sm:tracking-wide">
                                         WE BRING IDEAS TO LIFE
                                     </p>
