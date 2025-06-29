@@ -124,15 +124,6 @@ const SoftwareServices = () => {
                     <TopServices />
                 </div>
 
-                <div className="text-center mt-4 mb-12 sm:mb-16 px-4">
-                    <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-800 mb-4">
-                        Our <span className="text-blue-500">Services</span>
-                    </h1>
-                    <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">
-                        We provide perfect IT Solutions for your business
-                    </p>
-                </div>
-
                 <div className="w-full sm:mt-16 mb-8 sm:mb-12">
                     <CarouselComponent />
                 </div>

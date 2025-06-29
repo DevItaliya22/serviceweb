@@ -154,7 +154,7 @@ const TopServices = () => {
       {/* Animated Header */}
       <div className="text-center mt-12 md:mt-0 mb-8 md:mb-16 px-4">
         <h2 className="text-4xl sm:text-5xl md:text-4xl lg:text-6xl font-bold mb-4 md:mb-6 bg-gradient-to-r from-gray-900 via-blue-900 to-gray-900 bg-clip-text text-transparent">
-          Our Top <span className="text-blue-500 inline-block font-bold">Services</span>
+          Our Top <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent inline-block font-bold">Services</span>
         </h2>
         <p className="text-gray-600 text-sm sm:text-base md:text-lg max-w-4xl mx-auto leading-relaxed animate-fadeInUp">
           Iteck Dashboard is a powerhouse when it comes to the feature list. This ensures you have every
