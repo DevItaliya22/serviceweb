@@ -143,24 +143,34 @@ export default function ImprovedServicesCarousel() {
 
         <div className="max-w-7xl mx-auto relative">
           {/* Left Arrow */}
-          {totalPages > 1 && currentPage > 0 && (
+          {totalPages > 1 && (
             <button
-              onClick={() => goToPage(currentPage - 1)}
-              className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-20 z-10 p-3 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-200 hover:border-blue-300 group"
+              onClick={() => currentPage > 0 && goToPage(currentPage - 1)}
+              disabled={currentPage === 0}
+              className={`absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-20 z-10 p-3 rounded-full shadow-lg transition-all duration-300 border group ${
+                currentPage === 0
+                  ? 'bg-gray-100 text-gray-300 cursor-not-allowed border-gray-200'
+                  : 'bg-white text-slate-600 hover:text-blue-600 hover:shadow-xl border-slate-200 hover:border-blue-300'
+              }`}
             >
-              <svg className="w-6 h-6 text-slate-600 group-hover:text-blue-600 transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-6 h-6 transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
               </svg>
             </button>
           )}
 
           {/* Right Arrow */}
-          {totalPages > 1 && currentPage < totalPages - 1 && (
+          {totalPages > 1 && (
             <button
-              onClick={() => goToPage(currentPage + 1)}
-              className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-20 z-10 p-3 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-200 hover:border-blue-300 group"
+              onClick={() => currentPage < totalPages - 1 && goToPage(currentPage + 1)}
+              disabled={currentPage === totalPages - 1}
+              className={`absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-20 z-10 p-3 rounded-full shadow-lg transition-all duration-300 border group ${
+                currentPage === totalPages - 1
+                  ? 'bg-gray-100 text-gray-300 cursor-not-allowed border-gray-200'
+                  : 'bg-white text-slate-600 hover:text-blue-600 hover:shadow-xl border-slate-200 hover:border-blue-300'
+              }`}
             >
-              <svg className="w-6 h-6 text-slate-600 group-hover:text-blue-600 transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-6 h-6 transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
             </button>
@@ -225,22 +235,22 @@ export default function ImprovedServicesCarousel() {
 
 function ServiceCard({ service }) {
   return (
-    <div className="bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 p-3 group border border-slate-100 hover:border-blue-200 flex flex-col h-full transform hover:scale-105 hover:-translate-y-2">
-      <div className="text-center mb-3">
-        <div className="text-3xl mb-2 group-hover:scale-110 transition-transform duration-300 relative">
+    <div className="bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 p-1.5 group border border-slate-100 hover:border-blue-200 flex flex-col h-full transform hover:scale-105 hover:-translate-y-2">
+      <div className="text-center mb-1.5">
+        <div className="text-xl mb-1 group-hover:scale-110 transition-transform duration-300 relative">
           <div className="absolute inset-0 bg-gradient-to-r from-blue-200 to-purple-200 rounded-full blur-lg opacity-0 group-hover:opacity-50 transition-opacity duration-300 -z-10"></div>
           {service.icon}
         </div>
-        <span className="inline-block px-1.5 py-0.5 bg-gradient-to-r from-blue-100 to-purple-100 text-blue-700 text-xs font-semibold rounded-full">
+        <span className="inline-block px-1 py-0.5 bg-gradient-to-r from-blue-100 to-purple-100 text-blue-700 text-xs font-semibold rounded-full">
           {service.category}
         </span>
       </div>
 
       <div className="text-center flex-grow">
-        <h3 className="text-sm font-bold text-slate-800 mb-2 group-hover:text-blue-700 transition-colors duration-300">
+        <h3 className="text-sm font-bold text-slate-800 mb-1 group-hover:text-blue-700 transition-colors duration-300">
           {service.title}
         </h3>
-        <p className="text-slate-600 text-xs leading-tight mb-3 line-clamp-3">
+        <p className="text-slate-600 text-xs leading-tight mb-1.5 line-clamp-2">
           {service.description}
         </p>
       </div>
@@ -250,7 +260,7 @@ function ServiceCard({ service }) {
           onClick={() => {
             window.location.href = '/contact';
           }}
-          className="px-2 py-1 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-md shadow-sm hover:shadow-md transform hover:-translate-y-0.5 transition-all duration-300 group text-xs"
+          className="px-2 py-0.5 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-md shadow-sm hover:shadow-md transform hover:-translate-y-0.5 transition-all duration-300 group text-xs"
         >
           Enquiry
           <svg className="inline-block w-2 h-2 ml-1 group-hover:translate-x-0.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
