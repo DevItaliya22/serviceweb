@@ -249,7 +249,7 @@ const TopServices = () => {
         </div>
 
         {/* Animated Dots Indicator */}
-        <div className="flex justify-center mt-8 md:mt-12 space-x-2 md:space-x-3 animate-fadeInUp">
+        {/* <div className="flex justify-center mt-8 md:mt-12 space-x-2 md:space-x-3 animate-fadeInUp">
           {services.map((_, index) => (
             <button
               key={index}
@@ -266,7 +266,7 @@ const TopServices = () => {
             </button>
 
           ))}
-        </div>
+        </div> */}
       </div>
 
       {/* Custom CSS Animations */}
