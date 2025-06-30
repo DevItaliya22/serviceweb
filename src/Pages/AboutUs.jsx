@@ -58,7 +58,7 @@ const AnimatedSection = ({ children, delay = 0, className = "" }) => {
 
 export default function AboutUs() {
     return (
-        <div className="min-h-screen">
+        <div className="min-h-screen overflow-hidden ">
                 <Navbar />
 
             <div className="w-full min-h-screen relative overflow-hidden">
