@@ -9,7 +9,8 @@ const Project = () => {
   const [categories, setCategories] = useState(['All']);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6;
 
   useEffect(() => {
     fetchProjects();
@@ -50,26 +51,24 @@ const Project = () => {
 
   const currentProjects = filterProjectsByCategory(activeTab);
 
-  const getItemsPerSlide = () => {
-    if (typeof window !== 'undefined') {
-      if (window.innerWidth < 768) return 1; 
-      if (window.innerWidth < 1024) return 2; 
-      return 3; 
-    }
-    return 3;
-  };
+  // Pagination logic
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentProjectsPage = currentProjects.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.ceil(currentProjects.length / itemsPerPage);
 
-  const [itemsPerSlide, setItemsPerSlide] = useState(getItemsPerSlide());
-
+  // Reset to first page when category changes
   useEffect(() => {
-    const handleResize = () => {
-      setItemsPerSlide(getItemsPerSlide());
-      setCurrentSlide(0); 
-    };
+    setCurrentPage(1);
+  }, [activeTab]);
 
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  // Scroll to top when page changes
+  useEffect(() => {
+    const projectsSection = document.querySelector('.projects-section');
+    if (projectsSection) {
+      projectsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, [currentPage]);
 
   const StarRating = ({ rating, size = "sm" }) => {
     const sizeClasses = {
@@ -197,50 +196,85 @@ const Project = () => {
 </div>
   );
 
-  const CarouselControls = () => {
-    const totalSlides = Math.ceil(currentProjects.length / itemsPerSlide);
+  const Pagination = () => {
+    if (totalPages <= 1) return null;
 
-    if (totalSlides <= 1) return null;
+    const getPageNumbers = () => {
+      const pages = [];
+      const maxVisiblePages = 5;
+      
+      if (totalPages <= maxVisiblePages) {
+        for (let i = 1; i <= totalPages; i++) {
+          pages.push(i);
+        }
+      } else {
+        if (currentPage <= 3) {
+          for (let i = 1; i <= 4; i++) {
+            pages.push(i);
+          }
+          pages.push('...');
+          pages.push(totalPages);
+        } else if (currentPage >= totalPages - 2) {
+          pages.push(1);
+          pages.push('...');
+          for (let i = totalPages - 3; i <= totalPages; i++) {
+            pages.push(i);
+          }
+        } else {
+          pages.push(1);
+          pages.push('...');
+          for (let i = currentPage - 1; i <= currentPage + 1; i++) {
+            pages.push(i);
+          }
+          pages.push('...');
+          pages.push(totalPages);
+        }
+      }
+      
+      return pages;
+    };
 
     return (
-      <>
+      <div className="flex justify-center items-center mt-8 sm:mt-12 space-x-2">
         <button
-          onClick={() => setCurrentSlide(prev => Math.max(0, prev - 1))}
-          disabled={currentSlide === 0}
-          className="absolute left-0 sm:-left-2 md:left-2 top-1/2 transform -translate-y-1/2 z-10 p-2 sm:p-4 rounded-full bg-white shadow-xl border border-gray-200 text-gray-600 disabled:text-gray-300 disabled:cursor-not-allowed hover:bg-gray-50 hover:text-blue-600 hover:shadow-2xl transition-all duration-200 disabled:hover:bg-white disabled:hover:text-gray-300"
+          onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+          disabled={currentPage === 1}
+          className="px-3 py-2 rounded-lg bg-white border border-gray-300 text-gray-600 disabled:text-gray-300 disabled:cursor-not-allowed hover:bg-gray-50 hover:text-blue-600 transition-colors"
         >
-          <svg className="w-4 h-4 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
           </svg>
         </button>
 
+        {getPageNumbers().map((page, index) => (
+          <button
+            key={index}
+            onClick={() => typeof page === 'number' && setCurrentPage(page)}
+            disabled={page === '...'}
+            className={`px-3 py-2 rounded-lg transition-colors ${
+              page === currentPage
+                ? 'bg-blue-500 text-white'
+                : page === '...'
+                ? 'text-gray-400 cursor-default'
+                : 'bg-white border border-gray-300 text-gray-600 hover:bg-gray-50 hover:text-blue-600'
+            }`}
+          >
+            {page}
+          </button>
+        ))}
+
         <button
-          onClick={() => setCurrentSlide(prev => Math.min(totalSlides - 1, prev + 1))}
-          disabled={currentSlide === totalSlides - 1}
-          className="absolute right-0 sm:-right-2 md:right-2 top-1/2 transform -translate-y-1/2 z-10 p-2 sm:p-4 rounded-full bg-white shadow-xl border border-gray-200 text-gray-600 disabled:text-gray-300 disabled:cursor-not-allowed hover:bg-gray-50 hover:text-blue-600 hover:shadow-2xl transition-all duration-200 disabled:hover:bg-white disabled:hover:text-gray-300"
+          onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+          disabled={currentPage === totalPages}
+          className="px-3 py-2 rounded-lg bg-white border border-gray-300 text-gray-600 disabled:text-gray-300 disabled:cursor-not-allowed hover:bg-gray-50 hover:text-blue-600 transition-colors"
         >
-          <svg className="w-4 h-4 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
           </svg>
         </button>
-
-        <div className="flex justify-center items-center mt-6 sm:mt-8 space-x-2">
-          {Array.from({ length: totalSlides }).map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentSlide(index)}
-              className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-colors ${currentSlide === index ? 'bg-blue-500' : 'bg-gray-300'
-                }`}
-            />
-          ))}
-        </div>
-      </>
+      </div>
     );
   };
-
-  useEffect(() => {
-    setCurrentSlide(0);
-  }, [activeTab, itemsPerSlide]);
 
   if (loading) {
     return (
@@ -278,7 +312,7 @@ const Project = () => {
   }
 
   return (
-    <div className="py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
+    <div className="py-8 sm:py-12 px-4 sm:px-6 lg:px-8 projects-section">
       <div className="max-w-7xl mx-auto">
         <div className="mb-8 sm:mb-12">
           <div className="flex justify-start sm:justify-center gap-2 overflow-x-auto pb-2 sm:pb-0 scrollbar-hide">
@@ -299,35 +333,13 @@ const Project = () => {
           </div>
         </div>
 
-        {currentProjects.length > itemsPerSlide ? (
-          <div className="relative px-8 sm:px-16 md:px-20 lg:px-24">
-            <div className="overflow-hidden">
-              <div
-                className="flex transition-transform duration-300 ease-in-out"
-                style={{ transform: `translateX(-${currentSlide * 100}%)` }}
-              >
-                {Array.from({ length: Math.ceil(currentProjects.length / itemsPerSlide) }).map((_, slideIndex) => (
-                  <div key={slideIndex} className="w-full flex-shrink-0">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
-                      {currentProjects
-                        .slice(slideIndex * itemsPerSlide, (slideIndex + 1) * itemsPerSlide)
-                        .map((project) => (
-                          <ProjectCard key={project.id || project._id} project={project} />
-                        ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <CarouselControls />
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
-            {currentProjects.map((project) => (
-              <ProjectCard key={project.id || project._id} project={project} />
-            ))}
-          </div>
-        )}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+          {currentProjectsPage.map((project) => (
+            <ProjectCard key={project.id || project._id} project={project} />
+          ))}
+        </div>
+
+        <Pagination />
 
         {currentProjects.length === 0 && (
           <div className="text-center py-12 sm:py-16">
