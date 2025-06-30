@@ -107,7 +107,7 @@ export default function ImprovedServicesCarousel() {
 
   return (
     <div className="py-8">
-      <div className="w-full mx-auto px-4">
+      <div className="w-full mx-auto px-4 overflow-x-hidden">
 
         <div className="text-center mb-6">
           <h2 className="text-4xl md:text-5xl font-bold text-slate-800 mb-3">
@@ -116,20 +116,20 @@ export default function ImprovedServicesCarousel() {
         </div>
 
         <div className="flex justify-center mb-6">
-          <div className="flex justify-between items-center w-full max-w-3xl px-4 gap-2">
+          <div className="flex flex-wrap justify-center items-center w-full max-w-4xl px-4 gap-2 md:gap-4 lg:gap-6">
             {categories.map((category) => {
               const count = category === 'All' ? services.length : services.filter(s => s.category === category).length;
               return (
                 <button
                   key={category}
                   onClick={() => setActiveTab(category)}
-                  className={`px-2 py-1 rounded-full font-medium text-xs transition-all duration-300 shadow-sm border ${activeTab === category
+                  className={`px-3 py-2 rounded-full font-medium text-sm transition-all duration-300 shadow-sm border whitespace-nowrap ${activeTab === category
                       ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white border-transparent shadow-md transform scale-105'
                       : 'bg-white text-black border-slate-200 hover:border-blue-300 hover:shadow-md hover:scale-105'
                     }`}
                 >
                   <span className="inline-block align-middle">{category}</span>
-                  <span className={`ml-1 text-xs px-1 py-0.5 rounded-full font-medium inline-block align-middle ${activeTab === category
+                  <span className={`ml-1 text-xs px-1.5 py-0.5 rounded-full font-medium inline-block align-middle ${activeTab === category
                       ? 'bg-white/20 text-white'
                       : 'bg-slate-100 text-slate-600'
                     }`}>
