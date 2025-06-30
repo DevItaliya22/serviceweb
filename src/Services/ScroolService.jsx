@@ -116,14 +116,14 @@ export default function ImprovedServicesCarousel() {
         </div>
 
         <div className="flex justify-center mb-6">
-          <div className="flex flex-wrap justify-center items-center w-full max-w-4xl px-4 gap-2 md:gap-4 lg:gap-6">
+          <div className="flex md:flex-wrap justify-start md:justify-center items-center w-full max-w-4xl px-4 gap-2 md:gap-4 lg:gap-6 overflow-x-auto md:overflow-x-visible scrollbar-hide">
             {categories.map((category) => {
               const count = category === 'All' ? services.length : services.filter(s => s.category === category).length;
               return (
                 <button
                   key={category}
                   onClick={() => setActiveTab(category)}
-                  className={`px-3 py-2 rounded-full font-medium text-sm transition-all duration-300 shadow-sm border whitespace-nowrap ${activeTab === category
+                  className={`px-3 py-2 rounded-full font-medium text-sm transition-all duration-300 shadow-sm border whitespace-nowrap flex-shrink-0 ${activeTab === category
                       ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white border-transparent shadow-md transform scale-105'
                       : 'bg-white text-black border-slate-200 hover:border-blue-300 hover:shadow-md hover:scale-105'
                     }`}
