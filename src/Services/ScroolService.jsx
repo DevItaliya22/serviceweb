@@ -16,7 +16,8 @@ export default function ImprovedServicesCarousel(Services) {
         icon: service.icon ? `${import.meta.env.VITE_BASE_URL}/${service.icon.replace(/\\/g, '/')}` : '🔧',
         category: service.type,
         isTopService: service.isTopService,
-        id: service._id
+        id: service._id,
+        newService: service.newService
       }));
     }
     return [];
@@ -196,6 +197,8 @@ export default function ImprovedServicesCarousel(Services) {
 }
 
 function ServiceCard({ service }) {
+  const isNew = !!service.newService;
+
   return (
     <div className="bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 p-3 group border border-slate-100 hover:border-blue-200 flex flex-col h-full transform hover:scale-105 hover:-translate-y-2">
       <div className="text-center mb-3">
@@ -205,6 +208,9 @@ function ServiceCard({ service }) {
             <img src={service.icon} alt={service.title} className="w-8 h-8 mx-auto object-contain" />
           ) : (
             service.icon
+          )}
+          {isNew && (
+            <span className="absolute top-0 left-0 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white text-[11px] font-bold px-3 py-0.5 rounded-full shadow-md z-20 border border-white whitespace-nowrap min-w-[40px] text-center">NEW</span>
           )}
         </div>
         <span className="inline-block px-1.5 py-0.5 bg-gradient-to-r from-blue-100 to-purple-100 text-blue-700 text-xs font-semibold rounded-full">
