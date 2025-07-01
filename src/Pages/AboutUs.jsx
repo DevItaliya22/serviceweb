@@ -4,6 +4,7 @@ import IteckFooter from '../components/Footer/Footer';
 import { FaFacebookF, FaLinkedinIn, FaPinterestP } from "react-icons/fa";
 import Navbar from '../components/Navbar/Navbar';
 import FloatingBubbles from './Animation';
+import ScrollToTop from '../components/ScrollToTop';
 
 const useInView = (threshold = 0.1) => {
   const [inView, setInView] = useState(false);
@@ -236,6 +237,8 @@ export default function AboutUs() {
             <AnimatedSection>
                 <IteckFooter />
             </AnimatedSection>
+            
+            <ScrollToTop />
         </div>
     );
 }

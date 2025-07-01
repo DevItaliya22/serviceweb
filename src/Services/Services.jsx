@@ -5,6 +5,7 @@ import TopServices from './TopServices';
 import CarouselComponent from './ScroolService';
 import { getServices } from '../api/service';
 import Loader from '../Spinner/Loader';
+import ScrollToTop from '../components/ScrollToTop';
 
 const SoftwareServices = () => {
     const [services, setServices] = useState([]);
@@ -51,6 +52,7 @@ const SoftwareServices = () => {
                 </div>
             </div>
             <IteckFooter />
+            <ScrollToTop />
         </div>
     )
 };
