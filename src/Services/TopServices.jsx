@@ -35,7 +35,8 @@ const TopServices = (Services) => {
           description: service.singleLineDescription || service.description || "Professional service to meet your needs",
           bgColor: colors.bgColor,
           iconBg: "bg-white",
-          accentColor: colors.accentColor
+          accentColor: colors.accentColor,
+          newService: service.newService
         };
       });
     }
@@ -212,6 +213,11 @@ const TopServices = (Services) => {
                 animationFillMode: 'both'
               }}
             >
+              {/* NEW badge - now at top-right of card */}
+              {service.newService && (
+                <span className="absolute top-1 right-2 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white text-[11px] font-bold px-3 py-0.5 rounded-full shadow-md z-30 border border-white whitespace-nowrap min-w-[40px] text-center">NEW</span>
+              )}
+
               {/* Animated Background Effects */}
               <div className="absolute inset-0 bg-gradient-to-br from-transparent via-blue-50/20 to-purple-50/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               <div className="absolute -top-4 -right-4 w-12 h-12 md:w-20 md:h-20 bg-gradient-to-br from-blue-400/10 to-purple-400/10 rounded-full blur-xl group-hover:scale-150 transition-transform duration-700"></div>
