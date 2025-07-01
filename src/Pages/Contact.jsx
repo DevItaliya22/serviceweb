@@ -106,7 +106,7 @@ const ContactForm = () => {
       <main className="flex-grow pt-10 pb-16 px-4">
         <div className="max-w-4xl mx-auto text-center mb-12 mt-24">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            Get In <span className="text-purple-500 font-bold">Touch</span>
+            Get In <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent font-bold">Touch</span>
           </h1>
           <p className="text-gray-600 text-lg mb-12">
             We will contact again after receiving your request in 24h
@@ -144,7 +144,7 @@ const ContactForm = () => {
 
         {/* Contact Form */}
         <div className="relative max-w-4xl mx-auto">
-          <div className="h-8 bg-gradient-to-b from-purple-500 via-purple-600 to-purple-700 shadow-lg rounded-t-full relative z-10"></div>
+          <div className="h-8 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 shadow-lg rounded-t-full relative z-10"></div>
           <div className="absolute top-0 left-0 w-full h-2 bg-white/30 rounded-t-full blur-sm z-20"></div>
 
           <form onSubmit={handleSubmit} className="bg-white p-8 rounded-b-xl shadow-md relative z-0 space-y-5">
