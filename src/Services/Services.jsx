@@ -4,6 +4,7 @@ import IteckFooter from '../components/Footer/Footer';
 import TopServices from './TopServices';
 import CarouselComponent from './ScroolService';
 import { getServices } from '../api/service';
+import Loader from '../Spinner/Loader';
 
 const SoftwareServices = () => {
     const [services, setServices] = useState([]);
@@ -27,6 +28,10 @@ const SoftwareServices = () => {
 
         fetchServices();
     }, []);
+
+    if (loading) {
+        return <Loader />;
+    }
 
     return (
         <div className="min-h-screen bg-white">
