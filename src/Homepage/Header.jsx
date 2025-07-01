@@ -1,9 +1,8 @@
 import React from 'react';
-import { Settings, Home } from 'lucide-react';
 import Navbar from '../components/Navbar/Navbar';
+import ScrollToTop from '../components/ScrollToTop';
 
 export default function IteckLandingPage() {
-
     return (
         <div className="min-h-screen bg-gradient-to-br from-gray-50  relative overflow-hidden">
             <Navbar />
@@ -51,17 +50,7 @@ export default function IteckLandingPage() {
                     </div>
                 </div>
             </main>
-
-
-
-            <div className="fixed bottom-8 right-8 space-y-4 z-40">
-                <div className="w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center cursor-pointer hover:shadow-xl transition-shadow">
-                    <Settings className="w-6 h-6 text-gray-600" />
-                </div>
-                <div className="w-12 h-12 bg-blue-500 rounded-full shadow-lg flex items-center justify-center cursor-pointer hover:shadow-xl transition-shadow">
-                    <span className="text-white text-xl">💬</span>
-                </div>
-            </div>
+            <ScrollToTop />
 
             <div className="absolute top-1/4 left-8 w-32 h-32 bg-blue-100 rounded-full opacity-20 blur-xl"></div>
             <div className="absolute bottom-1/4 right-8 w-40 h-40 bg-purple-100 rounded-full opacity-20 blur-xl"></div>

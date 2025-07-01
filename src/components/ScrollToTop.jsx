@@ -1,16 +1,36 @@
 // ScrollToTop.js
-import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { ChevronUp } from 'lucide-react';
 
-const ScrollToTop = () => {
-  const { pathname } = useLocation();
+export default function ScrollToTop() {
+    const [showScrollTop, setShowScrollTop] = useState(false);
 
-  useEffect(() => {
-    // Scroll to top whenever the pathname changes
-    window.scrollTo(0, 0);
-  }, [pathname]);
+    useEffect(() => {
+        const handleScroll = () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            setShowScrollTop(scrollTop > 300);
+        };
 
-  return null;
-};
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
-export default ScrollToTop;
+    const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    return (
+        <>
+            {showScrollTop && (
+                <div className="fixed bottom-8 right-8 z-40">
+                    <div 
+                        onClick={scrollToTop}
+                        className="w-12 h-12 bg-blue-500 rounded-full shadow-lg flex items-center justify-center cursor-pointer hover:shadow-xl transition-shadow hover:bg-blue-600"
+                    >
+                        <ChevronUp className="w-6 h-6 text-white" />
+                    </div>
+                </div>
+            )}
+        </>
+    );
+}
