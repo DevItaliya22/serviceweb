@@ -12,7 +12,7 @@ export default function ImprovedServicesCarousel(Services) {
     if (Services?.services?.data && Array.isArray(Services.services.data)) {
       return Services.services.data.map(service => ({
         title: service.title,
-        description: service.multiLineDescription || service.singleLineDescription,
+        description:  service.singleLineDescription,
         icon: service.icon ? `${import.meta.env.VITE_BASE_URL}/${service.icon.replace(/\\/g, '/')}` : '🔧',
         category: service.type,
         isTopService: service.isTopService,
