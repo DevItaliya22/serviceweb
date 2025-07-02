@@ -21,7 +21,7 @@ export const Dashboard = () => {
     }, []);
 
     return (
-        <div className="w-screen overflow-x-hidden overflow-y-hidden bg-gray-100">
+        <div className="w-full overflow-x-hidden overflow-y-hidden bg-gray-100">
             <Header />
             <div data-aos="fade-down">
                 <Expertise />
