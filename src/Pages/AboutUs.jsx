@@ -151,7 +151,7 @@ export default function AboutUs() {
                     <div className="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300 p-4 md:p-6 lg:p-8 mx-4 md:mx-0">
                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8 relative">
                             {/* Card 1 */}
-                            <AnimatedSection delay={300} className="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-4 relative lg:after:content-[''] lg:after:absolute lg:after:top-0 lg:after:right-0 lg:after:h-full lg:after:w-px lg:after:bg-gray-300 lg:after:mx-4 pb-6 lg:pb-0 border-b lg:border-b-0 border-gray-200 lg:border-none">
+                            <AnimatedSection delay={300} className="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-4 relative lg:after:content-[''] lg:after:absolute lg:after:top-0 lg:after:right-0 lg:after:h-full lg:after:w-px lg:after:bg-gray-300 lg:after:mx-4 pb-6 lg:pb-0 border-b lg:border-b-0 border-gray-200 lg:border-none lg:pr-8">
                                 <div className="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center flex-shrink-0 transform hover:scale-110 transition-transform duration-300">
                                     <Code className="w-8 h-8 text-blue-600" />
                                 </div>
@@ -164,7 +164,7 @@ export default function AboutUs() {
                             </AnimatedSection>
 
                             {/* Card 2 */}
-                            <AnimatedSection delay={500} className="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-4 relative lg:after:content-[''] lg:after:absolute lg:after:top-0 lg:after:right-0 lg:after:h-full lg:after:w-px lg:after:bg-gray-300 lg:after:mx-4 pb-6 lg:pb-0 border-b lg:border-b-0 border-gray-200 lg:border-none">
+                            <AnimatedSection delay={500} className="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-4 relative lg:after:content-[''] lg:after:absolute lg:after:top-0 lg:after:right-0 lg:after:h-full lg:after:w-px lg:after:bg-gray-300 lg:after:mx-4 pb-6 lg:pb-0 border-b lg:border-b-0 border-gray-200 lg:border-none lg:px-8">
                                 <div className="w-16 h-16 bg-green-100 rounded-xl flex items-center justify-center flex-shrink-0 transform hover:scale-110 transition-transform duration-300">
                                     <Smartphone className="w-8 h-8 text-green-600" />
                                 </div>
@@ -177,7 +177,7 @@ export default function AboutUs() {
                             </AnimatedSection>
 
                             {/* Card 3 */}
-                            <AnimatedSection delay={700} className="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-4">
+                            <AnimatedSection delay={700} className="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-4 lg:pl-8">
                                 <div className="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center flex-shrink-0 transform hover:scale-110 transition-transform duration-300">
                                     <MessageSquare className="w-8 h-8 text-blue-600" />
                                 </div>
