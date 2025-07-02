@@ -170,7 +170,7 @@ const Project = () => {
           }}
           className="text-blue-500 hover:text-blue-600 text-xs sm:text-sm font-medium"
         >
-          Submit Enquiry
+          Enquiry
         </button>
       </div>
     )}

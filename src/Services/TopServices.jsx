@@ -3,7 +3,7 @@ import { ChevronLeft, ChevronRight, Target, Megaphone, Mail, Instagram, Globe } 
 
 const TopServices = (Services) => {
   console.log(Services?.services?.data);
-  
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [visibleCards, setVisibleCards] = useState(4);
@@ -13,7 +13,7 @@ const TopServices = (Services) => {
   const services = React.useMemo(() => {
     if (Services?.services?.data && Array.isArray(Services.services.data)) {
       const topServices = Services.services.data.filter(service => service.isTopService === true);
-      
+
       // Map each service to the original structure with icons
       return topServices.map((service) => {
         // Map service types to original colors
@@ -28,7 +28,7 @@ const TopServices = (Services) => {
 
         const serviceType = service.type?.toLowerCase().replace(/\s+/g, '-') || 'default';
         const colors = colorMap[serviceType] || colorMap.default;
-        
+
         return {
           icon: service.icon ? `${import.meta.env.VITE_BASE_URL}/${service.icon.replace(/\\/g, '/')}` : null,
           title: service.title,
@@ -40,7 +40,7 @@ const TopServices = (Services) => {
         };
       });
     }
-    
+
     // Fallback to original services if no API data
     return [
       {
@@ -207,7 +207,7 @@ const TopServices = (Services) => {
               className={`bg-white rounded-2xl md:rounded-3xl p-4 sm:p-5 md:p-6 shadow-lg hover:shadow-2xl transition-all duration-700 transform hover:-translate-y-2 md:hover:-translate-y-6 hover:rotate-1 group cursor-pointer border-2 ${getAccentColors(service.accentColor)} relative overflow-hidden h-full flex flex-col ${
                 // Only show entrance animations on initial load, no animations for carousel
                 !hasInitiallyLoaded ? 'animate-slideInUp' : ''
-              }`}
+                }`}
               style={{
                 animationDelay: !hasInitiallyLoaded ? `${index * 0.15}s` : '0s',
                 animationFillMode: 'both'
@@ -228,9 +228,9 @@ const TopServices = (Services) => {
                 <div className={`${service.iconBg} rounded-lg md:rounded-xl p-2 md:p-3 shadow-lg relative z-10 mx-auto w-fit group-hover:shadow-xl transition-all duration-300 ${!hasInitiallyLoaded ? 'animate-pulse' : ''}`}>
                   <div className={!hasInitiallyLoaded ? 'animate-spin-slow' : ''}>
                     {service.icon ? (
-                      <img 
-                        src={service.icon} 
-                        alt={service.title} 
+                      <img
+                        src={service.icon}
+                        alt={service.title}
                         className="w-6 h-6 md:w-8 md:h-8 object-contain"
                         onError={(e) => {
                           e.target.style.display = 'none';
@@ -274,7 +274,7 @@ const TopServices = (Services) => {
                     window.location.href = '/contact';
                   }}
                 >
-                  Submit Enquiry
+                  Enquiry
                 </button>
               </div>
             </div>

@@ -100,7 +100,7 @@ const ContactForm = () => {
   }
 
   return (
-    <div className="bg-white min-h-screen flex flex-col justify-between">
+    <div className="min-h-screen flex flex-col justify-between">
       <Navbar />
 
       <main className="flex-grow pt-10 pb-16 px-4">

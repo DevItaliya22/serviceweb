@@ -3,8 +3,10 @@ import Navbar from '../components/Navbar/Navbar';
 import Project from './Project';
 import IteckFooter from '../components/Footer/Footer';
 import Review from '../Homepage/Review'
+import { useNavigate } from 'react-router-dom';
 
 const Portfolio = () => {
+    const navigate = useNavigate();
     return (
         <div className="">
             <Navbar />
@@ -57,11 +59,13 @@ const Portfolio = () => {
                                 </h2>
 
                                 <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-                                    <button className="px-10 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold rounded-full text-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
+                                    <button onClick={() => navigate('/contact')}
+                                     className="px-10 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold rounded-full text-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
                                         Start A Project Now
                                     </button>
-                                    <button className="px-10 py-4 bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold rounded-full text-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
-                                        See Pricing & Plan
+                                    <button onClick={() => navigate('/services')}
+                                    className="px-10 py-4 bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold rounded-full text-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
+                                        See Our Services
                                     </button>
                                 </div>
                             </div>

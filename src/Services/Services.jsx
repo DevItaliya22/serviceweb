@@ -35,7 +35,7 @@ const SoftwareServices = () => {
     }
 
     return (
-        <div className="min-h-screen bg-white">
+        <div className="min-h-screen ">
             <div className="py-8 sm:py-12 lg:py-16 px-4">
                 <div className="w-full max-w-full mx-auto">
                     <div className="mb-8 sm:mb-12">
