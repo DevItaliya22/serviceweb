@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Logo from "../../assets/3RP.jpg";
+import { Facebook, Twitter, Youtube, Linkedin } from "lucide-react";
 
 export default function Navbar() {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -85,8 +86,35 @@ export default function Navbar() {
                 </div>
 
                 {/* Desktop CTA Button */}
-                <div className="hidden lg:block">
-                    {/* Add CTA button here if needed */}
+                <div className="hidden lg:flex items-center space-x-4">
+                    <a
+                        href="#"
+                        className="w-9 h-9 bg-white rounded-lg flex items-center justify-center shadow-sm hover:shadow-md transition-shadow"
+                        aria-label="Facebook"
+                    >
+                        <Facebook className="w-5 h-5 text-blue-600" />
+                    </a>
+                    <a
+                        href="#"
+                        className="w-9 h-9 bg-white rounded-lg flex items-center justify-center shadow-sm hover:shadow-md transition-shadow"
+                        aria-label="Twitter"
+                    >
+                        <Twitter className="w-5 h-5 text-blue-400" />
+                    </a>
+                    <a
+                        href="#"
+                        className="w-9 h-9 bg-white rounded-lg flex items-center justify-center shadow-sm hover:shadow-md transition-shadow"
+                        aria-label="Youtube"
+                    >
+                        <Youtube className="w-5 h-5 text-red-600" />
+                    </a>
+                    <a
+                        href="#"
+                        className="w-9 h-9 bg-white rounded-lg flex items-center justify-center shadow-sm hover:shadow-md transition-shadow"
+                        aria-label="Linkedin"
+                    >
+                        <Linkedin className="w-5 h-5 text-blue-700" />
+                    </a>
                 </div>
 
                 {/* Mobile Menu Button */}
