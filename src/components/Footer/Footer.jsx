@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Facebook, Twitter, Youtube, Linkedin, Mail, Phone, MapPin } from 'lucide-react';
-import Logo from "../../assets/Logo.jpg"
+import Logo from "../../assets/3RP.jpg";
 import { getContactDetails } from '../../api/contact';
 import Loader from '../../Spinner/Loader';
 
