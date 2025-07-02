@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar/Navbar';
 import IteckFooter from '../components/Footer/Footer';
-import { getContactDetails, submitform } from '../api/contact';
+import {  submitform } from '../api/contact';
 import { getServices } from '../api/service';
 import Loader from '../Spinner/Loader';
 
@@ -16,11 +16,11 @@ const ContactForm = () => {
     agree: false,
   });
 
-  const [contactDetails, setContactDetails] = useState({
-    email: 'info@iteck-info.com',
-    phone: '907 000 999 22',
-    address: '12/A, New Booston, NYC'
-  });
+  // const [contactDetails, setContactDetails] = useState({
+  //   email: 'info@iteck-info.com',
+  //   phone: '907 000 999 22',
+  //   address: '12/A, New Booston, NYC'
+  // });
 
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -65,12 +65,6 @@ const ContactForm = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const details = await getContactDetails();
-        setContactDetails({
-          email: details.email || 'info@iteck-info.com',
-          phone: details.phone || '907 000 999 22',
-          address: details.address || '12/A, New Booston, NYC',
-        });
         const servicesData = await getServices();
 
         if (Array.isArray(servicesData)) {
@@ -113,15 +107,15 @@ const ContactForm = () => {
           </p>
 
           <div className="flex flex-col md:flex-row justify-center items-center gap-8 md:gap-16 mb-16">
-            <div className="flex items-center gap-3">
+            {/* <div className="flex items-center gap-3">
               <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center">
                 <svg className="w-6 h-6 text-yellow-600" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" />
                 </svg>
               </div>
               <span className="text-gray-800 font-semibold">{contactDetails.email}</span>
-            </div>
-
+            </div> */}
+{/* 
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
                 <svg className="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
@@ -129,16 +123,16 @@ const ContactForm = () => {
                 </svg>
               </div>
               <span className="text-gray-800 font-semibold">{contactDetails.address}</span>
-            </div>
+            </div> */}
 
-            <div className="flex items-center gap-3">
+            {/* <div className="flex items-center gap-3">
               <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
                 <svg className="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
                 </svg>
               </div>
               <span className="text-gray-800 font-semibold">{contactDetails.phone}</span>
-            </div>
+            </div> */}
           </div>
         </div>
 
