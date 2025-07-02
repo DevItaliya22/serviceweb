@@ -4,6 +4,7 @@ import IteckFooter from '../components/Footer/Footer';
 import {  submitform } from '../api/contact';
 import { getServices } from '../api/service';
 import Loader from '../Spinner/Loader';
+import TermsAndConditions from './TermsAndConditions';
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -24,6 +25,7 @@ const ContactForm = () => {
 
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [showModal, setShowModal] = useState(false);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -61,6 +63,13 @@ const ContactForm = () => {
     }
   };
 
+  const openModal = (e) => {
+    e.preventDefault();
+    setShowModal(true);
+  };
+
+  const closeModal = () => setShowModal(false);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -88,6 +97,17 @@ const ContactForm = () => {
 
     fetchData();
   }, []);
+
+  useEffect(() => {
+    if (showModal) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [showModal]);
 
   if (loading) {
     return <Loader />;
@@ -221,7 +241,7 @@ const ContactForm = () => {
               />
               <label htmlFor="agree" className="text-sm text-gray-700">
                 By submitting, I'm agreed to the{' '}
-                <a href="#" className="underline text-blue-600">
+                <a href="#" className="underline text-blue-600" onClick={openModal}>
                   Terms & Conditions
                 </a>
               </label>
@@ -240,6 +260,21 @@ const ContactForm = () => {
       </main>
 
       <IteckFooter />
+
+      {showModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white rounded-lg shadow-lg max-w-2xl w-full h-[80vh] mx-4 p-8 relative flex flex-col">
+            <button
+              className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 text-2xl"
+              onClick={closeModal}
+              aria-label="Close"
+            >
+              &times;
+            </button>
+            <TermsAndConditions />
+          </div>
+        </div>
+      )}
     </div>
   );
 };
