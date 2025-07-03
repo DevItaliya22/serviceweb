@@ -63,7 +63,7 @@ export default function Navbar() {
                         <img
                             src={Logo}
                             alt="Company Logo"
-                            className="w-30 h-16 object-contain rounded-lg transition-transform duration-300 hover:scale-105"
+                            className="w-34 h-20 object-contain rounded-lg transition-transform duration-300 hover:scale-105"
                         />
                     </Link>
                 </div>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Facebook, Twitter, Youtube, Linkedin, Mail, Phone, MapPin } from 'lucide-react';
-import Logo from "../../assets/3RP.jpg";
+import Logo from "../../assets/Logo.svg";
 import { getContactDetails } from '../../api/contact';
 import Loader from '../../Spinner/Loader';
 
@@ -38,7 +38,7 @@ export default function IteckFooter() {
 
   return (
     <footer className="bg-gray-50 py-16 px-4">
-      <div className="max-w-7xl mx-auto">
+      <div className="w-full mx-auto">
 
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-12 pb-8 border-b border-gray-200">
           {/* Logo Section */}
@@ -47,7 +47,7 @@ export default function IteckFooter() {
               <img
                 src={Logo}
                 alt="Company Logo"
-                className="w-30 h-20 object-contain rounded-lg"
+                className="w-30 h-20 object-contain rounded-lg ml-2 mr-2 sm:mr-3 sm:ml-3"
               />
             </div>
             {/* <div>
@@ -87,7 +87,7 @@ export default function IteckFooter() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
           {/* About Us Section */}
-          <div className="space-y-6">
+          <div className="space-y-6 md:ml-6">
             <h4 className="text-xl font-semibold text-gray-900">About Us</h4>
             <p className="text-gray-600 leading-relaxed">
               Our highly skilled development teams specialized in data analysis.
