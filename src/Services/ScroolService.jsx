@@ -1,27 +1,32 @@
 import React, { useState, useEffect } from 'react';
 
-export default function ImprovedServicesCarousel(Services) {
-  console.log(Services?.services?.data);
-  
+export default function ImprovedServicesCarousel({ services }) {
+  console.log("Services data:", services?.data);
+  console.log("First service icon:", services?.data?.[0]?.icon);
+  console.log("VITE_BASE_URL:", import.meta.env.VITE_BASE_URL);
   const [activeTab, setActiveTab] = useState('All');
   const [currentPage, setCurrentPage] = useState(0);
   const servicesPerPage = 12;
 
   // Process the services data from API
   const processedServices = React.useMemo(() => {
-    if (Services?.services?.data && Array.isArray(Services.services.data)) {
-      return Services.services.data.map(service => ({
-        title: service.title,
-        description:  service.singleLineDescription,
-        icon: service.icon ? `${import.meta.env.VITE_BASE_URL}/${service.icon.replace(/\\/g, '/')}` : '🔧',
-        category: service.type,
-        isTopService: service.isTopService,
-        id: service._id,
-        newService: service.newService
-      }));
+    if (services?.data && Array.isArray(services.data)) {
+      return services.data.map(service => {
+        const iconUrl = service?.icon ? `${import.meta.env.VITE_BASE_URL || 'http://localhost:5000'}/${service.icon.replace(/\\/g, '/')}` : null;
+        console.log('Processing service:', service.title, 'Icon URL:', iconUrl);
+        return {
+          title: service.title || 'Untitled Service',
+          description: service.singleLineDescription || service.description || 'No description available',
+          icon: iconUrl,
+          category: service.type || 'Other',
+          isTopService: service.isTopService || false,
+          id: service._id,
+          newService: service.newService || false
+        };
+      });
     }
     return [];
-  }, [Services]);
+  }, [services]);
 
   const categories = ['All', ...new Set(processedServices.map(service => service.category))];
   const filteredServices = activeTab === 'All'
@@ -56,21 +61,20 @@ export default function ImprovedServicesCarousel(Services) {
 
   const goToPage = (pageIndex) => {
     setCurrentPage(pageIndex);
-    // Scroll to top when changing pages, especially useful on mobile
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
-    <div className="py-8">
+    <div className="py-4">
       <div className="w-full mx-auto px-4 overflow-x-hidden">
 
         <div className="text-center mb-6">
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-800 mb-3">
+          <h2 className="text-4xl md:text-5xl font-bold text-slate-800 mb-2">
             Our <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">Services</span>
           </h2>
         </div>
 
-        <div className="flex justify-center mb-6">
+        <div className="flex justify-center mb-4">
           <div className="flex justify-start items-center w-full max-w-7xl px-4 gap-2 md:gap-4 lg:gap-6 overflow-x-auto scrollbar-hide">
             {categories.map((category) => {
               const count = category === 'All' ? processedServices.length : processedServices.filter(s => s.category === category).length;
@@ -128,7 +132,7 @@ export default function ImprovedServicesCarousel(Services) {
               </svg>
             </button>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4">
               {currentServices.map((service, index) => (
                 <ServiceCard key={service.id || `${service.title}-${startIndex + index}`} service={service} />
               ))}
@@ -137,7 +141,7 @@ export default function ImprovedServicesCarousel(Services) {
 
           {/* Pagination - Only show when there are more than 12 services */}
           {filteredServices.length > servicesPerPage && (
-            <div className="flex justify-center items-center mt-8 space-x-3">
+            <div className="flex justify-center items-center mt-4 space-x-3">
               {/* Previous Arrow */}
               <button
                 onClick={() => {
@@ -198,31 +202,65 @@ export default function ImprovedServicesCarousel(Services) {
 
 function ServiceCard({ service }) {
   const isNew = !!service.newService;
+  const [iconError, setIconError] = useState(false);
+
+  const handleIconError = () => {
+    setIconError(true);
+  };
+
+  // Default icon component
+  const DefaultIcon = () => (
+    <div className="w-10 h-10 mx-auto bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 rounded-xl flex items-center justify-center text-white shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-110">
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+      </svg>
+    </div>
+  );
 
   return (
-    <div className="bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 p-3 group border border-slate-100 hover:border-blue-200 flex flex-col h-full transform hover:scale-105 hover:-translate-y-2">
+    <div className="bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 p-3 group border border-slate-100 hover:border-blue-200 flex flex-col h-full transform hover:scale-105 hover:-translate-y-1">
       <div className="text-center mb-3">
-        <div className="text-2xl mb-2 group-hover:scale-110 transition-transform duration-300 relative">
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-200 to-purple-200 rounded-full blur-lg opacity-0 group-hover:opacity-50 transition-opacity duration-300 -z-10"></div>
-          {service.icon !== '🔧' ? (
-            <img src={service.icon} alt={service.title} className="w-8 h-8 mx-auto object-contain" />
-          ) : (
-            service.icon
-          )}
-          {isNew && (
-            <span className="absolute top-0 left-0 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white text-[11px] font-bold px-3 py-0.5 rounded-full shadow-md z-20 border border-white whitespace-nowrap min-w-[40px] text-center">NEW</span>
-          )}
+                 <div className="mb-3 group-hover:scale-110 transition-transform duration-300 relative">
+           <div className="absolute inset-0 bg-gradient-to-r from-blue-200 to-purple-200 rounded-full blur-lg opacity-0 group-hover:opacity-50 transition-opacity duration-300 -z-10"></div>
+          
+                     {/* Icon Display Logic */}
+           {service.icon && !iconError ? (
+             <div className="relative group/icon">
+               <div className="absolute inset-0 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 rounded-xl blur-lg opacity-0 group-hover/icon:opacity-30 transition-opacity duration-300"></div>
+               <img
+                 src={service.icon}
+                 alt={`${service.title} icon`}
+                 className="relative w-10 h-10 mx-auto object-contain rounded-xl shadow-lg group-hover/icon:shadow-xl transition-all duration-300 group-hover/icon:scale-110 border-2 border-white"
+                 onError={(e) => {
+                   console.log('Icon failed to load:', service.icon);
+                   console.log('Error target:', e.target);
+                   handleIconError();
+                 }}
+                 onLoad={() => console.log('Icon loaded successfully:', service.icon)}
+               />
+             </div>
+           ) : (
+             <DefaultIcon />
+           )}
+          
+                     {/* NEW Badge */}
+           {isNew && (
+             <span className="absolute -top-3 -right-3 bg-gradient-to-r from-green-500 via-blue-500 to-purple-500 text-white text-[10px] font-bold px-3 py-1 rounded-full shadow-lg z-20 border-2 border-white animate-pulse">
+               NEW
+             </span>
+           )}
         </div>
-        <span className="inline-block px-1.5 py-0.5 bg-gradient-to-r from-blue-100 to-purple-100 text-blue-700 text-xs font-semibold rounded-full">
+        
+        <span className="inline-block px-2 py-1 bg-gradient-to-r from-blue-100 to-purple-100 text-blue-700 text-xs font-semibold rounded-full">
           {service.category}
         </span>
       </div>
 
       <div className="text-center flex-grow">
-        <h3 className="text-sm font-bold text-slate-800 mb-2 group-hover:text-blue-700 transition-colors duration-300">
+        <h3 className="text-sm font-bold text-slate-800 mb-1 group-hover:text-blue-700 transition-colors duration-300">
           {service.title}
         </h3>
-        <p className="text-slate-600 text-xs leading-tight mb-3 line-clamp-3">
+        <p className="text-slate-600 text-xs leading-relaxed mb-2 line-clamp-2">
           {service.description}
         </p>
       </div>
@@ -232,10 +270,10 @@ function ServiceCard({ service }) {
           onClick={() => {
             window.location.href = '/contact';
           }}
-          className="px-2 py-1 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-md shadow-sm hover:shadow-md transform hover:-translate-y-0.5 transition-all duration-300 group text-xs"
+          className="px-3 py-1.5 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-lg shadow-sm hover:shadow-md transform hover:-translate-y-0.5 transition-all duration-300 group text-xs"
         >
           Enquiry
-          <svg className="inline-block w-2 h-2 ml-1 group-hover:translate-x-0.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="inline-block w-3 h-3 ml-1 group-hover:translate-x-0.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
           </svg>
         </button>

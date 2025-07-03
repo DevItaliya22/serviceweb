@@ -234,7 +234,9 @@ const TopServices = (Services) => {
                         className="w-6 h-6 md:w-8 md:h-8 object-contain"
                         onError={(e) => {
                           e.target.style.display = 'none';
-                          e.target.nextSibling.style.display = 'block';
+                          if (e.target.nextSibling) {
+                            e.target.nextSibling.style.display = 'block';
+                          }
                         }}
                       />
                     ) : (
