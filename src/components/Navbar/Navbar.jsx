@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Logo from "../../assets/Logo.svg";
-import { getIcon } from "../../api/icon";
 import { Facebook, Twitter, Youtube, Linkedin } from "lucide-react";
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchIcon } from '../../store/iconSlice';
 
 export default function Navbar() {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const location = useLocation();
-    const [icon, setIcon] = useState(null);
-      
+    const dispatch = useDispatch();
+    const iconData = useSelector((state) => state.icon.data);
+    const iconStatus = useSelector((state) => state.icon.status);
+    
     useEffect(() => {
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 0);
@@ -36,27 +39,20 @@ export default function Navbar() {
     }, [isMobileMenuOpen]);
 
     useEffect(() => {
-        const fetchLogo = async () => {
-            try {
-                const data = await getIcon();
-                // If data is an array, find the logo type
-                if (Array.isArray(data)) {
-                    const logoObj = data.find(item => item.type === 'logo');
-                    if (logoObj && logoObj.icon) {
-                        const baseUrl = import.meta.env.VITE_BASE_URL || 'http://localhost:5000';
-                        setIcon(`${baseUrl}/${logoObj.icon.replace(/\\/g, '/')}`);
-                    } else {
-                        setIcon(null);
-                    }
-                } else {
-                    setIcon(null);
-                }
-            } catch {
-                setIcon(null);
-            }
-        };
-        fetchLogo();
-    }, []);
+        if (iconStatus === 'idle') {
+            dispatch(fetchIcon());
+        }
+    }, [dispatch, iconStatus]);
+
+    // Find logo from iconData
+    let logoUrl = Logo;
+    if (Array.isArray(iconData)) {
+        const logoObj = iconData.find(item => item.type === 'logo');
+        if (logoObj && logoObj.icon) {
+            const baseUrl = import.meta.env.VITE_BASE_URL || 'http://localhost:5000';
+            logoUrl = `${baseUrl}/${logoObj.icon.replace(/\\/g, '/')}`;
+        }
+    }
 
     const toggleMobileMenu = (e) => {
         e.stopPropagation();
@@ -86,7 +82,7 @@ export default function Navbar() {
                 <div className="flex items-center space-x-3">
                     <Link to="/" className="flex items-center space-x-3">
                         <img
-                            src={icon || Logo}
+                            src={logoUrl}
                             alt="Company Logo"
                             className="w-34 h-20 object-contain rounded-lg transition-transform duration-300 hover:scale-105"
                         />
