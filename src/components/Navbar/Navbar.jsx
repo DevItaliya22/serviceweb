@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import Logo from "../../assets/3RP.jpg";
+import Logo from "../../assets/Logo.svg";
 import { Facebook, Twitter, Youtube, Linkedin } from "lucide-react";
 
 export default function Navbar() {
