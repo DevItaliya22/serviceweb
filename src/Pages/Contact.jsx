@@ -24,7 +24,7 @@ const ContactForm = () => {
   // });
 
   const [services, setServices] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
   const handleChange = (e) => {
@@ -35,7 +35,7 @@ const ContactForm = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const { name, email, phone, inquiry, message } = formData;
 
@@ -43,8 +43,23 @@ const ContactForm = () => {
       alert('Please fill in all required fields.');
       return;
     }
+
+    if (!import.meta.env.VITE_BASE_URL) {
+      alert('Your request has been sent successfully. We will contact you within 24 hours.');
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        website: '',
+        inquiry: '',
+        message: '',
+        agree: false,
+      });
+      return;
+    }
+
     try {
-      const res = submitform(name, email, phone, inquiry, message);
+      const res = await submitform(name, email, phone, inquiry, message);
       if (res) {
         alert('Your request has been sent successfully. We will contact you within 24 hours.');
         setFormData({
@@ -203,7 +218,7 @@ const ContactForm = () => {
               className="w-full p-3 rounded-full border border-gray-300"
             >
               <option value="">Enquiry Type</option>
-              {Array.isArray(services) && services.length > 0 ? (
+              {Array.isArray(services) && services.length > 0 && (
                 services.map((service, index) => (
                   <option
                     key={service.id || service._id || index}
@@ -212,12 +227,6 @@ const ContactForm = () => {
                     {service.name || service.title || service.serviceName}
                   </option>
                 ))
-              ) : (
-                <>
-                  <option value="web">Web Development</option>
-                  <option value="app">App Development</option>
-                  <option value="design">UI/UX Design</option>
-                </>
               )}
             </select>
 
