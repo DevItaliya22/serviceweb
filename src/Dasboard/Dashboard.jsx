@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css"; // Import AOS styles
 
@@ -11,14 +11,22 @@ import Expertise from "../Homepage/Expertise";
 // import Plan from "../Homepage/Plan";
 import Header from "../Homepage/Header";
 import Platform from "../Homepage/Platform";
+import Loader from "../Spinner/Loader";
 
 export const Dashboard = () => {
+    const [loading, setLoading] = useState(true);
     useEffect(() => {
         AOS.init({
             duration: 1000,
             once: false,
         });
+        const timer = setTimeout(() => setLoading(false), 5000);
+        return () => clearTimeout(timer);
     }, []);
+
+    if (loading) {
+        return <Loader />;
+    }
 
     return (
         <div className="w-full overflow-x-hidden overflow-y-hidden bg-gray-100">
