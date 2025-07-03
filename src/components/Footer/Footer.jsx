@@ -53,6 +53,10 @@ export default function IteckFooter() {
   }
   console.log('logoUrl:', logoUrl);
 
+  console.log('iconData:', iconData);
+  const socialIcons = Array.isArray(iconData) ? iconData.filter(item => item.type === 'social') : [];
+  console.log('Filtered social icons:', socialIcons);
+
   if (loading) {
     return <Loader />;
   }
@@ -79,30 +83,23 @@ export default function IteckFooter() {
 
           {/* Social Media Icons */}
           <div className="flex space-x-4">
-            <a
-              href="#"
-              className="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-sm hover:shadow-md transition-shadow"
-            >
-              <Facebook className="w-5 h-5 text-blue-600" />
-            </a>
-            <a
-              href="#"
-              className="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-sm hover:shadow-md transition-shadow"
-            >
-              <Twitter className="w-5 h-5 text-blue-400" />
-            </a>
-            <a
-              href="#"
-              className="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-sm hover:shadow-md transition-shadow"
-            >
-              <Youtube className="w-5 h-5 text-red-600" />
-            </a>
-            <a
-              href="#"
-              className="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-sm hover:shadow-md transition-shadow"
-            >
-              <Linkedin className="w-5 h-5 text-blue-700" />
-            </a>
+            {socialIcons.length > 0 ? (
+              socialIcons.map((item, idx) => {
+                return (
+                  <a
+                    key={idx}
+                    href={item.url || '#'}
+                    className="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-sm hover:shadow-md transition-shadow"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img src={`${import.meta.env.VITE_BASE_URL || 'http://localhost:5000'}/${item.icon.replace(/\\/g, '/')}`} alt={item.name || 'Social'} className="w-5 h-5 object-contain" />
+                  </a>
+                );
+              })
+            ) : (
+              <span className="text-red-500 text-sm">No social icons found in Redux data.</span>
+            )}
           </div>
         </div>
 
