@@ -54,6 +54,9 @@ export default function Navbar() {
         }
     }
 
+    // Find social icons from iconData
+    const socialIcons = Array.isArray(iconData) ? iconData.filter(item => item.type === 'social') : [];
+
     const toggleMobileMenu = (e) => {
         e.stopPropagation();
         setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -108,34 +111,26 @@ export default function Navbar() {
 
                 {/* Desktop CTA Button */}
                 <div className="hidden lg:flex items-center space-x-4">
-                    <a
-                        href="#"
-                        className="w-9 h-9 bg-white rounded-lg flex items-center justify-center shadow-sm hover:shadow-md transition-shadow"
-                        aria-label="Facebook"
-                    >
-                        <Facebook className="w-5 h-5 text-blue-600" />
-                    </a>
-                    <a
-                        href="#"
-                        className="w-9 h-9 bg-white rounded-lg flex items-center justify-center shadow-sm hover:shadow-md transition-shadow"
-                        aria-label="Twitter"
-                    >
-                        <Twitter className="w-5 h-5 text-blue-400" />
-                    </a>
-                    <a
-                        href="#"
-                        className="w-9 h-9 bg-white rounded-lg flex items-center justify-center shadow-sm hover:shadow-md transition-shadow"
-                        aria-label="Youtube"
-                    >
-                        <Youtube className="w-5 h-5 text-red-600" />
-                    </a>
-                    <a
-                        href="#"
-                        className="w-9 h-9 bg-white rounded-lg flex items-center justify-center shadow-sm hover:shadow-md transition-shadow"
-                        aria-label="Linkedin"
-                    >
-                        <Linkedin className="w-5 h-5 text-blue-700" />
-                    </a>
+                    {socialIcons.length > 0 ? (
+                        socialIcons.map((item, idx) => (
+                            <a
+                                key={idx}
+                                href={item.url || '#'}
+                                className="w-9 h-9 bg-white rounded-lg flex items-center justify-center shadow-sm hover:shadow-md transition-shadow"
+                                aria-label={item.name || 'Social'}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                <img
+                                    src={`${import.meta.env.VITE_BASE_URL || 'http://localhost:5000'}/${item.icon.replace(/\\/g, '/')}`}
+                                    alt={item.name || 'Social'}
+                                    className="w-5 h-5 object-contain"
+                                />
+                            </a>
+                        ))
+                    ) : (
+                        <span className="text-red-500 text-sm">No social icons found.</span>
+                    )}
                 </div>
 
                 {/* Mobile Menu Button */}
@@ -178,6 +173,29 @@ export default function Navbar() {
                             </Link>
                         );
                     })}
+                    {/* Mobile Social Icons */}
+                    <div className="flex space-x-4 mt-4">
+                        {socialIcons.length > 0 ? (
+                            socialIcons.map((item, idx) => (
+                                <a
+                                    key={idx}
+                                    href={item.url || '#'}
+                                    className="w-9 h-9 bg-white rounded-lg flex items-center justify-center shadow-sm hover:shadow-md transition-shadow"
+                                    aria-label={item.name || 'Social'}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    <img
+                                        src={`${import.meta.env.VITE_BASE_URL || 'http://localhost:5000'}/${item.icon.replace(/\\/g, '/')}`}
+                                        alt={item.name || 'Social'}
+                                        className="w-5 h-5 object-contain"
+                                    />
+                                </a>
+                            ))
+                        ) : (
+                            <span className="text-red-500 text-sm">No social icons found.</span>
+                        )}
+                    </div>
                 </div>
             </div>
         </header>
