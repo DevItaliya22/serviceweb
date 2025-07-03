@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Logo from "../../assets/Logo.svg";
+import { getIcon } from "../../api/icon";
 import { Facebook, Twitter, Youtube, Linkedin } from "lucide-react";
 
 export default function Navbar() {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const location = useLocation();
-
+    const [icon, setIcon] = useState(null);
+      
     useEffect(() => {
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 0);
@@ -32,6 +34,29 @@ export default function Navbar() {
             document.removeEventListener('click', handleClickOutside);
         };
     }, [isMobileMenuOpen]);
+
+    useEffect(() => {
+        const fetchLogo = async () => {
+            try {
+                const data = await getIcon();
+                // If data is an array, find the logo type
+                if (Array.isArray(data)) {
+                    const logoObj = data.find(item => item.type === 'logo');
+                    if (logoObj && logoObj.icon) {
+                        const baseUrl = import.meta.env.VITE_BASE_URL || 'http://localhost:5000';
+                        setIcon(`${baseUrl}/${logoObj.icon.replace(/\\/g, '/')}`);
+                    } else {
+                        setIcon(null);
+                    }
+                } else {
+                    setIcon(null);
+                }
+            } catch {
+                setIcon(null);
+            }
+        };
+        fetchLogo();
+    }, []);
 
     const toggleMobileMenu = (e) => {
         e.stopPropagation();
@@ -61,7 +86,7 @@ export default function Navbar() {
                 <div className="flex items-center space-x-3">
                     <Link to="/" className="flex items-center space-x-3">
                         <img
-                            src={Logo}
+                            src={icon || Logo}
                             alt="Company Logo"
                             className="w-34 h-20 object-contain rounded-lg transition-transform duration-300 hover:scale-105"
                         />
