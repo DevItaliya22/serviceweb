@@ -11,7 +11,6 @@ export const getProjects = async () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                timeout: 10000, 
             }
         );
         

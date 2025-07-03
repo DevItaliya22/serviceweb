@@ -8,7 +8,6 @@ export const getContactDetails = async () => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            timeout: 10000, 
         });
         
         console.log('Contact API Response:', response);
