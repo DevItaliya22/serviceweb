@@ -90,10 +90,10 @@ const Project = () => {
             <svg
               key={star}
               className={`${sizeClasses[size]} ${isFilled
+                ? 'text-yellow-400'
+                : isPartial
                   ? 'text-yellow-400'
-                  : isPartial
-                    ? 'text-yellow-400'
-                    : 'text-gray-300'
+                  : 'text-gray-300'
                 }`}
               fill="currentColor"
               viewBox="0 0 20 20"
@@ -106,95 +106,98 @@ const Project = () => {
     );
   };
 
-  const ProjectCard = ({ project }) => (
-<div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 group hover:-translate-y-1 block w-full">
-  <div className="relative h-48 sm:h-56 md:h-64 overflow-hidden">
-    <img
-      src={project.image ? `${import.meta.env.VITE_BASE_URL}/${project.image.replace(/\\/g, '/')}` : 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=250&fit=crop&crop=center'}
-      alt={project.title || 'Project'}
-      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-      onError={(e) => {
-        e.target.src = 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=250&fit=crop&crop=center';
-      }}
-    />
-    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+  const ProjectCard = ({ project }) => {
+    const baseUrl = import.meta.env.VITE_BASE_URL || 'http://localhost:5000';
+    return (
+      <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 group hover:-translate-y-1 block w-full">
+        <div className="relative h-48 sm:h-56 md:h-64 overflow-hidden">
+          <img
+            src={project.image ? `${baseUrl}/${project.image.replace(/\\/g, '/')}` : 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=250&fit=crop&crop=center'}
+            alt={project.title || 'Project'}
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            onError={(e) => {
+              e.target.src = 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=250&fit=crop&crop=center';
+            }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
 
-    {project.rating && (
-      <div className="absolute top-2 right-2 sm:top-4 sm:right-4 bg-white/95 backdrop-blur-sm rounded-full px-2 py-1 sm:px-3 sm:py-1.5 shadow-lg">
-        <div className="flex items-center space-x-1">
-          <StarRating rating={project.rating} size="sm" />
-          <span className="text-xs sm:text-sm font-bold text-gray-900 ml-1">
-            {parseFloat(project.rating).toFixed(1)}
-          </span>
-        </div>
-      </div>
-    )}
-  </div>
-
-  <div className="p-4 sm:p-6">
-    <div className="flex items-center justify-between mb-2 sm:mb-3">
-      <span className="text-xs font-semibold text-blue-500 uppercase tracking-wide">
-        {project.category || 'PROJECT'}
-      </span>
-    </div>
-
-    <Link
-      to={`/portfolio/${project.id || project._id}`}
-      className="block"
-    >
-      <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 sm:mb-3 hover:text-blue-600 transition-colors line-clamp-2 cursor-pointer">
-        {project.title || 'Untitled Project'}
-      </h3>
-    </Link>
-
-    <p className="text-gray-600 text-sm mb-3 sm:mb-4 leading-relaxed line-clamp-3">
-      {project.description || 'No description available'}
-    </p>
-
-    {project.rating && (
-      <div className="mb-3 sm:mb-4">
-        <div className="flex items-center space-x-2 mb-2">
-          <StarRating rating={project.rating} size="md" />
-          <span className="text-base sm:text-lg font-semibold text-gray-900">
-            {parseFloat(project.rating).toFixed(1)}
-          </span>
-          {project.reviewCount && (
-            <span className="text-xs sm:text-sm text-gray-500 hidden sm:inline">
-              ({project.reviewCount} reviews)
-            </span>
+          {project.rating && (
+            <div className="absolute top-2 right-2 sm:top-4 sm:right-4 bg-white/95 backdrop-blur-sm rounded-full px-2 py-1 sm:px-3 sm:py-1.5 shadow-lg">
+              <div className="flex items-center space-x-1">
+                <StarRating rating={project.rating} size="sm" />
+                <span className="text-xs sm:text-sm font-bold text-gray-900 ml-1">
+                  {parseFloat(project.rating).toFixed(1)}
+                </span>
+              </div>
+            </div>
           )}
         </div>
-        <button
-          onClick={() => {
-            window.location.href = '/contact';
-          }}
-          className="text-blue-500 hover:text-blue-600 text-xs sm:text-sm font-medium"
-        >
-          Enquiry
-        </button>
-      </div>
-    )}
 
-    {project.tags && project.tags.length > 0 && (
-      <div className="flex flex-wrap gap-1 sm:gap-2 mb-3 sm:mb-4">
-        {project.tags.slice(0, 3).map((tag, tagIndex) => (
-          <span
-            key={tagIndex}
-            className="px-2 py-1 sm:px-3 sm:py-1 bg-gray-100 text-gray-700 text-xs rounded-full hover:bg-blue-100 hover:text-blue-700 transition-colors cursor-pointer"
+        <div className="p-4 sm:p-6">
+          <div className="flex items-center justify-between mb-2 sm:mb-3">
+            <span className="text-xs font-semibold text-blue-500 uppercase tracking-wide">
+              {project.category || 'PROJECT'}
+            </span>
+          </div>
+
+          <Link
+            to={`/portfolio/${project.id || project._id}`}
+            className="block"
           >
-            {tag}
-          </span>
-        ))}
-        {project.tags.length > 3 && (
-          <span className="px-2 py-1 sm:px-3 sm:py-1 bg-gray-200 text-gray-600 text-xs rounded-full">
-            +{project.tags.length - 3}
-          </span>
-        )}
+            <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 sm:mb-3 hover:text-blue-600 transition-colors line-clamp-2 cursor-pointer">
+              {project.title || 'Untitled Project'}
+            </h3>
+          </Link>
+
+          <p className="text-gray-600 text-sm mb-3 sm:mb-4 leading-relaxed line-clamp-3">
+            {project.description || 'No description available'}
+          </p>
+
+          {project.rating && (
+            <div className="mb-3 sm:mb-4">
+              <div className="flex items-center space-x-2 mb-2">
+                <StarRating rating={project.rating} size="md" />
+                <span className="text-base sm:text-lg font-semibold text-gray-900">
+                  {parseFloat(project.rating).toFixed(1)}
+                </span>
+                {project.reviewCount && (
+                  <span className="text-xs sm:text-sm text-gray-500 hidden sm:inline">
+                    ({project.reviewCount} reviews)
+                  </span>
+                )}
+              </div>
+              <button
+                onClick={() => {
+                  window.location.href = '/contact';
+                }}
+                className="text-blue-500 hover:text-blue-600 text-xs sm:text-sm font-medium"
+              >
+                Enquiry
+              </button>
+            </div>
+          )}
+
+          {project.tags && project.tags.length > 0 && (
+            <div className="flex flex-wrap gap-1 sm:gap-2 mb-3 sm:mb-4">
+              {project.tags.slice(0, 3).map((tag, tagIndex) => (
+                <span
+                  key={tagIndex}
+                  className="px-2 py-1 sm:px-3 sm:py-1 bg-gray-100 text-gray-700 text-xs rounded-full hover:bg-blue-100 hover:text-blue-700 transition-colors cursor-pointer"
+                >
+                  {tag}
+                </span>
+              ))}
+              {project.tags.length > 3 && (
+                <span className="px-2 py-1 sm:px-3 sm:py-1 bg-gray-200 text-gray-600 text-xs rounded-full">
+                  +{project.tags.length - 3}
+                </span>
+              )}
+            </div>
+          )}
+        </div>
       </div>
-    )}
-  </div>
-</div>
-  );
+    );
+  };
 
   const Pagination = () => {
     if (totalPages <= 1) return null;
@@ -202,7 +205,7 @@ const Project = () => {
     const getPageNumbers = () => {
       const pages = [];
       const maxVisiblePages = 5;
-      
+
       if (totalPages <= maxVisiblePages) {
         for (let i = 1; i <= totalPages; i++) {
           pages.push(i);
@@ -230,7 +233,7 @@ const Project = () => {
           pages.push(totalPages);
         }
       }
-      
+
       return pages;
     };
 
@@ -251,13 +254,12 @@ const Project = () => {
             key={index}
             onClick={() => typeof page === 'number' && setCurrentPage(page)}
             disabled={page === '...'}
-            className={`px-3 py-2 rounded-lg transition-colors ${
-              page === currentPage
+            className={`px-3 py-2 rounded-lg transition-colors ${page === currentPage
                 ? 'bg-blue-500 text-white'
                 : page === '...'
-                ? 'text-gray-400 cursor-default'
-                : 'bg-white border border-gray-300 text-gray-600 hover:bg-gray-50 hover:text-blue-600'
-            }`}
+                  ? 'text-gray-400 cursor-default'
+                  : 'bg-white border border-gray-300 text-gray-600 hover:bg-gray-50 hover:text-blue-600'
+              }`}
           >
             {page}
           </button>
@@ -322,8 +324,8 @@ const Project = () => {
                   key={category}
                   onClick={() => setActiveTab(category)}
                   className={`px-3 py-2 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm transition-all duration-200 font-bold whitespace-nowrap ${activeTab === category
-                      ? 'bg-blue-500 text-white shadow-lg'
-                      : 'bg-white text-gray-600 hover:bg-gray-100 hover:text-gray-800'
+                    ? 'bg-blue-500 text-white shadow-lg'
+                    : 'bg-white text-gray-600 hover:bg-gray-100 hover:text-gray-800'
                     }`}
                 >
                   {category}
