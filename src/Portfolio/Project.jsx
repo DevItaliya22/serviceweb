@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Loader from '../Spinner/Loader';
 import { getProjects } from '../api/project';
+import { getReviewById } from '../api/review';
 
 const Project = () => {
   const [activeTab, setActiveTab] = useState('All');
@@ -107,6 +108,15 @@ const Project = () => {
   };
 
   const ProjectCard = ({ project }) => {
+    const [reviewInfo, setReviewInfo] = useState(null);
+    console.log("reviewInfo",reviewInfo?.totalCount)
+    useEffect(() => {
+      const fetchReview = async () => {
+        const reviewResponse = await getReviewById(project?._id);
+        setReviewInfo(reviewResponse?.data);
+      };
+      fetchReview();
+    }, [project.id]);
     const baseUrl = import.meta.env.VITE_BASE_URL || 'http://localhost:5000';
     return (
       <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 group hover:-translate-y-1 block w-full">
@@ -121,12 +131,12 @@ const Project = () => {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
 
-          {project.rating && (
+          {reviewInfo && (
             <div className="absolute top-2 right-2 sm:top-4 sm:right-4 bg-white/95 backdrop-blur-sm rounded-full px-2 py-1 sm:px-3 sm:py-1.5 shadow-lg">
               <div className="flex items-center space-x-1">
-                <StarRating rating={project.rating} size="sm" />
+                <StarRating rating={reviewInfo.averageRating} size="sm" />
                 <span className="text-xs sm:text-sm font-bold text-gray-900 ml-1">
-                  {parseFloat(project.rating).toFixed(1)}
+                  {reviewInfo.averageRating}
                 </span>
               </div>
             </div>
@@ -153,18 +163,16 @@ const Project = () => {
             {project.description || 'No description available'}
           </p>
 
-          {project.rating && (
+          {reviewInfo && (
             <div className="mb-3 sm:mb-4">
               <div className="flex items-center space-x-2 mb-2">
-                <StarRating rating={project.rating} size="md" />
+                <StarRating rating={reviewInfo.averageRating} size="md" />
                 <span className="text-base sm:text-lg font-semibold text-gray-900">
-                  {parseFloat(project.rating).toFixed(1)}
+                  {reviewInfo.averageRating}
                 </span>
-                {project.reviewCount && (
-                  <span className="text-xs sm:text-sm text-gray-500 hidden sm:inline">
-                    ({project.reviewCount} reviews)
+                  <span className="text-xs sm:text-sm text-gray-500">
+                    ({reviewInfo?.totalCount} reviews)
                   </span>
-                )}
               </div>
               <button
                 onClick={() => {
