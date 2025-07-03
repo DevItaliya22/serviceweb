@@ -3,6 +3,8 @@ import { Facebook, Twitter, Youtube, Linkedin, Mail, Phone, MapPin } from 'lucid
 import Logo from "../../assets/Logo.svg";
 import { getContactDetails } from '../../api/contact';
 import Loader from '../../Spinner/Loader';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchIcon } from '../../store/iconSlice';
 
 export default function IteckFooter() {
   const [contactDetails, setContactDetails] = useState({
@@ -11,6 +13,9 @@ export default function IteckFooter() {
     address: '12/A, New Booston, NYC'
   });
   const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
+  const iconData = useSelector((state) => state.icon.data);
+  const iconStatus = useSelector((state) => state.icon.status);
 
   useEffect(() => {
     const fetchContactDetails = async () => {
@@ -24,13 +29,29 @@ export default function IteckFooter() {
         });
       } catch (error) {
         console.error('Error fetching contact details:', error);
-      }finally {
+      } finally {
         setLoading(false);
       }
     };
 
     fetchContactDetails();
   }, []);
+
+  useEffect(() => {
+    if (iconStatus === 'idle') {
+      dispatch(fetchIcon());
+    }
+  }, [dispatch, iconStatus]);
+
+  let logoUrl = Logo;
+  if (Array.isArray(iconData)) {
+    const logoObj = iconData.find(item => item.type === 'logo');
+    if (logoObj && logoObj.icon) {
+      const baseUrl = import.meta.env.VITE_BASE_URL || 'http://localhost:5000';
+      logoUrl = `${baseUrl}/${logoObj.icon.replace(/\\/g, '/')}`;
+    }
+  }
+  console.log('logoUrl:', logoUrl);
 
   if (loading) {
     return <Loader />;
@@ -45,7 +66,7 @@ export default function IteckFooter() {
           <div className="flex items-center space-x-2 mb-6 sm:mb-0">
             <div className="flex">
               <img
-                src={Logo}
+                src={logoUrl}
                 alt="Company Logo"
                 className="w-30 h-20 object-contain rounded-lg ml-2 mr-2 sm:mr-3 sm:ml-3"
               />
