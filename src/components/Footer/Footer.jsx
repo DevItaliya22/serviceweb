@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Facebook, Twitter, Youtube, Linkedin, Mail, Phone, MapPin } from 'lucide-react';
 import Logo from "../../assets/Logo.svg";
 import { getContactDetails } from '../../api/contact';
@@ -62,23 +63,19 @@ export default function IteckFooter() {
   }
 
   return (
-    <footer className="bg-gray-50 py-16 px-4">
-      <div className="w-full mx-auto">
+    <footer className="bg-gray-50 py-16">
+      <div className="w-full mx-auto px-4 sm:px-6 lg:px-8">
 
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-12 pb-8 border-b border-gray-200">
           {/* Logo Section */}
-          <div className="flex items-center space-x-2 mb-6 sm:mb-0">
-            <div className="flex ml-2">
+          <div className="flex items-center mb-6 sm:mb-0">
+            <Link to="/" className="flex items-center ml-3">
               <img
                 src={logoUrl}
                 alt="Company Logo"
-                className="w-30 h-20 object-contain rounded-lg ml-2 mr-2 sm:mr-3 sm:ml-3"
+                className="h-20 w-40 lg:w-60 lg:object-cover sm:object-contain rounded-lg transition-transform duration-300 hover:scale-105"
               />
-            </div>
-            {/* <div>
-              <h1 className="text-2xl font-bold text-gray-900"> Technitium </h1>
-              <p className="text-sm text-gray-600 -mt-1">Experience The Excellence</p>
-            </div> */}
+            </Link>
           </div>
 
           {/* Social Media Icons */}
