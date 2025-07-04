@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Logo from '../assets/Logo1.jpg';
+import Logo from '../assets/Icon.png';
 
 export default function Loader() {
   const [isSpinning, setIsSpinning] = useState(true);
@@ -7,16 +7,13 @@ export default function Loader() {
   useEffect(() => {
     const timeout = setTimeout(() => {
       setIsSpinning(false);
-    }, 1500);
+    }, 5000); // Increased to 5 seconds for more spinning time
 
     return () => clearTimeout(timeout);
   }, []);
 
-  const spinClass = (duration, reverse = false) =>
-    `${isSpinning ? 'animate-spin' : ''} ${reverse ? 'reverse' : ''}`.trim();
-
   return (
-    <div className="w-screen h-screen flex items-center justify-center bg-white relative overflow-hidden">
+    <div className="w-full min-h-screen flex items-center justify-center relative overflow-hidden">
       <div className="relative w-60 h-60 flex items-center justify-center">
 
         {/* Outer Circle */}
@@ -24,7 +21,7 @@ export default function Loader() {
           <svg
             className={`w-full h-full -rotate-90 ${isSpinning ? '' : ''}`}
             style={{
-              animation: isSpinning ? 'spin 1s linear infinite' : 'none',
+              animation: isSpinning ? 'spin 1.2s linear infinite' : 'none',
             }}
           >
             <circle
@@ -46,7 +43,7 @@ export default function Loader() {
           <svg
             className="w-full h-full -rotate-90"
             style={{
-              animation: isSpinning ? 'spinReverse 1.5s linear infinite' : 'none',
+              animation: isSpinning ? 'spinReverse 1.8s linear infinite' : 'none',
             }}
           >
             <circle
@@ -68,7 +65,7 @@ export default function Loader() {
           <svg
             className="w-full h-full -rotate-90"
             style={{
-              animation: isSpinning ? 'spin 0.5s linear infinite' : 'none',
+              animation: isSpinning ? 'spin 0.8s linear infinite' : 'none',
             }}
           >
             <circle
