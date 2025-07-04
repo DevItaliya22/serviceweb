@@ -68,7 +68,7 @@ export default function IteckFooter() {
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-12 pb-8 border-b border-gray-200">
           {/* Logo Section */}
           <div className="flex items-center space-x-2 mb-6 sm:mb-0">
-            <div className="flex">
+            <div className="flex ml-2">
               <img
                 src={logoUrl}
                 alt="Company Logo"
@@ -89,7 +89,7 @@ export default function IteckFooter() {
                   <a
                     key={idx}
                     href={item.url || '#'}
-                    className="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-sm hover:shadow-md transition-shadow"
+                    className="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-sm hover:shadow-md transition-shadow mr-2"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -103,24 +103,25 @@ export default function IteckFooter() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
+        {/* Main Content Grid - Center Aligned with Uniform Gaps */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12 max-w-6xl mx-auto">
           {/* About Us Section */}
-          <div className="space-y-6 md:ml-6">
+          <div className="space-y-6 text-center">
             <h4 className="text-xl font-semibold text-gray-900">About Us</h4>
             <p className="text-gray-600 leading-relaxed">
               Our highly skilled development teams specialized in data analysis.
             </p>
 
             <div className="space-y-3">
-              <div className="flex items-center space-x-3">
+              <div className="flex items-center justify-center space-x-3">
                 <Mail className="w-5 h-5 text-blue-600" />
                 <span className="text-gray-700">{contactDetails.email}</span>
               </div>
-              <div className="flex items-center space-x-3">
+              <div className="flex items-center justify-center space-x-3">
                 <Phone className="w-5 h-5 text-blue-600" />
                 <span className="text-gray-700">{contactDetails.phone}</span>
               </div>
-              <div className="flex items-center space-x-3">
+              <div className="flex items-center justify-center space-x-3">
                 <MapPin className="w-5 h-5 text-blue-600" />
                 <span className="text-gray-700">{contactDetails.address}</span>
               </div>
@@ -128,7 +129,7 @@ export default function IteckFooter() {
           </div>
 
           {/* What We Do Section */}
-          <div className="space-y-6">
+          <div className="space-y-6 text-center">
             <h4 className="text-xl font-semibold text-gray-900">What We Do</h4>
             <ul className="space-y-3">
               <li>
@@ -136,7 +137,7 @@ export default function IteckFooter() {
                   Online Marketing
                 </a>
               </li>
-              <li className="flex items-center space-x-2">
+              <li>
                 <a href="#" className="text-gray-600 hover:text-blue-600 transition-colors">
                   Technology
                 </a>
@@ -165,7 +166,7 @@ export default function IteckFooter() {
           </div>
 
           {/* Other Pages Section */}
-          <div className="space-y-6">
+          <div className="space-y-6 text-center">
             <h4 className="text-xl font-semibold text-gray-900">Other Pages</h4>
             <ul className="space-y-3">
               <li>
@@ -210,7 +211,6 @@ export default function IteckFooter() {
               </li>
             </ul>
           </div>
-
         </div>
 
         {/* Copyright Section */}

@@ -323,11 +323,7 @@ const CompletedProject = () => {
                             </div>
                         )}
 
-                        <div className="pt-4">
-                            <button className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors shadow-lg">
-                                <ChevronRight className="w-5 h-5 text-white" />
-                            </button>
-                        </div>
+
                     </div>
                 </div>
 
