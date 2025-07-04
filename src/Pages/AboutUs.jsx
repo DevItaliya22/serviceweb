@@ -231,8 +231,8 @@ export default function AboutUs() {
                 </AnimatedSection>
             </AnimatedSection>
 
-            <AnimatedSection className="bg-white py-8 md:py-12 lg:py-16 px-4 md:px-12 lg:px-20">
-            </AnimatedSection>
+            {/* <AnimatedSection className="py-8 md:py-12 lg:py-16 px-4 md:px-12 lg:px-20">
+            </AnimatedSection> */}
 
             <AnimatedSection>
                 <IteckFooter />

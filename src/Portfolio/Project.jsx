@@ -178,7 +178,7 @@ const Project = () => {
                 onClick={() => {
                   window.location.href = '/contact';
                 }}
-                className="text-blue-500 hover:text-blue-600 text-xs sm:text-sm font-medium"
+                          className="px-3 py-1.5 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-lg shadow-sm hover:shadow-md transform hover:-translate-y-0.5 transition-all duration-300 group text-xs"
               >
                 Enquiry
               </button>
