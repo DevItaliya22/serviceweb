@@ -8,6 +8,8 @@ const CompletedProject = () => {
     const [projects, setProjects] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [slideDirection, setSlideDirection] = useState('right');
+    const [isAnimating, setIsAnimating] = useState(false);
 
     const fetchProjects = async () => {
         try {
@@ -65,11 +67,23 @@ const CompletedProject = () => {
     }, []);
 
     const nextSlide = () => {
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % projects.length);
+        if (isAnimating) return;
+        setIsAnimating(true);
+        setSlideDirection('right');
+        setTimeout(() => {
+            setCurrentIndex((prevIndex) => (prevIndex + 1) % projects.length);
+            setIsAnimating(false);
+        }, 300);
     };
 
     const prevSlide = () => {
-        setCurrentIndex((prevIndex) => (prevIndex - 1 + projects.length) % projects.length);
+        if (isAnimating) return;
+        setIsAnimating(true);
+        setSlideDirection('left');
+        setTimeout(() => {
+            setCurrentIndex((prevIndex) => (prevIndex - 1 + projects.length) % projects.length);
+            setIsAnimating(false);
+        }, 300);
     };
 
   if (loading) {
@@ -145,22 +159,6 @@ const CompletedProject = () => {
                         <p className="text-blue-600 text-sm font-medium tracking-wider uppercase mb-2">CASE STUDY</p>
                         <h1 className="text-4xl font-bold text-gray-900">Completed Projects</h1>
                     </div>
-                    <div className="flex gap-2">
-                        <button
-                            onClick={prevSlide}
-                            className="p-3 rounded-full border border-gray-300 hover:bg-white transition-colors"
-                            disabled={projects.length <= 1}
-                        >
-                            <ChevronLeft className="w-5 h-5 text-gray-600" />
-                        </button>
-                        <button
-                            onClick={nextSlide}
-                            className="p-3 rounded-full bg-blue-600 text-white hover:bg-blue-700 transition-colors"
-                            disabled={projects.length <= 1}
-                        >
-                            <ChevronRight className="w-5 h-5" />
-                        </button>
-                    </div>
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[500px]">
@@ -176,7 +174,13 @@ const CompletedProject = () => {
                             </span>
                         </div> */}
 
-                        <div className="relative z-10 mx-8">
+                        <div className={`relative z-10 mx-8 transition-all duration-300 ease-in-out transform ${
+                            isAnimating 
+                                ? slideDirection === 'right' 
+                                    ? 'translate-x-full opacity-0' 
+                                    : '-translate-x-full opacity-0'
+                                : 'translate-x-0 opacity-100'
+                        }`}>
                             {currentProject.image ? (
                                 <div className="w-full max-w-md mx-auto">
                                     <div className="bg-white rounded-2xl shadow-xl overflow-hidden transform hover:scale-105 transition-transform duration-300">
@@ -225,7 +229,13 @@ const CompletedProject = () => {
 
                     </div>
 
-                    <div className="space-y-6">
+                    <div className={`space-y-6 transition-all duration-300 ease-in-out transform ${
+                        isAnimating 
+                            ? slideDirection === 'right' 
+                                ? 'translate-x-full opacity-0' 
+                                : '-translate-x-full opacity-0'
+                            : 'translate-x-0 opacity-100'
+                    }`}>
                         <div className="flex items-center gap-2 text-gray-400">
                             <span className="text-sm font-medium">{currentProject.category || 'CATEGORY'}</span>
                         </div>
@@ -323,22 +333,30 @@ const CompletedProject = () => {
                             </div>
                         )}
 
+                        {/* Navigation Controls */}
+                        {projects.length > 1 && (
+                            <div className="flex items-center justify-end pt-6 border-t border-gray-200">
+                                <div className="flex gap-2">
+                                    <button
+                                        onClick={prevSlide}
+                                        className="p-3 rounded-full border border-gray-300 hover:bg-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                        disabled={projects.length <= 1}
+                                    >
+                                        <ChevronLeft className="w-5 h-5 text-gray-600" />
+                                    </button>
+                                    <button
+                                        onClick={nextSlide}
+                                        className="p-3 rounded-full bg-blue-600 text-white hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                        disabled={projects.length <= 1}
+                                    >
+                                        <ChevronRight className="w-5 h-5" />
+                                    </button>
+                                </div>
+                            </div>
+                        )}
 
                     </div>
                 </div>
-
-                {projects.length > 1 && (
-                    <div className="flex justify-center mt-12 gap-2">
-                        {projects.map((_, index) => (
-                            <button
-                                key={index}
-                                onClick={() => setCurrentIndex(index)}
-                                className={`w-2 h-2 rounded-full transition-colors ${index === currentIndex ? 'bg-blue-600' : 'bg-gray-300'
-                                    }`}
-                            />
-                        ))}
-                    </div>
-                )}
             </div>
         </div>
     );
