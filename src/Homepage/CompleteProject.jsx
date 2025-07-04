@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, Star } from 'lucide-react';
 import { getProjects } from '../api/project'; 
+import { getReviewById } from '../api/review';
 import Loader from '../Spinner/Loader';
 
 const CompletedProject = () => {
@@ -10,6 +11,7 @@ const CompletedProject = () => {
     const [error, setError] = useState(null);
     const [slideDirection, setSlideDirection] = useState('right');
     const [isAnimating, setIsAnimating] = useState(false);
+    const [reviewInfo, setReviewInfo] = useState(null);
 
     const fetchProjects = async () => {
         try {
@@ -65,6 +67,22 @@ const CompletedProject = () => {
     useEffect(() => {
         fetchProjects();
     }, []);
+
+    // Fetch review info when current project changes
+    useEffect(() => {
+        const fetchReview = async () => {
+            if (projects.length > 0 && projects[currentIndex]?._id) {
+                try {
+                    const reviewResponse = await getReviewById(projects[currentIndex]._id);
+                    setReviewInfo(reviewResponse?.data);
+                } catch (error) {
+                    console.error('Error fetching review:', error);
+                    setReviewInfo(null);
+                }
+            }
+        };
+        fetchReview();
+    }, [currentIndex, projects]);
 
     const nextSlide = () => {
         if (isAnimating) return;
@@ -265,9 +283,9 @@ const CompletedProject = () => {
                                 <div>
                                     <div className="text-gray-500 text-sm mb-1">Rating</div>
                                     <div className="font-semibold text-gray-900 flex items-center gap-1">
-                                        {currentProject.rating ? (
+                                        {reviewInfo?.averageRating ? (
                                             <div className="flex items-center gap-1">
-                                                {[...Array(Math.max(1, Math.min(10, currentProject.rating)))].map((_, index) => (
+                                                {[...Array(Math.max(1, Math.min(10, reviewInfo?.averageRating)))].map((_, index) => (
                                                     <Star
                                                         key={index}
                                                         className="w-4 h-4 text-yellow-500 fill-current"
@@ -282,7 +300,7 @@ const CompletedProject = () => {
                                 <div>
                                     <div className="text-gray-500 text-sm mb-1">Reviews</div>
                                     <div className="font-semibold text-gray-900">
-                                        {currentProject.reviewCount || 0}
+                                        {reviewInfo?.totalCount || 0}
                                     </div>
                                 </div>
                             </div>
