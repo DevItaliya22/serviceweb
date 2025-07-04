@@ -98,7 +98,7 @@ export default function AboutUs() {
                 </AnimatedSection>
 
                 {/* Main content */}
-                <AnimatedSection delay={100} className="w-full min-h-screen flex items-center justify-center px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-8 md:py-12 lg:py-16 xl:py-20 mt-8 sm:mt-12 md:mt-16 lg:mt-20 xl:mt-24">
+                <AnimatedSection delay={100} className="w-full min-h-screen flex items-center justify-center px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-4 md:py-6 lg:py-8 xl:py-10 mt-2 sm:mt-4 md:mt-6 lg:mt-8 xl:mt-10">
                     <div className="text-center max-w-4xl lg:max-w-6xl w-full">
                         <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold text-black leading-tight mb-4 md:mb-6 lg:mb-8">
                             We provide perfect
@@ -137,7 +137,7 @@ export default function AboutUs() {
             </div>
 
             {/* Top Reasons Section */}
-            <AnimatedSection delay={100} className="py-8 md:py-12 lg:py-16 px-4">
+            <AnimatedSection delay={100} className="pt-4 md:pt-6 lg:pt-8 pb-8 md:pb-12 lg:pb-16 px-4 mt-[-32px] md:mt-[-48px] lg:mt-[-64px]">
                 <div className="w-full max-w-7xl mx-auto">
                     <div className="text-center mb-8 md:mb-12 lg:mb-16">
                         <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4">
@@ -164,7 +164,7 @@ export default function AboutUs() {
                             </AnimatedSection>
 
                             {/* Card 2 */}
-                            <AnimatedSection delay={500} className="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-4 relative lg:after:content-[''] lg:after:absolute lg:after:top-0 lg:after:right-0 lg:after:h-full lg:after:w-px lg:after:bg-gray-300 lg:after:mx-4 pb-6 lg:pb-0 border-b lg:border-b-0 border-gray-200 lg:border-none lg:px-8">
+                            <AnimatedSection delay={500} className="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-4 relative lg:after:content-[''] lg:after:absolute lg:after:top-0 lg:after:right-0 lg:after:h-full lg:after:w-px lg:after:bg-gray-300 lg:after:mx-4 pb-6 lg:pb-0 border-b lg:border-b-0 border-gray-200 lg:border-none lg:pr-8">
                                 <div className="w-16 h-16 bg-green-100 rounded-xl flex items-center justify-center flex-shrink-0 transform hover:scale-110 transition-transform duration-300">
                                     <Smartphone className="w-8 h-8 text-green-600" />
                                 </div>
@@ -177,7 +177,7 @@ export default function AboutUs() {
                             </AnimatedSection>
 
                             {/* Card 3 */}
-                            <AnimatedSection delay={700} className="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-4 lg:pl-8">
+                            <AnimatedSection delay={700} className="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-4">
                                 <div className="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center flex-shrink-0 transform hover:scale-110 transition-transform duration-300">
                                     <MessageSquare className="w-8 h-8 text-blue-600" />
                                 </div>

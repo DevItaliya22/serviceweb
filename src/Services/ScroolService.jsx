@@ -218,19 +218,19 @@ function ServiceCard({ service }) {
   );
 
   return (
-    <div className="bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 p-3 group border border-slate-100 hover:border-blue-200 flex flex-col h-full transform hover:scale-105 hover:-translate-y-1">
+    <div className="bg-white rounded-lg shadow-md hover:shadow-xl active:shadow-xl transition-all duration-300 p-3 group border border-slate-100 hover:border-blue-200 active:border-blue-200 flex flex-col h-full transform hover:scale-105 active:scale-105 hover:-translate-y-1 active:-translate-y-1">
       <div className="text-center mb-3">
-                 <div className="mb-3 group-hover:scale-110 transition-transform duration-300 relative">
-           <div className="absolute inset-0 bg-gradient-to-r from-blue-200 to-purple-200 rounded-full blur-lg opacity-0 group-hover:opacity-50 transition-opacity duration-300 -z-10"></div>
+                 <div className="mb-3 group-hover:scale-110 active:scale-110 transition-transform duration-300 relative">
+           <div className="absolute inset-0 bg-gradient-to-r from-blue-200 to-purple-200 rounded-full blur-lg opacity-0 group-hover:opacity-50 active:opacity-50 transition-opacity duration-300 -z-10"></div>
           
                      {/* Icon Display Logic */}
            {service.icon && !iconError ? (
              <div className="relative group/icon">
-               <div className="absolute inset-0 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 rounded-xl blur-lg opacity-0 group-hover/icon:opacity-30 transition-opacity duration-300"></div>
+               <div className="absolute inset-0 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 rounded-xl blur-lg opacity-0 group-hover/icon:opacity-30 active:opacity-30 transition-opacity duration-300"></div>
                <img
                  src={service.icon}
                  alt={`${service.title} icon`}
-                 className="relative w-10 h-10 mx-auto object-contain rounded-xl shadow-lg group-hover/icon:shadow-xl transition-all duration-300 group-hover/icon:scale-110 border-2 border-white"
+                 className="relative w-10 h-10 mx-auto object-contain rounded-xl shadow-lg group-hover/icon:shadow-xl active:shadow-xl transition-all duration-300 group-hover/icon:scale-110 active:scale-110 border-2 border-white"
                  onError={(e) => {
                    console.log('Icon failed to load:', service.icon);
                    console.log('Error target:', e.target);
@@ -245,7 +245,7 @@ function ServiceCard({ service }) {
           
                      {/* NEW Badge */}
            {isNew && (
-             <span className="absolute -top-3 -right-3 bg-gradient-to-r from-green-500 via-blue-500 to-purple-500 text-white text-[10px] font-bold px-3 py-1 rounded-full shadow-lg z-20 border-2 border-white animate-pulse">
+             <span className="absolute top-2 right-2 bg-gradient-to-r from-green-500 via-blue-500 to-purple-500 text-white text-[10px] font-bold px-3 py-1 rounded-full shadow-lg z-20 border-2 border-white transition-transform duration-200 group-hover:scale-110 active:scale-110">
                NEW
              </span>
            )}
@@ -273,9 +273,6 @@ function ServiceCard({ service }) {
           className="px-3 py-1.5 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-lg shadow-sm hover:shadow-md transform hover:-translate-y-0.5 transition-all duration-300 group text-xs"
         >
           Enquiry
-          <svg className="inline-block w-3 h-3 ml-1 group-hover:translate-x-0.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-          </svg>
         </button>
       </div>
     </div>

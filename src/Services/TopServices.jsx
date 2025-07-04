@@ -30,7 +30,7 @@ const TopServices = (Services) => {
         const colors = colorMap[serviceType] || colorMap.default;
 
         return {
-          icon: service.icon ? `${import.meta.env.VITE_BASE_URL}/${service.icon.replace(/\\/g, '/')}` : null,
+          icon: service.icon ? `${import.meta.env.VITE_BASE_URL || 'http://localhost:5000'}/${service.icon.replace(/\\/g, '/')}` : null,
           title: service.title,
           description: service.singleLineDescription || service.description || "Professional service to meet your needs",
           bgColor: colors.bgColor,
