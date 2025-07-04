@@ -52,6 +52,14 @@ export default function Review() {
     return () => clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+    if (reviews.length === 0) return;
+    const interval = setInterval(() => {
+      nextSlide();
+    }, 2000);
+    return () => clearInterval(interval);
+  }, [reviews, currentIndex, isTransitioning]);
+
   const handleTransition = (dir) => {
     if (isTransitioning) return;
 
