@@ -74,10 +74,10 @@ export default function AboutUs() {
     }
 
     return (
-        <div className="min-h-screen overflow-hidden ">
+        <div>
                 <Navbar />
 
-            <div className="w-full min-h-screen relative overflow-hidden">
+            <div className="w-full relative flex flex-col">
                 {/* Left decorative element */}
                 <AnimatedSection delay={200} className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-8 lg:-translate-x-8 md:-translate-x-6 sm:-translate-x-4 hidden sm:block">
                     <div className="relative scale-75 md:scale-90 lg:scale-100">
@@ -113,9 +113,9 @@ export default function AboutUs() {
                 </AnimatedSection>
 
                 {/* Main content */}
-                <AnimatedSection delay={100} className="w-full min-h-screen flex items-center justify-center px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-4 md:py-6 lg:py-8 xl:py-10 mt-2 sm:mt-4 md:mt-6 lg:mt-8 xl:mt-10">
+                <AnimatedSection delay={100} className="w-full min-h-screen flex flex-col justify-center items-center px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 pt-16 md:pt-24 pb-8 md:pb-12">
                     <div className="text-center max-w-4xl lg:max-w-6xl w-full">
-                        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold text-black leading-tight mb-4 md:mb-6 lg:mb-8">
+                        <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-bold text-black leading-tight mb-2 md:mb-3 lg:mb-4">
                             We provide perfect
                             <br className="hidden sm:block" />
                             <span className="block mt-1 sm:mt-2 md:mt-0">IT Solutions & Technology for</span>
@@ -127,24 +127,24 @@ export default function AboutUs() {
                                         <path d="M0 4 Q50 0 100 4 T200 4" stroke="#60A5FA" strokeWidth="3" fill="none" className="opacity-80" />
                                     </svg>
                                 </span>
-                                <span className="ml-1 sm:ml-2 md:ml-4 text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl">✏️</span>
+                                <span className="ml-1 sm:ml-2 md:ml-4 text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl">✏️</span>
                             </span>
                         </h1>
 
-                        <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-gray-600 max-w-3xl lg:max-w-4xl mx-auto leading-relaxed mb-6 md:mb-8 lg:mb-10 px-2 sm:px-4">
+                        <p className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl text-gray-600 max-w-3xl lg:max-w-4xl mx-auto leading-relaxed mb-2 md:mb-3 lg:mb-4 px-2 sm:px-4">
                             Iteck helps you unify your brand identity by collecting, storing and distributing
                             <br className="hidden lg:block" />
                             design tokens and assets — automatically.
                         </p>
 
-                        <div className="flex justify-center items-center space-x-1 mb-8 md:mb-12 lg:mb-16">
+                        <div className="flex justify-center items-center space-x-1 mb-2 md:mb-3 lg:mb-4">
                             {Array.from({ length: 5 }).map((_, i) => (
-                                <span key={i} className="text-xl sm:text-2xl md:text-3xl animate-pulse" style={{ animationDelay: `${i * 0.2}s` }}>⭐</span>
+                                <span key={i} className="text-lg sm:text-xl md:text-2xl animate-pulse" style={{ animationDelay: `${i * 0.2}s` }}>⭐</span>
                             ))}
                         </div>
                         
                         {/* Floating Bubbles below the main content */}
-                        <div className="mt-8 sm:mt-12 md:mt-16 lg:mt-20 xl:mt-24">
+                        <div className="mt-6 md:mt-8 lg:mt-10 flex-shrink-0">
                             <FloatingBubbles />
                         </div>
                     </div>
@@ -152,7 +152,7 @@ export default function AboutUs() {
             </div>
 
             {/* Top Reasons Section */}
-            <AnimatedSection delay={100} className="pt-4 md:pt-6 lg:pt-8 pb-8 md:pb-12 lg:pb-16 px-4 mt-[-32px] md:mt-[-48px] lg:mt-[-64px]">
+            <AnimatedSection delay={100} className="pt-4 md:pt-6 lg:pt-8 pb-8 md:pb-12 lg:pb-16 px-4">
                 <div className="w-full max-w-7xl mx-auto">
                     <div className="text-center mb-8 md:mb-12 lg:mb-16">
                         <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4">

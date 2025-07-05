@@ -100,25 +100,25 @@ export default function IteckFooter() {
           </div>
         </div>
 
-        {/* Main Content Grid - Center Aligned with Uniform Gaps */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12 max-w-6xl mx-auto">
+        {/* Main Content Grid - Left Aligned with Uniform Gaps */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 max-w-6xl mx-auto justify-items-center">
           {/* About Us Section */}
-          <div className="space-y-6 text-center">
+          <div className="space-y-6 text-left min-w-[220px] pl-0">
             <h4 className="text-xl font-semibold text-gray-900">About Us</h4>
             <p className="text-gray-600 leading-relaxed">
               Our highly skilled development teams specialized in data analysis.
             </p>
 
             <div className="space-y-3">
-              <div className="flex items-center justify-center space-x-3">
+              <div className="flex items-center space-x-3">
                 <Mail className="w-5 h-5 text-blue-600" />
                 <span className="text-gray-700">{contactDetails.email}</span>
               </div>
-              <div className="flex items-center justify-center space-x-3">
+              <div className="flex items-center space-x-3">
                 <Phone className="w-5 h-5 text-blue-600" />
                 <span className="text-gray-700">{contactDetails.phone}</span>
               </div>
-              <div className="flex items-center justify-center space-x-3">
+              <div className="flex items-center space-x-3">
                 <MapPin className="w-5 h-5 text-blue-600" />
                 <span className="text-gray-700">{contactDetails.address}</span>
               </div>
@@ -126,7 +126,7 @@ export default function IteckFooter() {
           </div>
 
           {/* What We Do Section */}
-          <div className="space-y-6 text-center">
+          <div className="space-y-6 text-left min-w-[220px]">
             <h4 className="text-xl font-semibold text-gray-900">What We Do</h4>
             <ul className="space-y-3">
               <li>
@@ -163,8 +163,8 @@ export default function IteckFooter() {
           </div>
 
           {/* Other Pages Section */}
-          <div className="space-y-6 text-center">
-            <h4 className="text-xl font-semibold text-gray-900">Other Pages</h4>
+          <div className="space-y-6 text-left min-w-[220px]">
+            <h4 className="text-xl font-semibold text-gray-900 right-9">Other Pages</h4>
             <ul className="space-y-3">
               <li>
                 <a href="#" className="text-gray-600 hover:text-blue-600 transition-colors">
