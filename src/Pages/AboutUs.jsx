@@ -74,13 +74,13 @@ export default function AboutUs() {
     }
 
     return (
-        <div>
+        <div className="overflow-hidden">
                 <Navbar />
 
-            <div className="w-full relative flex flex-col">
+            <div className="w-full relative flex flex-col overflow-hidden">
                 {/* Left decorative element */}
-                <AnimatedSection delay={200} className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-8 lg:-translate-x-8 md:-translate-x-6 sm:-translate-x-4 hidden sm:block">
-                    <div className="relative scale-75 md:scale-90 lg:scale-100">
+                <AnimatedSection delay={200} className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-4 lg:-translate-x-8 md:-translate-x-6 sm:-translate-x-4 hidden sm:block z-10">
+                    <div className="relative scale-50 sm:scale-75 md:scale-90 lg:scale-100">
                         <div className="w-20 h-32 bg-gradient-to-br from-pink-300 to-orange-300 rounded-full relative transform rotate-12">
                             <div className="absolute top-6 -left-2 w-6 h-12 bg-gradient-to-br from-pink-200 to-orange-200 rounded-full transform -rotate-45"></div>
                             <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-24 h-12 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full"></div>
@@ -105,17 +105,17 @@ export default function AboutUs() {
                 </AnimatedSection>
 
                 {/* Top right decorative element */}
-                <AnimatedSection delay={400} className="absolute right-4 md:right-10 lg:right-20 top-10 md:top-16 lg:top-20">
-                    <div className="relative scale-75 md:scale-90 lg:scale-100">
+                <AnimatedSection delay={400} className="absolute right-2 md:right-10 lg:right-20 top-10 md:top-16 lg:top-20 z-10">
+                    <div className="relative scale-50 sm:scale-75 md:scale-90 lg:scale-100">
                         <div className="w-12 h-12 bg-gradient-to-br from-orange-400 to-pink-400 rounded-lg transform rotate-45 shadow-lg"></div>
                         <div className="absolute top-8 left-8 w-8 h-8 bg-gradient-to-br from-blue-400 to-purple-400 rounded-full shadow-lg"></div>
                     </div>
                 </AnimatedSection>
 
                 {/* Main content */}
-                <AnimatedSection delay={100} className="w-full min-h-screen flex flex-col justify-center items-center px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 pt-16 md:pt-24 pb-8 md:pb-12">
-                    <div className="text-center max-w-4xl lg:max-w-6xl w-full">
-                        <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-bold text-black leading-tight mb-2 md:mb-3 lg:mb-4">
+                <AnimatedSection delay={100} className="w-full min-h-screen flex flex-col justify-center items-center px-2 sm:px-6 md:px-8 lg:px-12 xl:px-16 pt-16 md:pt-24 pb-8 md:pb-12 overflow-hidden">
+                    <div className="text-center max-w-4xl lg:max-w-6xl w-full px-2">
+                        <h1 className="text-base sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-bold text-black leading-tight mb-2 md:mb-3 lg:mb-4 break-words">
                             We provide perfect
                             <br className="hidden sm:block" />
                             <span className="block mt-1 sm:mt-2 md:mt-0">IT Solutions & Technology for</span>
@@ -127,11 +127,11 @@ export default function AboutUs() {
                                         <path d="M0 4 Q50 0 100 4 T200 4" stroke="#60A5FA" strokeWidth="3" fill="none" className="opacity-80" />
                                     </svg>
                                 </span>
-                                <span className="ml-1 sm:ml-2 md:ml-4 text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl">✏️</span>
+                                <span className="ml-1 sm:ml-2 md:ml-4 text-base sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl">✏️</span>
                             </span>
                         </h1>
 
-                        <p className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl text-gray-600 max-w-3xl lg:max-w-4xl mx-auto leading-relaxed mb-2 md:mb-3 lg:mb-4 px-2 sm:px-4">
+                        <p className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl text-gray-600 max-w-3xl lg:max-w-4xl mx-auto leading-relaxed mb-2 md:mb-3 lg:mb-4 px-2 sm:px-4 break-words">
                             Iteck helps you unify your brand identity by collecting, storing and distributing
                             <br className="hidden lg:block" />
                             design tokens and assets — automatically.
@@ -139,12 +139,12 @@ export default function AboutUs() {
 
                         <div className="flex justify-center items-center space-x-1 mb-2 md:mb-3 lg:mb-4">
                             {Array.from({ length: 5 }).map((_, i) => (
-                                <span key={i} className="text-lg sm:text-xl md:text-2xl animate-pulse" style={{ animationDelay: `${i * 0.2}s` }}>⭐</span>
+                                <span key={i} className="text-sm sm:text-xl md:text-2xl animate-pulse" style={{ animationDelay: `${i * 0.2}s` }}>⭐</span>
                             ))}
                         </div>
                         
                         {/* Floating Bubbles below the main content */}
-                        <div className="mt-6 md:mt-8 lg:mt-10 flex-shrink-0">
+                        <div className="mt-6 md:mt-8 lg:mt-10 flex-shrink-0 overflow-hidden">
                             <FloatingBubbles />
                         </div>
                     </div>
