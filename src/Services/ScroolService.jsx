@@ -245,7 +245,7 @@ function ServiceCard({ service }) {
           
                      {/* NEW Badge */}
            {isNew && (
-             <span className="absolute top-2 right-2 bg-gradient-to-r from-green-500 via-blue-500 to-purple-500 text-white text-[10px] font-bold px-3 py-1 rounded-full shadow-lg z-20 border-2 border-white transition-transform duration-200 group-hover:scale-110 active:scale-110">
+             <span className="absolute top-2 right-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-[10px] font-bold px-3 py-1 rounded-full shadow-lg z-20 border-2 border-white transition-transform duration-200 group-hover:scale-110 active:scale-110">
                NEW
              </span>
            )}

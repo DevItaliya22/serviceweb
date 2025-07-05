@@ -353,7 +353,7 @@ const CompletedProject = () => {
 
                         {/* Navigation Controls */}
                         {projects.length > 1 && (
-                            <div className="flex items-center justify-end pt-6 border-t border-gray-200">
+                            <div className="flex items-center justify-start pt-6 border-t border-gray-200 ">
                                 <div className="flex gap-2">
                                     <button
                                         onClick={prevSlide}
