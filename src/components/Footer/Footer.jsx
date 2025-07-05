@@ -101,7 +101,7 @@ export default function IteckFooter() {
         </div>
 
         {/* Main Content Grid - Left Aligned with Uniform Gaps */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 max-w-6xl mx-auto justify-items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 lg:gap-16 gap-y-10 max-w-6xl mx-auto justify-items-start items-start">
           {/* About Us Section */}
           <div className="space-y-6 text-left min-w-[220px] pl-0">
             <h4 className="text-xl font-semibold text-gray-900">About Us</h4>
