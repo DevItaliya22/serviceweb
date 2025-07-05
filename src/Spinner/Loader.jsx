@@ -84,7 +84,7 @@ export default function Loader() {
 
         {/* Logo */}
         <div className="absolute inset-0 flex items-center justify-center">
-          <div className="w-28 h-28 rounded-full overflow-hidden shadow-2xl animate-pulse border-4 border-white/20 bg-white">
+          <div className="w-28 h-28 rounded-full overflow-hidden shadow-2xl border-4 border-white/20 bg-white">
             <img
               src={Logo}
               alt="Logo"

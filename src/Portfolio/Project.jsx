@@ -11,7 +11,7 @@ const Project = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 6;
+  const itemsPerPage = 10;
 
   useEffect(() => {
     fetchProjects();
@@ -109,7 +109,6 @@ const Project = () => {
 
   const ProjectCard = ({ project }) => {
     const [reviewInfo, setReviewInfo] = useState(null);
-    console.log("reviewInfo",reviewInfo?.totalCount)
     useEffect(() => {
       const fetchReview = async () => {
         const reviewResponse = await getReviewById(project?._id);
@@ -119,89 +118,82 @@ const Project = () => {
     }, [project.id]);
     const baseUrl = import.meta.env.VITE_BASE_URL || 'http://localhost:5000';
     return (
-      <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 group hover:-translate-y-1 block w-full">
-        <div className="relative h-48 sm:h-56 md:h-64 overflow-hidden">
-          <img
-            src={project.image ? `${baseUrl}/${project.image.replace(/\\/g, '/')}` : 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=250&fit=crop&crop=center'}
-            alt={project.title || 'Project'}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-            onError={(e) => {
-              e.target.src = 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=250&fit=crop&crop=center';
-            }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
-
-          {reviewInfo && (
-            <div className="absolute top-2 right-2 sm:top-4 sm:right-4 bg-white/95 backdrop-blur-sm rounded-full px-2 py-1 sm:px-3 sm:py-1.5 shadow-lg">
-              <div className="flex items-center space-x-1">
-                <StarRating rating={reviewInfo.averageRating} size="sm" />
-                <span className="text-xs sm:text-sm font-bold text-gray-900 ml-1">
-                  {reviewInfo.averageRating}
-                </span>
-              </div>
-            </div>
-          )}
-        </div>
-
-        <div className="p-4 sm:p-6">
-          <div className="flex items-center justify-between mb-2 sm:mb-3">
-            <span className="text-xs font-semibold text-blue-500 uppercase tracking-wide">
-              {project.category || 'PROJECT'}
-            </span>
+      <div className="bg-white rounded-lg shadow-md hover:shadow-xl active:shadow-xl transition-all duration-300 p-2 group border border-slate-100 hover:border-blue-200 active:border-blue-200 flex flex-col h-full transform hover:scale-105 active:scale-105 hover:-translate-y-1 active:-translate-y-1">
+        <div className="text-center mb-2">
+          <div className="mb-2 group-hover:scale-110 active:scale-110 transition-transform duration-300 relative">
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-200 to-purple-200 rounded-full blur-lg opacity-0 group-hover:opacity-50 active:opacity-50 transition-opacity duration-300 -z-10"></div>
+            <img
+              src={project.image ? `${baseUrl}/${project.image.replace(/\\/g, '/')}` : 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=250&fit=crop&crop=center'}
+              alt={project.title || 'Project'}
+              className="relative w-16 h-16 mx-auto object-cover rounded-xl shadow-lg group-hover:shadow-xl active:shadow-xl transition-all duration-300 group-hover:scale-110 active:scale-110 border-2 border-white"
+              onError={(e) => {
+                e.target.src = 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=250&fit=crop&crop=center';
+              }}
+            />
+            {/* NEW Badge Example (if you want to add a badge for new projects) */}
+            {/* {project.isNew && (
+              <span className="absolute top-2 right-2 bg-gradient-to-r from-green-500 via-blue-500 to-purple-500 text-white text-[10px] font-bold px-3 py-1 rounded-full shadow-lg z-20 border-2 border-white transition-transform duration-200 group-hover:scale-110 active:scale-110">
+                NEW
+              </span>
+            )} */}
           </div>
-
+          <span className="inline-block px-2 py-1 bg-gradient-to-r from-blue-100 to-purple-100 text-blue-700 text-xs font-semibold rounded-full">
+            {project.category || 'PROJECT'}
+          </span>
+        </div>
+        <div className="text-center flex-grow">
           <Link
             to={`/portfolio/${project.id || project._id}`}
             className="block"
           >
-            <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 sm:mb-3 hover:text-blue-600 transition-colors line-clamp-2 cursor-pointer">
+            <h3 className="text-sm font-bold text-slate-800 mb-1 group-hover:text-blue-700 transition-colors duration-300 line-clamp-2 cursor-pointer">
               {project.title || 'Untitled Project'}
             </h3>
           </Link>
-
-          <p className="text-gray-600 text-sm mb-3 sm:mb-4 leading-relaxed line-clamp-3">
+          <p className="text-slate-600 text-xs leading-relaxed mb-1 line-clamp-2">
             {project.description || 'No description available'}
           </p>
-
-          {reviewInfo && (
-            <div className="mb-3 sm:mb-4">
-              <div className="flex items-center space-x-2 mb-2">
-                <StarRating rating={reviewInfo.averageRating} size="md" />
-                <span className="text-base sm:text-lg font-semibold text-gray-900">
-                  {reviewInfo.averageRating}
-                </span>
-                  <span className="text-xs sm:text-sm text-gray-500">
-                    ({reviewInfo?.totalCount} reviews)
-                  </span>
-              </div>
-              <button
-                onClick={() => {
-                  window.location.href = '/contact';
-                }}
-                          className="px-3 py-1.5 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-lg shadow-sm hover:shadow-md transform hover:-translate-y-0.5 transition-all duration-300 group text-xs"
+        </div>
+        {reviewInfo && (
+          <div className="mb-1 flex flex-col items-center">
+            <div className="w-full flex justify-center items-center">
+              <StarRating rating={reviewInfo.averageRating} size="md" />
+              <span className="ml-2 text-lg font-bold text-yellow-500">
+                {reviewInfo.averageRating}
+              </span>
+              <span className="ml-1 text-xs text-gray-400 font-medium">
+                ({reviewInfo?.totalCount} reviews)
+              </span>
+            </div>
+            <div className="w-2/3 border-t border-gray-100 my-1"></div>
+          </div>
+        )}
+        {project.tags && project.tags.length > 0 && (
+          <div className="flex flex-wrap gap-1 sm:gap-2 mb-1 justify-center">
+            {project.tags.slice(0, 3).map((tag, tagIndex) => (
+              <span
+                key={tagIndex}
+                className="px-2 py-1 sm:px-3 sm:py-1 bg-gray-100 text-gray-700 text-xs rounded-full hover:bg-blue-100 hover:text-blue-700 transition-colors cursor-pointer"
               >
-                Enquiry
-              </button>
-            </div>
-          )}
-
-          {project.tags && project.tags.length > 0 && (
-            <div className="flex flex-wrap gap-1 sm:gap-2 mb-3 sm:mb-4">
-              {project.tags.slice(0, 3).map((tag, tagIndex) => (
-                <span
-                  key={tagIndex}
-                  className="px-2 py-1 sm:px-3 sm:py-1 bg-gray-100 text-gray-700 text-xs rounded-full hover:bg-blue-100 hover:text-blue-700 transition-colors cursor-pointer"
-                >
-                  {tag}
-                </span>
-              ))}
-              {project.tags.length > 3 && (
-                <span className="px-2 py-1 sm:px-3 sm:py-1 bg-gray-200 text-gray-600 text-xs rounded-full">
-                  +{project.tags.length - 3}
-                </span>
-              )}
-            </div>
-          )}
+                {tag}
+              </span>
+            ))}
+            {project.tags.length > 3 && (
+              <span className="px-2 py-1 sm:px-3 sm:py-1 bg-gray-200 text-gray-600 text-xs rounded-full">
+                +{project.tags.length - 3}
+              </span>
+            )}
+          </div>
+        )}
+        <div className="text-center mt-auto">
+          <button
+            onClick={() => {
+              window.location.href = '/contact';
+            }}
+            className="px-3 py-1.5 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-lg shadow-sm hover:shadow-md transform hover:-translate-y-0.5 transition-all duration-300 group text-xs"
+          >
+            Enquiry
+          </button>
         </div>
       </div>
     );
@@ -246,7 +238,7 @@ const Project = () => {
     };
 
     return (
-      <div className="flex justify-center items-center mt-8 sm:mt-12 space-x-2">
+      <div className="flex justify-center items-center mt-2 sm:mt-4 space-x-2">
         <button
           onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
           disabled={currentPage === 1}
@@ -263,10 +255,10 @@ const Project = () => {
             onClick={() => typeof page === 'number' && setCurrentPage(page)}
             disabled={page === '...'}
             className={`px-3 py-2 rounded-lg transition-colors ${page === currentPage
-                ? 'bg-blue-500 text-white'
-                : page === '...'
-                  ? 'text-gray-400 cursor-default'
-                  : 'bg-white border border-gray-300 text-gray-600 hover:bg-gray-50 hover:text-blue-600'
+              ? 'bg-blue-500 text-white'
+              : page === '...'
+                ? 'text-gray-400 cursor-default'
+                : 'bg-white border border-gray-300 text-gray-600 hover:bg-gray-50 hover:text-blue-600'
               }`}
           >
             {page}
@@ -322,28 +314,37 @@ const Project = () => {
   }
 
   return (
-    <div className="py-8 sm:py-12 px-4 sm:px-6 lg:px-8 projects-section">
+    <div className="py-2 sm:py-4 px-4 sm:px-6 lg:px-8 projects-section">
       <div className="max-w-7xl mx-auto">
-        <div className="mb-8 sm:mb-12">
-          <div className="flex justify-start sm:justify-center gap-2 overflow-x-auto pb-2 sm:pb-0 scrollbar-hide">
-            <div className="flex gap-2 min-w-max sm:min-w-0">
-              {categories.map((category) => (
-                <button
-                  key={category}
-                  onClick={() => setActiveTab(category)}
-                  className={`px-3 py-2 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm transition-all duration-200 font-bold whitespace-nowrap ${activeTab === category
-                    ? 'bg-blue-500 text-white shadow-lg'
-                    : 'bg-white text-gray-600 hover:bg-gray-100 hover:text-gray-800'
-                    }`}
-                >
-                  {category}
-                </button>
-              ))}
+        <div className="mb-2 sm:mb-4">
+          <div className="flex justify-center mb-1">
+            <div className="flex justify-start items-center w-full max-w-7xl px-4 gap-2 md:gap-4 lg:gap-6 overflow-x-auto scrollbar-hide">
+              {categories.map((category) => {
+                const count = category === 'All' ? projects.length : projects.filter(p => p.category && p.category.trim().toLowerCase() === category.toLowerCase()).length;
+                return (
+                  <button
+                    key={category}
+                    onClick={() => setActiveTab(category)}
+                    className={`px-3 py-2 rounded-full font-medium text-sm transition-all duration-300 shadow-sm border whitespace-nowrap flex-shrink-0 ${activeTab === category
+                        ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white border-transparent shadow-md transform scale-105'
+                        : 'bg-white text-black border-slate-200 hover:border-blue-300 hover:shadow-md hover:scale-105'
+                      }`}
+                  >
+                    <span className="inline-block align-middle">{category}</span>
+                    <span className={`ml-1 text-xs px-1.5 py-0.5 rounded-full font-medium inline-block align-middle ${activeTab === category
+                        ? 'bg-white/20 text-white'
+                        : 'bg-slate-100 text-slate-600'
+                      }`}>
+                      {count}
+                    </span>
+                  </button>
+                );
+              })}
             </div>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-3 lg:gap-4">
           {currentProjectsPage.map((project) => (
             <ProjectCard key={project.id || project._id} project={project} />
           ))}

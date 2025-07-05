@@ -5,6 +5,7 @@ import { FaFacebookF, FaLinkedinIn, FaPinterestP } from "react-icons/fa";
 import Navbar from '../components/Navbar/Navbar';
 import FloatingBubbles from './Animation';
 import ScrollToTop from '../components/ScrollToTop';
+import Loader from '../Spinner/Loader';
 
 const useInView = (threshold = 0.1) => {
   const [inView, setInView] = useState(false);
@@ -58,6 +59,20 @@ const AnimatedSection = ({ children, delay = 0, className = "" }) => {
 
 
 export default function AboutUs() {
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setIsLoading(false);
+        }, 2000);
+
+        return () => clearTimeout(timer);
+    }, []);
+
+    if (isLoading) {
+        return <Loader />;
+    }
+
     return (
         <div className="min-h-screen overflow-hidden ">
                 <Navbar />
