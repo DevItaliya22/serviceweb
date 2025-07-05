@@ -73,7 +73,7 @@ export default function IteckFooter() {
               <img
                 src={logoUrl}
                 alt="Company Logo"
-                className="h-20 w-40 lg:w-60 lg:object-cover sm:object-contain rounded-lg transition-transform duration-300 hover:scale-105"
+                className="h-20 w-40 lg:w-60 lg:object-cover sm:object-contain mr-1 rounded-lg transition-transform duration-300 hover:scale-105 scale-105 cursor-pointer"
               />
             </Link>
           </div>
