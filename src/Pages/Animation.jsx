@@ -25,15 +25,15 @@ export default function IconsDisplay() {
   ];
 
   const responsiveLeft = [
-    "left-[5%] sm:left-[10%] md:left-[5%]",
+    "left-[12%] sm:left-[10%] md:left-[5%]",
     "left-[25%] sm:left-[30%] md:left-[25%]",
-    "left-[45%] sm:left-[50%] md:left-[45%]",
-    "left-[65%] sm:left-[70%] md:left-[65%]",
-    "left-[85%] sm:left-[90%] md:left-[85%]",
+    "left-[40%] sm:left-[50%] md:left-[45%]",
+    "left-[60%] sm:left-[70%] md:left-[65%]",
+    "left-[80%] sm:left-[90%] md:left-[85%]",
   ];
 
   return (
-    <div className="relative min-h-[200px] sm:min-h-[280px] md:h-[320px] w-full overflow-hidden">
+    <div className="relative min-h-[200px] sm:min-h-[280px] md:h-[320px] w-screen overflow-hidden">
       <style jsx>{`
         @keyframes bubbleFloat {
           0%, 100% { transform: translate(-50%, 0px) scale(1); }
