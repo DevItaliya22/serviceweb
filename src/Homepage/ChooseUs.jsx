@@ -1,8 +1,15 @@
 import React from 'react';
 import { ArrowRight, Mail } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import Choose from "../assets/Choose.svg";
 
 export default function ChooseUs() {
+    const navigate = useNavigate();
+
+    const handleContactClick = () => {
+        navigate('/contact');
+    };
+
     return (
         <section className="bg-gray-50 py-20 px-4 relative overflow-hidden">
             <div className="max-w-7xl mx-auto">
@@ -45,17 +52,10 @@ export default function ChooseUs() {
                         </div>
 
                         <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-8 mt-16">
-                            <button className="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-4 rounded-full flex items-center space-x-2 transition-colors">
+                            <button onClick={handleContactClick} className="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-4 rounded-full flex items-center space-x-2 transition-colors">
                                 <span>Get Started Now</span>
                                 <ArrowRight className="w-5 h-5" />
                             </button>
-
-                            <div className="flex items-center space-x-3">
-                                <div className="text-gray-500">
-                                    <p className="text-sm">Support Email</p>
-                                    <p className="font-semibold text-gray-900">info@support-iteck.com</p>
-                                </div>
-                            </div>
                         </div>
                     </div>
 
