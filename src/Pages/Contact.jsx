@@ -20,6 +20,7 @@ const ContactForm = () => {
   const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showPrivacyModal, setShowPrivacyModal] = useState(false);
+  const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -27,16 +28,26 @@ const ContactForm = () => {
       ...formData,
       [name]: type === 'checkbox' ? checked : value,
     });
+    // Clear error for the field as user types
+    if (errors[name]) {
+      setErrors({ ...errors, [name]: undefined });
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { name, email, phone, inquiry, message } = formData;
-
-    if (!name || !email || !phone || !inquiry || !message) {
-      alert('Please fill in all required fields.');
+    const newErrors = {};
+    if (!name) newErrors.name = 'Name is required';
+    if (!email) newErrors.email = 'Email is required';
+    if (!phone) newErrors.phone = 'Phone is required';
+    if (!inquiry) newErrors.inquiry = 'Inquiry type is required';
+    if (!message) newErrors.message = 'Message is required';
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
       return;
     }
+    setErrors({});
 
     if (!import.meta.env.VITE_BASE_URL) {
       alert('Your request has been sent successfully. We will contact you within 24 hours.');
@@ -152,62 +163,74 @@ const ContactForm = () => {
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <input
-                type="text"
-                name="name"
-                placeholder="Name *"
-                className="p-3 rounded-full border border-gray-300"
-                value={formData.name}
-                onChange={handleChange}
-                required
-              />
-              <input
-                type="email"
-                name="email"
-                placeholder="Email Address *"
-                className="p-3 rounded-full border border-gray-300"
-                value={formData.email}
-                onChange={handleChange}
-                required
-              />
-              <input
-                type="text"
-                name="phone"
-                placeholder="Phone Number *"
-                className="p-3 rounded-full border border-gray-300"
-                value={formData.phone}
-                onChange={handleChange}
-                required
-              />
+              <div className="flex flex-col">
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Name *"
+                  className={`p-3 rounded-full border ${errors.name ? 'border-red-500' : 'border-gray-300'}`}
+                  value={formData.name}
+                  onChange={handleChange}
+                />
+                {errors.name && <span className="text-red-500 text-xs mt-1">{errors.name}</span>}
+              </div>
+              <div className="flex flex-col">
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Email Address *"
+                  className={`p-3 rounded-full border ${errors.email ? 'border-red-500' : 'border-gray-300'}`}
+                  value={formData.email}
+                  onChange={handleChange}
+                />
+                {errors.email && <span className="text-red-500 text-xs mt-1">{errors.email}</span>}
+              </div>
+              <div className="flex flex-col">
+                <input
+                  type="text"
+                  name="phone"
+                  placeholder="Phone Number *"
+                  className={`p-3 rounded-full border ${errors.phone ? 'border-red-500' : 'border-gray-300'}`}
+                  value={formData.phone}
+                  onChange={handleChange}
+                />
+                {errors.phone && <span className="text-red-500 text-xs mt-1">{errors.phone}</span>}
+              </div>
             </div>
 
-            <select
-              name="inquiry"
-              value={formData.inquiry}
-              onChange={handleChange}
-              className="w-full p-3 rounded-full border border-gray-300"
-            >
-              <option value="">Enquiry Type</option>
-              {Array.isArray(services) && services.length > 0 && (
-                services.map((service, index) => (
-                  <option
-                    key={service.id || service._id || index}
-                    value={service.name || service.title || service.serviceName}
-                  >
-                    {service.name || service.title || service.serviceName}
-                  </option>
-                ))
-              )}
-            </select>
+            <div className="flex flex-col">
+              <select
+                name="inquiry"
+                value={formData.inquiry}
+                onChange={handleChange}
+                className={`w-full p-3 rounded-full border ${errors.inquiry ? 'border-red-500' : 'border-gray-300'}`}
+              >
+                <option value="">Enquiry Type</option>
+                {Array.isArray(services) && services.length > 0 && (
+                  services.map((service, index) => (
+                    <option
+                      key={service.id || service._id || index}
+                      value={service.name || service.title || service.serviceName}
+                    >
+                      {service.name || service.title || service.serviceName}
+                    </option>
+                  ))
+                )}
+              </select>
+              {errors.inquiry && <span className="text-red-500 text-xs mt-1">{errors.inquiry}</span>}
+            </div>
 
-            <textarea
-              name="message"
-              rows={5}
-              placeholder="Your message..."
-              className="w-full p-4 rounded-2xl border border-gray-300"
-              value={formData.message}
-              onChange={handleChange}
-            />
+            <div className="flex flex-col">
+              <textarea
+                name="message"
+                rows={5}
+                placeholder="Your message..."
+                className={`w-full p-4 rounded-2xl border ${errors.message ? 'border-red-500' : 'border-gray-300'}`}
+                value={formData.message}
+                onChange={handleChange}
+              />
+              {errors.message && <span className="text-red-500 text-xs mt-1">{errors.message}</span>}
+            </div>
 
             <div className="flex items-start space-x-2">
               <input
