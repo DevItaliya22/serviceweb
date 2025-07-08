@@ -144,7 +144,8 @@ const TopServices = (Services) => {
 
   const getVisibleServices = () => {
     const visible = [];
-    for (let i = 0; i < visibleCards; i++) {
+    const count = Math.min(visibleCards, services.length);
+    for (let i = 0; i < count; i++) {
       const index = (currentIndex + i) % services.length;
       visible.push({ ...services[index], originalIndex: index, position: i });
     }
