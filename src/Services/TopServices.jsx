@@ -232,7 +232,7 @@ const TopServices = (Services) => {
                       <img
                         src={service.icon}
                         alt={service.title}
-                        className="w-6 h-6 md:w-8 md:h-8 object-contain"
+                        className="w-10 h-10 md:w-12 md:h-12 object-contain"
                         onError={(e) => {
                           e.target.style.display = 'none';
                           if (e.target.nextSibling) {
@@ -241,7 +241,7 @@ const TopServices = (Services) => {
                         }}
                       />
                     ) : (
-                      <div className="w-6 h-6 md:w-8 md:h-8 bg-gray-300 rounded flex items-center justify-center">
+                      <div className="w-10 h-10 md:w-12 md:h-12 bg-gray-300 rounded flex items-center justify-center">
                         <span className="text-gray-500 text-xs">🔧</span>
                       </div>
                     )}
