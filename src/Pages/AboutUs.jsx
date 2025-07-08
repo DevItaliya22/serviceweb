@@ -69,13 +69,21 @@ export default function AboutUs() {
         return () => clearTimeout(timer);
     }, []);
 
+    // Always render Navbar first
     if (isLoading) {
-        return <Loader />;
+        return (
+            <div className="overflow-hidden">
+                <Navbar />
+                <div className="flex justify-center items-center min-h-[60vh]">
+                    <Loader />
+                </div>
+            </div>
+        );
     }
 
     return (
         <div className="overflow-hidden">
-                <Navbar />
+            <Navbar />
 
             <div className="w-full relative flex flex-col overflow-hidden">
                 {/* Left decorative element */}

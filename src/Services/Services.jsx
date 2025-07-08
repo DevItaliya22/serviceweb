@@ -30,25 +30,30 @@ const SoftwareServices = () => {
         fetchServices();
     }, []);
 
-    if (loading) {
-        return <Loader />;
-    }
-
     return (
         <div className="min-h-screen ">
             <div className="py-8 sm:py-12 lg:py-16 px-4">
                 <div className="w-full max-w-full mx-auto">
-                    <div className="mb-8 sm:mb-12">
-                        <Navbar />
-                    </div>
-
-                    <div className="w-full sm:mt-12">
-                        <TopServices services={services} loading={loading} error={error} />
-                    </div>
-
-                    <div className="w-full sm:mt-16 mb-8 sm:mb-12">
-                        <CarouselComponent services={services} loading={loading} error={error} />
-                    </div>
+                    {loading ? (
+                        <>
+                            <Loader />
+                            <div className="mb-8 sm:mb-12">
+                                <Navbar />
+                            </div>
+                        </>
+                    ) : (
+                        <>
+                            <div className="mb-8 sm:mb-12">
+                                <Navbar />
+                            </div>
+                            <div className="w-full sm:mt-12">
+                                <TopServices services={services} loading={loading} error={error} />
+                            </div>
+                            <div className="w-full sm:mt-16 mb-8 sm:mb-12">
+                                <CarouselComponent services={services} loading={loading} error={error} />
+                            </div>
+                        </>
+                    )}
                 </div>
             </div>
             <IteckFooter />

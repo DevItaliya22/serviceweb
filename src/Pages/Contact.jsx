@@ -116,9 +116,16 @@ const ContactForm = () => {
     fetchData();
   }, []);
 
-  if (loading) {
-    return <Loader />;
-  }
+   if (loading) {
+        return (
+            <div className="overflow-hidden">
+                <Navbar />
+                <div className="flex justify-center items-center min-h-[60vh]">
+                    <Loader />
+                </div>
+            </div>
+        );
+    }
 
   return (
     <div className="min-h-screen flex flex-col justify-between">
