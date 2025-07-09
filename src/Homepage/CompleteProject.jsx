@@ -104,6 +104,43 @@ const CompletedProject = () => {
         }, 300);
     };
 
+    // Helper function to normalize technologies data
+    function getTechnologies(technologies) {
+        let techs = technologies;
+        try {
+            // If it's a string, try to parse it
+            if (typeof techs === 'string') {
+                techs = JSON.parse(techs);
+            }
+            // If it's an array with a single string that looks like an array, parse again
+            if (Array.isArray(techs) && techs.length === 1 && typeof techs[0] === 'string' && techs[0].startsWith('[')) {
+                techs = JSON.parse(techs[0]);
+            }
+            // Flatten any nested arrays
+            if (Array.isArray(techs)) {
+                techs = techs.flat(Infinity);
+            }
+            // Now split by comma, remove double quotes, and trim
+            techs = techs
+                .filter(t => typeof t === 'string')
+                .flatMap(t => t.split(','))
+                .map(t => t.replace(/"/g, '').trim())
+                .filter(t => t.length > 0);
+        } catch {
+            // fallback: return as array of strings, split by comma, remove double quotes, and trim
+            if (Array.isArray(technologies)) {
+                techs = technologies
+                    .filter(t => typeof t === 'string')
+                    .flatMap(t => t.split(','))
+                    .map(t => t.replace(/"/g, '').trim())
+                    .filter(t => t.length > 0);
+            } else {
+                techs = [];
+            }
+        }
+        return techs;
+    }
+
   if (loading) {
     return <Loader />;
   }
@@ -306,55 +343,19 @@ const CompletedProject = () => {
                             </div>
                         </div>
 
-                        {currentProject.technologies && currentProject.technologies.length > 0 && (
+                        {currentProject.technologies && getTechnologies(currentProject.technologies).length > 0 && (
                             <div>
                                 <div className="text-gray-500 text-sm mb-2">Technologies</div>
                                 <div className="flex flex-wrap gap-2">
-                                    {(() => {
-                                        try {
-                                            let techs = currentProject.technologies;
-                                            
-                                            // Handle different technology formats
-                                            if (Array.isArray(techs) && techs.length > 0) {
-                                                const firstTech = techs[0];
-                                                if (typeof firstTech === 'string') {
-                                                    // Try to parse if it's a JSON string
-                                                    if (firstTech.startsWith('[')) {
-                                                        try {
-                                                            techs = JSON.parse(firstTech);
-                                                            // Handle nested arrays (some data has double-nested arrays)
-                                                            if (Array.isArray(techs) && techs.length > 0 && typeof techs[0] === 'string' && techs[0].startsWith('[')) {
-                                                                techs = JSON.parse(techs[0]);
-                                                            }
-                                                        } catch {
-                                                            // If parsing fails, use as is
-                                                            techs = currentProject.technologies;
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                            
-                                            return techs.map((tech, index) => (
-                                                <button
-                                                    key={index}
-                                                    className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors duration-200 shadow-sm hover:shadow-md transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                                                    onClick={() => console.log(`Technology clicked: ${tech}`)}
-                                                >
-                                                    {tech}
-                                                </button>
-                                            ));
-                                        } catch {
-                                            return currentProject.technologies.map((tech, index) => (
-                                                <button
-                                                    key={index}
-                                                    className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors duration-200 shadow-sm hover:shadow-md transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                                                    onClick={() => console.log(`Technology clicked: ${tech}`)}
-                                                >
-                                                    {tech}
-                                                </button>
-                                            ));
-                                        }
-                                    })()}
+                                    {getTechnologies(currentProject.technologies).map((tech, index) => (
+                                        <button
+                                            key={index}
+                                            className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors duration-200 shadow-sm hover:shadow-md transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                                            onClick={() => console.log(`Technology clicked: ${tech}`)}
+                                        >
+                                            {tech}
+                                        </button>
+                                    ))}
                                 </div>
                             </div>
                         )}
