@@ -335,15 +335,23 @@ const CompletedProject = () => {
                                             }
                                             
                                             return techs.map((tech, index) => (
-                                                <span key={index} className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm">
+                                                <button
+                                                    key={index}
+                                                    className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors duration-200 shadow-sm hover:shadow-md transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                                                    onClick={() => console.log(`Technology clicked: ${tech}`)}
+                                                >
                                                     {tech}
-                                                </span>
+                                                </button>
                                             ));
                                         } catch {
                                             return currentProject.technologies.map((tech, index) => (
-                                                <span key={index} className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm">
+                                                <button
+                                                    key={index}
+                                                    className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors duration-200 shadow-sm hover:shadow-md transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                                                    onClick={() => console.log(`Technology clicked: ${tech}`)}
+                                                >
                                                     {tech}
-                                                </span>
+                                                </button>
                                             ));
                                         }
                                     })()}
