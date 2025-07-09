@@ -1,7 +1,8 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { FaSlack, FaGithub, FaDiscord, FaTrello, FaDropbox, FaSpotify, FaCube } from "react-icons/fa";
 import { FcGoogle, FcAndroidOs } from "react-icons/fc";
 import { getStats } from "../api/stats";
+import { getPlatform } from "../api/platform";
 import logo from '../assets/logo_home8_icon.png';
 import fig1 from '../assets/5M.png';
 import fig2 from '../assets/3M.png';
@@ -16,6 +17,7 @@ const Integrations = () => {
         dataManagement: 0,
         happyUsers: 0
     });
+    const [platforms, setPlatforms] = useState([]);
 
     useEffect(() => {
         const fetchStats = async () => {
@@ -32,16 +34,25 @@ const Integrations = () => {
             }
         };
 
+        const fetchPlatforms = async () => {
+            try {
+                const res = await getPlatform();
+                if (res && res.success && Array.isArray(res.data)) {
+                    setPlatforms(res.data);
+                }
+            } catch (error) {
+                console.error('Error fetching platforms:', error);
+            }
+        };
+
         fetchStats();
+        fetchPlatforms();
     }, []);
     return (
         <div className="w-screen min-h-screen bg-white relative overflow-visible flex flex-col items-center">
-            {/* Left Orange Gradient - Responsive */}
             <div className="absolute left-0 top-1/4 transform -translate-y-1/2 z-2">
                 <div className="w-16 h-32 sm:w-24 sm:h-48 lg:w-32 lg:h-64 bg-gradient-to-r from-orange-400 to-orange-500 rounded-r-full opacity-60"></div>
             </div>
-
-            {/* Bottom Right Floating Element - Responsive */}
             <div className="absolute bottom-10 right-10 sm:bottom-16 sm:right-16 lg:bottom-20 lg:right-20 z-10">
                 <div className="relative">
                     <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-blue-400 to-purple-600 rounded-lg shadow-2xl transform rotate-12 hover:rotate-0 transition-all duration-500 flex items-center justify-center">
@@ -51,7 +62,6 @@ const Integrations = () => {
                 </div>
             </div>
 
-            {/* Header Section - Responsive */}
             <div className="pt-12 sm:pt-16 lg:pt-20 z-10 text-center px-4">
                 <div className="inline-flex items-center px-4 sm:px-6 backdrop-blur-lg mb-2">
                     <span className="text-blue-500 underline uppercase tracking-widest text-xs sm:text-sm font-bold">
@@ -77,47 +87,50 @@ const Integrations = () => {
                 <div className="absolute w-[40%] h-[40%] rounded-full border-2 border-dashed border-gray-400 border-opacity-80 animate-spin"
                     style={{ animationDuration: '25s' }}></div>
 
-                {/* Left - Slack */}
-                <div className="absolute left-0 top-1/2 transform -translate-y-1/2 hover:scale-110 transition-all duration-300">
-                    <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-[130px] lg:h-[130px] rounded-full bg-white shadow-lg flex items-center justify-center hover:shadow-blue-300/50 border-2 border-gray-100">
-                        <FaSlack className="text-[#4A154B] text-2xl sm:text-3xl md:text-4xl lg:text-[90px]" />
-                    </div>
-                </div>
-
-                {/* Right - Google */}
-                <div className="absolute right-0 top-1/2 transform -translate-y-1/2 hover:scale-110 transition-all duration-300">
-                    <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-[130px] lg:h-[130px] rounded-full bg-white shadow-lg flex items-center justify-center hover:shadow-green-300/50 border-2 border-gray-100">
-                        <FcGoogle className="text-2xl sm:text-3xl md:text-4xl lg:text-[90px]" />
-                    </div>
-                </div>
-
-                {/* Top - GitHub */}
-                <div className="absolute top-0 left-1/2 transform -translate-y-1/2 hover:scale-110 transition-all duration-300">
-                    <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-[130px] lg:h-[130px] rounded-full bg-white shadow-md flex items-center justify-center hover:shadow-gray-300/50 border-2 border-gray-100">
-                        <FaGithub className="text-black text-2xl sm:text-3xl md:text-4xl lg:text-[90px]" />
-                    </div>
-                </div>
-
-                {/* Bottom - Discord */}
-                <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2  hover:scale-110 transition-all duration-300">
-                    <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-[130px] lg:h-[130px] rounded-full bg-white shadow-md flex items-center justify-center hover:shadow-blue-300/50 border-2 border-gray-100">
-                        <FaDiscord className="text-2xl sm:text-3xl md:text-4xl lg:text-[90px]" />
-                    </div>
-                </div>
-
-                {/* Top Middle - GitHub (duplicate) */}
-                <div className="absolute top-[25%] sm:top-[30%] md:top-[25%] lg:top-[calc(50%-200px)] left-1/2 transform -translate-x-1/2 -translate-y-1/2 hover:scale-110 transition-all duration-300">
-                    <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-[130px] lg:h-[130px] rounded-full bg-white shadow-md flex items-center justify-center hover:shadow-purple-300/50 border-2 border-gray-100">
-                        <FaGithub className="text-black text-2xl sm:text-3xl md:text-4xl lg:text-[90px]" />
-                    </div>
-                </div>
-
-                {/* Bottom Middle - Android */}
-                <div className="absolute bottom-[25%] sm:bottom-[30%] md:bottom-[25%] lg:bottom-[calc(50%-200px)] left-1/2 transform -translate-x-1/2 translate-y-1/2 hover:scale-110 transition-all duration-300">
-                    <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-[130px] lg:h-[130px] rounded-full bg-white shadow-md flex items-center justify-center hover:shadow-orange-300/50 border-2 border-gray-100">
-                        <FcAndroidOs className="text-4xl sm:text-5xl md:text-6xl lg:text-[90px]" />
-                    </div>
-                </div>
+                {/* Dynamic Platform Icons in Original Positions */}
+                {(() => {
+                    // Define the 6 positions as before
+                    const positions = [
+                        // left, right, top, bottom, top-middle, bottom-middle
+                        {
+                            style: 'absolute left-0 top-1/2 transform -translate-y-1/2 hover:scale-110 transition-all duration-300',
+                        },
+                        {
+                            style: 'absolute right-0 top-1/2 transform -translate-y-1/2 hover:scale-110 transition-all duration-300',
+                        },
+                        {
+                            style: 'absolute top-0 left-1/2 transform -translate-y-1/2 hover:scale-110 transition-all duration-300',
+                        },
+                        {
+                            style: 'absolute bottom-0 left-1/2 transform -translate-x-1/2  hover:scale-110 transition-all duration-300',
+                        },
+                        {
+                            style: 'absolute top-[25%] sm:top-[30%] md:top-[25%] lg:top-[calc(50%-200px)] left-1/2 transform -translate-x-1/2 -translate-y-1/2 hover:scale-110 transition-all duration-300',
+                        },
+                        {
+                            style: 'absolute bottom-[25%] sm:bottom-[30%] md:bottom-[25%] lg:bottom-[calc(50%-200px)] left-1/2 transform -translate-x-1/2 translate-y-1/2 hover:scale-110 transition-all duration-300',
+                        },
+                    ];
+                    return positions.map((pos, idx) => {
+                        if (!platforms[idx]) return null;
+                        const platform = platforms[idx];
+                        return (
+                            <div key={platform._id} className={pos.style}>
+                                <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-[130px] lg:h-[130px] rounded-full bg-white shadow-lg flex items-center justify-center border-2 border-gray-100">
+                                    <img
+                                        src={
+                                            platform.image.startsWith('http')
+                                                ? platform.image
+                                                : `${import.meta.env.VITE_BASE_URL}/${platform.image.replace(/\\/g, '/')}`
+                                        }
+                                        alt={platform.name}
+                                        className="w-10 h-10 sm:w-14 sm:h-14 md:w-20 md:h-20 lg:w-[90px] lg:h-[90px] object-contain"
+                                    />
+                                </div>
+                            </div>
+                        );
+                    });
+                })()}
 
                 {/* Center Logo */}
                 <div className="absolute z-10">
