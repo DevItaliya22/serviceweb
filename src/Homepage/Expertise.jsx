@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ML from "../assets/28.png";
 import BI from "../assets/BI.png";
 import AI from "../assets/AI.png";
 import Artificial from "../assets/Artificial.png";
 
 const Expertise = () => {
+  const [isHovered, setIsHovered] = useState(false);
+
   const services = [
     {
       id: 1,
@@ -46,7 +48,6 @@ const Expertise = () => {
 
   const duplicatedServices = [...services, ...services];
 
-
   return (
     <div className="min-h-screen py-16 px-8 overflow-hidden p-4">
       <style jsx>{`
@@ -60,6 +61,9 @@ const Expertise = () => {
   }
   .scroll-animation {
     animation: scroll 30s linear infinite;
+  }
+  .scroll-animation.paused {
+    animation-play-state: paused;
   }
 `}</style>
 
@@ -80,7 +84,11 @@ const Expertise = () => {
         </div>
 
         <div className="relative overflow-hidden">
-          <div className="scroll-animation flex gap-8 w-max">
+          <div 
+            className={`scroll-animation flex gap-8 w-max ${isHovered ? 'paused' : ''}`}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
             {duplicatedServices.map((service, index) => (
               <div
                 key={`${service.id}-${index}`}
