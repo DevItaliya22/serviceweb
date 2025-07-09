@@ -91,11 +91,26 @@ export default function Review() {
   };
 
   const getVisibleReviews = () => {
+    if (reviews.length === 0) return [];
+    
     const visible = [];
-    for (let i = 0; i < visibleCards; i++) {
+    const maxVisible = Math.min(visibleCards, reviews.length);
+    
+    // If we have fewer reviews than visible cards, just show all reviews
+    if (reviews.length <= visibleCards) {
+      return reviews.map((review, index) => ({
+        ...review,
+        originalIndex: index,
+        position: index
+      }));
+    }
+    
+    // Otherwise, show the carousel with proper cycling
+    for (let i = 0; i < maxVisible; i++) {
       const index = (currentIndex + i) % reviews.length;
       visible.push({ ...reviews[index], originalIndex: index, position: i });
     }
+    
     return visible;
   };
 
@@ -143,9 +158,10 @@ export default function Review() {
         {/* Carousel Container */}
         <div className="relative w-full">
           {/* Reviews Grid */}
-          <div className={`grid gap-3 sm:gap-4 md:gap-6 px-4 sm:px-6 md:px-8 lg:px-10 relative ${visibleCards === 1 ? 'grid-cols-1' :
-            visibleCards === 2 ? 'grid-cols-2' :
-              'grid-cols-3'
+          <div className={`grid gap-3 sm:gap-4 md:gap-6 px-4 sm:px-6 md:px-8 lg:px-10 relative ${
+            reviews.length <= visibleCards ? 
+              (reviews.length === 1 ? 'grid-cols-1' : reviews.length === 2 ? 'grid-cols-2' : 'grid-cols-3') :
+              (visibleCards === 1 ? 'grid-cols-1' : visibleCards === 2 ? 'grid-cols-2' : 'grid-cols-3')
             }`}>
             
             {/* Navigation Buttons - Positioned relative to the grid */}
