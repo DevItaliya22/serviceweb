@@ -6,6 +6,7 @@ const Expertise = () => {
   const [expertiseList, setExpertiseList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [selectedTechnology] = useState('All');
 
   useEffect(() => {
     const fetchExpertise = async () => {
@@ -22,8 +23,18 @@ const Expertise = () => {
     fetchExpertise();
   }, []);
 
-  // Duplicate the list for scrolling effect
-  const duplicatedServices = [...expertiseList, ...expertiseList];
+
+  // Filter expertise based on selected technology
+  const filteredExpertise = selectedTechnology === 'All' 
+    ? expertiseList 
+    : expertiseList.filter(expertise => 
+        expertise.technology && 
+        Array.isArray(expertise.technology) && 
+        expertise.technology.includes(selectedTechnology)
+      );
+
+  // Duplicate the filtered list for scrolling effect
+  const duplicatedServices = [...filteredExpertise, ...filteredExpertise];
 
   return (
     <div className="min-h-screen py-16 px-8 overflow-hidden p-4">
@@ -79,12 +90,22 @@ const Expertise = () => {
                     <h3 className="text-2xl font-bold text-gray-900 mb-4">
                       {service.name || service.title}
                     </h3>
-                    <p className="text-gray-600 text-base leading-relaxed mb-8">
+                    <p className="text-gray-600 text-base leading-relaxed mb-6">
                       {service.description}
                     </p>
-                    <button className="font-medium text-sm tracking-wide text-gray-400 hover:text-gray-600 transition-colors">
-                      READ MORE
-                    </button>
+                    {/* Technology Tags for each card */}
+                    {service.technology && Array.isArray(service.technology) && service.technology.length > 0 && (
+                      <div className="flex flex-wrap gap-2 justify-center">
+                        {service.technology.map((tech, techIndex) => (
+                          <span
+                            key={techIndex}
+                            className="px-3 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded-full hover:bg-blue-200 transition-colors duration-200"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 </div>
               ))}
