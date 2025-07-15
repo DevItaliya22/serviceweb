@@ -25,16 +25,13 @@ const Expertise = () => {
 
 
   // Filter expertise based on selected technology
-  const filteredExpertise = selectedTechnology === 'All' 
-    ? expertiseList 
-    : expertiseList.filter(expertise => 
-        expertise.technology && 
-        Array.isArray(expertise.technology) && 
-        expertise.technology.includes(selectedTechnology)
-      );
-
-  // Duplicate the filtered list for scrolling effect
-  const duplicatedServices = [...filteredExpertise, ...filteredExpertise];
+  const filteredExpertise = selectedTechnology === 'All'
+    ? expertiseList
+    : expertiseList.filter(expertise =>
+      expertise.technology &&
+      Array.isArray(expertise.technology) &&
+      expertise.technology.includes(selectedTechnology)
+    );
 
   return (
     <div className="min-h-screen py-16 px-8 overflow-hidden p-4">
@@ -76,7 +73,7 @@ const Expertise = () => {
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
             >
-              {duplicatedServices.map((service, index) => (
+              {filteredExpertise.map((service, index) => (
                 <div
                   key={`${service._id || service.id}-${index}`}
                   className="flex-shrink-0"
