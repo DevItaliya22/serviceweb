@@ -3,7 +3,7 @@ import { FaSlack, FaGithub, FaDiscord, FaTrello, FaDropbox, FaSpotify, FaCube } 
 import { FcGoogle, FcAndroidOs } from "react-icons/fc";
 import { getStats } from "../api/stats";
 import { getPlatform } from "../api/platform";
-import logo from '../assets/logo_home8_icon.png';
+import logo from '../assets/Icon.png';
 import fig1 from '../assets/5M.png';
 import fig2 from '../assets/3M.png';
 import fig3 from '../assets/Dm.png';
@@ -116,7 +116,7 @@ const Integrations = () => {
                         const platform = platforms[idx];
                         return (
                             <div key={platform._id} className={pos.style}>
-                                <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-[130px] lg:h-[130px] rounded-full bg-white shadow-lg flex items-center justify-center border-2 border-gray-100">
+                                <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-32 lg:h-32 rounded-full bg-white shadow-lg flex items-center justify-center">
                                     <img
                                         src={
                                             platform.image.startsWith('http')
@@ -134,11 +134,11 @@ const Integrations = () => {
 
                 {/* Center Logo */}
                 <div className="absolute z-10">
-                    <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-24 lg:h-24 rounded-full bg-white shadow-lg flex items-center justify-center">
+                    <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-32 lg:h-32 rounded-full bg-white shadow-lg flex items-center justify-center">
                         <img
                             src={logo}
                             alt="Logo"
-                            className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-[130px] lg:h-[130px] object-contain"
+                            className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-[170px] lg:h-[170px] object-contain"
                         />
                     </div>
                 </div>
