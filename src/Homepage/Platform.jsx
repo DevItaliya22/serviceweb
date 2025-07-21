@@ -8,6 +8,7 @@ import fig1 from '../assets/5M.png';
 import fig2 from '../assets/3M.png';
 import fig3 from '../assets/Dm.png';
 import fig4 from '../assets/100K.png';
+import fav  from '../assets/android-icon-192x192.png'
 
 const Integrations = () => {
 
@@ -134,9 +135,9 @@ const Integrations = () => {
 
                 {/* Center Logo */}
                 <div className="absolute z-10">
-                    <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-32 lg:h-32 rounded-full bg-white shadow-lg flex items-center justify-center">
+                    <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-32 lg:h-32 flex items-center justify-center">
                         <img
-                            src={logo}
+                            src={fav}
                             alt="Logo"
                             className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-[170px] lg:h-[170px] object-contain"
                         />
