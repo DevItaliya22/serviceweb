@@ -114,7 +114,7 @@ export default function Navbar() {
                             <a
                                 key={idx}
                                 href={item.url || '#'}
-                                className="w-9 h-9 bg-white rounded-lg flex items-center justify-center shadow-sm hover:shadow-md transition-shadow"
+                                className="w-9 h-9 rounded-lg flex items-center justify-center hover:shadow-md transition-shadow"
                                 aria-label={item.name || 'Social'}
                                 target="_blank"
                                 rel="noopener noreferrer"
@@ -178,7 +178,7 @@ export default function Navbar() {
                                 <a
                                     key={idx}
                                     href={item.url || '#'}
-                                    className="w-9 h-9 bg-white rounded-lg flex items-center justify-center shadow-sm hover:shadow-md transition-shadow"
+                                    className="w-9 h-9 rounded-lg flex items-center justify-center shadow-sm hover:shadow-md transition-shadow"
                                     aria-label={item.name || 'Social'}
                                     target="_blank"
                                     rel="noopener noreferrer"
