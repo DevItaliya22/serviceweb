@@ -86,7 +86,7 @@ export default function IteckFooter() {
                   <a
                     key={idx}
                     href={item.url || '#'}
-                    className="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-sm hover:shadow-md transition-shadow mr-2"
+                    className="w-10 h-10 rounded-lg flex items-center justify-center hover:shadow-md transition-shadow mr-2"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
