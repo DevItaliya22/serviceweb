@@ -68,11 +68,16 @@ const Expertise = () => {
           ) : error ? (
             <div className="text-center text-red-500">{error}</div>
           ) : (
-            <div
-              className={`scroll-animation flex gap-8 w-max ${isHovered ? 'paused' : ''}`}
-              onMouseEnter={() => setIsHovered(true)}
-              onMouseLeave={() => setIsHovered(false)}
-            >
+            <>
+              <div
+                className="absolute inset-0 z-10 flex justify-center items-center pointer-events-none"
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+                style={{ pointerEvents: 'auto', left: '25%', right: '25%' }}
+              ></div>
+              <div
+                className={`scroll-animation flex gap-8 w-max ${isHovered ? 'paused' : ''}`}
+              >
               {filteredExpertise.map((service, index) => (
                 <div
                   key={`${service._id || service.id}-${index}`}
@@ -106,7 +111,8 @@ const Expertise = () => {
                   </div>
                 </div>
               ))}
-            </div>
+              </div>
+            </>
           )}
         </div>
       </div>
