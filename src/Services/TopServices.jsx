@@ -224,15 +224,15 @@ const TopServices = (Services) => {
               <div className="absolute -top-4 -right-4 w-12 h-12 md:w-20 md:h-20 bg-gradient-to-br from-blue-400/10 to-purple-400/10 rounded-full blur-xl group-hover:scale-150 transition-transform duration-700"></div>
 
               {/* Icon Container - Only animate decorative elements initially */}
-              <div className={`${service.bgColor} rounded-xl md:rounded-2xl p-3 md:p-4 mb-4 md:mb-6 relative overflow-hidden group-hover:scale-105 md:group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 ${!hasInitiallyLoaded ? 'animate-bounceIn' : ''}`}>
+              <div className={`${service.bgColor} rounded-xl md:rounded-2xl p-1 md:p-2 mb-3 md:mb-4 relative overflow-hidden group-hover:scale-105 md:group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 ${!hasInitiallyLoaded ? 'animate-bounceIn' : ''}`}>
                 <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-transparent animate-shimmer"></div>
-                <div className={`${service.iconBg} rounded-lg md:rounded-xl p-2 md:p-3 shadow-lg relative z-10 mx-auto w-fit group-hover:shadow-xl transition-all duration-300 ${!hasInitiallyLoaded ? 'animate-pulse' : ''}`}>
+                <div className={`${service.iconBg} rounded-lg md:rounded-xl p-0.5 md:p-1 shadow-lg relative z-10 mx-auto w-fit group-hover:shadow-xl transition-all duration-300 ${!hasInitiallyLoaded ? 'animate-pulse' : ''}`}>
                   <div className={!hasInitiallyLoaded ? 'animate-spin-slow' : ''}>
                     {service.icon ? (
                       <img
                         src={service.icon}
                         alt={service.title}
-                        className="w-10 h-10 md:w-12 md:h-12 object-contain"
+                        className="w-16 h-16 md:w-18 md:h-18 object-contain"
                         onError={(e) => {
                           e.target.style.display = 'none';
                           if (e.target.nextSibling) {
@@ -241,7 +241,7 @@ const TopServices = (Services) => {
                         }}
                       />
                     ) : (
-                      <div className="w-10 h-10 md:w-12 md:h-12 bg-gray-300 rounded flex items-center justify-center">
+                      <div className="w-16 h-16 md:w-18 md:h-18 bg-gray-300 rounded flex items-center justify-center">
                         <span className="text-gray-500 text-xs">🔧</span>
                       </div>
                     )}
