@@ -45,7 +45,7 @@ const Expertise = () => {
     }
   }
   .scroll-animation {
-    animation: scroll 30s linear infinite;
+    animation: scroll 10s linear infinite;
   }
   .scroll-animation.paused {
     animation-play-state: paused;
